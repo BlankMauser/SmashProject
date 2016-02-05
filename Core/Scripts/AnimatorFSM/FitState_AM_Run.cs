@@ -80,6 +80,11 @@ public class FitState_AM_Run : BaseFSMState
 
 				}
 
+				if (controller.Inputter.y <= -0.9f) {
+						DoTransition (typeof(FitState_AM_Crouch));
+						return;
+				}
+
 
 		}
 

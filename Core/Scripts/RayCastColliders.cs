@@ -15,6 +15,34 @@ public class RayCastColliders : MonoBehaviour {
 	/// sides. These colliders push the character left and right when they hit obstacles.
 	/// </summary>
 	public RaycastDiamond[] ECBsides;
+
+
+		// ECB Positions
+		/// <summary>
+		/// Attach to ECB Top.
+		/// </summary>
+		public Transform TOPTransform;
+		/// <summary>
+		/// Attach to ECB Bottom.
+		/// </summary>
+		public Transform BOTTransform;
+		/// <summary>
+		/// Attach to ECB Left.
+		/// </summary>
+		public Transform ECBLeft;
+		/// <summary>
+		/// Attach to ECB Right.
+		/// </summary>
+		public Transform ECBRight;
+		public Vector3 PreviousTop;
+		public Vector3 PreviousLeft;
+		public Vector3 PreviousRight;
+		public Vector3 PreviousBottom;
+		public Vector3 CurrentTop;
+		public Vector3 CurrentLeft;
+		public Vector3 CurrentRight;
+		public Vector3 CurrentBottom;
+
 	/// <summary>
 	/// Movement attributes.
 	/// </summary>
@@ -96,7 +124,7 @@ public class RayCastColliders : MonoBehaviour {
 
 	public bool IsGrounded(float offset){
 				foreach (RaycastDiamond foot in ECBfeet) {
-						if (foot.IsColliding(backgroundLayer , offset)) return true;
+						if (foot.IsColliding(backgroundLayer | 1 << passThroughLayer, offset)) return true;
 				}
 				return false;
 	}
@@ -154,7 +182,7 @@ public class RayCastColliders : MonoBehaviour {
 	public float frameTime;
 	private int groundedFeet;
 	private float fallThroughTimer = 0.0f;
-	private Platform myParent;
+	private PlatformPass myParent;
 	private Transform myTransform;
 	private bool characterStateForced = false;
 	private float currentDrag = 0.0f;
@@ -207,7 +235,14 @@ public class RayCastColliders : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+				PreviousTop = TOPTransform.position;
+				PreviousLeft = ECBLeft.position;
+				PreviousRight = ECBRight.position;
+				PreviousBottom = BOTTransform.position;
+				CurrentTop = TOPTransform.position;
+				CurrentLeft = ECBLeft.position;
+				CurrentRight = ECBRight.position;
+				CurrentBottom = BOTTransform.position;
 	}
 				
 		void LateUpdate () {
@@ -215,6 +250,7 @@ public class RayCastColliders : MonoBehaviour {
 				CheckDirection ();
 				MoveInXDirection();
 				MoveInYDirection();
+				UpdateECB ();
 				if (BufferTimer == 0) {
 						ClearBuffer ();
 				} else {
@@ -300,6 +336,7 @@ public class RayCastColliders : MonoBehaviour {
 				// Fall/Stop
 				bool hasHitFeet = false;
 				bool hasHitHead = false;
+				bool AboveECB = false;
 				float maxForce = 0.0f;
 				float slope = 0.0f;
 				int slopeCount = -1; 
@@ -346,10 +383,17 @@ public class RayCastColliders : MonoBehaviour {
 								hitFeet = hitLadder;	
 						}
 
+
 						float force = (hitFeet.normal * (feetCollider.DistanceToECB - hitFeet.distance)).y;	
 						// Standing on a something that has an action when you stand on it
 						if (hitFeet.collider != null) {
-//								Platform platform = hitFeet.collider.gameObject.GetComponent<Platform> ();
+								PlatformPass platform = hitFeet.collider.gameObject.GetComponent<PlatformPass> ();
+								if (platform != null) {
+										// ECB is above
+										if (platform.myTransform.position.y > CurrentBottom.y) {
+												AboveECB = true;
+										}
+								}
 //								if (platform != null && feetCollider.DistanceToECB >= hitFeet.distance) {
 //										Transform parentPlatform = platform.ParentOnStand (this);
 //										if (parentPlatform != null) {
@@ -360,13 +404,8 @@ public class RayCastColliders : MonoBehaviour {
 //												}
 //												hitGameObject = hitFeet.collider.gameObject;
 //										}
-//										// Special case for the top of a ladder
-//										if (platform is TopStepPlatform) {
-//												hasHitFeet = true;
-//												maxForce = force;
-//												hitGameObject = hitLadder.collider.gameObject;
-//										}
 //								}
+
 
 										// Calculate slope
 										if (slopes.allowSlopes) {
@@ -400,8 +439,10 @@ public class RayCastColliders : MonoBehaviour {
 				}
 
 				if (hasHitFeet) {
-						myTransform.Translate (0.0f, maxForce, 0.0f, Space.World);	
-						velocity.y = 0.0f;
+						if (PreviousBottom.y >= CurrentBottom.y && AboveECB == false) {
+								myTransform.Translate (0.0f, maxForce, 0.0f, Space.World);	
+								velocity.y = 0.0f;
+						}
 				}
 
 				// Apply rotation from slopes
@@ -438,6 +479,17 @@ public class RayCastColliders : MonoBehaviour {
 						}
 				}
 
+		}
+
+		public void UpdateECB() {
+				PreviousTop = CurrentTop;
+				PreviousLeft = CurrentLeft;
+				PreviousRight = CurrentRight;
+				PreviousBottom = CurrentBottom;
+				CurrentTop = TOPTransform.position;
+				CurrentLeft = ECBLeft.position;
+				CurrentRight = ECBRight.position;
+				CurrentBottom = BOTTransform.position;
 		}
 
 		protected void CheckDirection(){
@@ -516,6 +568,7 @@ public class RayCastColliders : MonoBehaviour {
 		/// The offset from the centre of the transform.
 		/// </summary>
 		public Vector3 offset;
+
 
 		public bool IsColliding() {
 						offset = GetOffset ();

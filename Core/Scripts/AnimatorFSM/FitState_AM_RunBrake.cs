@@ -57,6 +57,10 @@ public class FitState_AM_RunBrake : BaseFSMState
 						BrakeTimer -= 1;
 				}
 
+				if (controller.Inputter.y <= -0.9f) {
+						DoTransition (typeof(FitState_AM_Crouch));
+						return;
+				}
 
 		}
 

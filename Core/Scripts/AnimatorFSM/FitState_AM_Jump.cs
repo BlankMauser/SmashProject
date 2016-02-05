@@ -124,8 +124,10 @@ public class FitState_AM_Jump : BaseFSMState
 						} 
 				} else 
 				{
+						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
 						DoTransition(typeof(FitState_AM_Land));
 						return;
+						}
 				}
 
 				if (controller.BfAction == BufferedAction.JUMP) {
