@@ -82,6 +82,9 @@ public class RayCastColliders : MonoBehaviour {
 	public Vector3 velocity;
 
 	public float C_Drag;
+
+	// Passing through a platform/rising
+	public bool IsPassing;
 	
 	public int localXdir;
 
@@ -124,7 +127,7 @@ public class RayCastColliders : MonoBehaviour {
 
 	public bool IsGrounded(float offset){
 				foreach (RaycastDiamond foot in ECBfeet) {
-						if (foot.IsColliding(backgroundLayer | 1 << passThroughLayer, offset)) return true;
+						if (foot.IsColliding(backgroundLayer | (IsPassing == false ? 1 << passThroughLayer : 0), offset)) return true;
 				}
 				return false;
 	}
@@ -336,7 +339,6 @@ public class RayCastColliders : MonoBehaviour {
 				// Fall/Stop
 				bool hasHitFeet = false;
 				bool hasHitHead = false;
-				bool AboveECB = false;
 				float maxForce = 0.0f;
 				float slope = 0.0f;
 				int slopeCount = -1; 
@@ -361,8 +363,20 @@ public class RayCastColliders : MonoBehaviour {
 												closestLadder = collision.distance;
 										}
 								} else if (collision.distance < closest) {
-										hitFeet = collision;
-										closest = collision.distance;
+										if (collision.collider.gameObject.layer == passThroughLayer) {
+												if (PreviousBottom.y >= CurrentBottom.y && PreviousBottom.y >= collision.transform.position.y) {
+														hitFeet = collision;
+														closest = collision.distance;
+														IsPassing = false;
+												} else 
+												{
+														IsPassing = true;
+												}
+										} else 
+										{
+												hitFeet = collision;
+												closest = collision.distance;	
+										}
 								}
 								if (collision.collider.gameObject.layer != climableLayer)
 										groundedFeet++;
@@ -383,45 +397,43 @@ public class RayCastColliders : MonoBehaviour {
 								hitFeet = hitLadder;	
 						}
 
-
 						float force = (hitFeet.normal * (feetCollider.DistanceToECB - hitFeet.distance)).y;	
 						// Standing on a something that has an action when you stand on it
 						if (hitFeet.collider != null) {
-								PlatformPass platform = hitFeet.collider.gameObject.GetComponent<PlatformPass> ();
-								if (platform != null) {
-										// ECB is above
-										if (platform.myTransform.position.y > CurrentBottom.y) {
-												AboveECB = true;
+								//								Platform platform = hitFeet.collider.gameObject.GetComponent<Platform> ();
+								//								if (platform != null && feetCollider.DistanceToECB >= hitFeet.distance) {
+								//										Transform parentPlatform = platform.ParentOnStand (this);
+								//										if (parentPlatform != null) {
+								//												// Normal parenting (moving platforms etc)
+								//												myParent = platform;
+								//												if (myTransform.parent != parentPlatform) {
+								//														myTransform.parent = parentPlatform;
+								//												}
+								//												hitGameObject = hitFeet.collider.gameObject;
+								//										}
+								//										// Special case for the top of a ladder
+								//										if (platform is TopStepPlatform) {
+								//												hasHitFeet = true;
+								//												maxForce = force;
+								//												hitGameObject = hitLadder.collider.gameObject;
+								//										}
+								//								}
+
+								// Calculate slope
+								if (slopes.allowSlopes) {
+										if (lastHitDistance < 0.0f) {
+												lastHitDistance = hitFeet.distance;
+												lastHitX = feetCollider.offset.x;
+												if (slopeCount == -1)
+														slopeCount = 0;
+										} else {
+												slope += Mathf.Atan ((lastHitDistance - hitFeet.distance) / (feetCollider.offset.x - lastHitX)) * Mathf.Rad2Deg;
+												slopeCount++;
+												lastHitDistance = hitFeet.distance;
+												lastHitX = feetCollider.offset.x;
 										}
 								}
-//								if (platform != null && feetCollider.DistanceToECB >= hitFeet.distance) {
-//										Transform parentPlatform = platform.ParentOnStand (this);
-//										if (parentPlatform != null) {
-//												// Normal parenting (moving platforms etc)
-//												myParent = platform;
-//												if (myTransform.parent != parentPlatform) {
-//														myTransform.parent = parentPlatform;
-//												}
-//												hitGameObject = hitFeet.collider.gameObject;
-//										}
-//								}
 
-
-										// Calculate slope
-										if (slopes.allowSlopes) {
-												if (lastHitDistance < 0.0f) {
-														lastHitDistance = hitFeet.distance;
-														lastHitX = feetCollider.offset.x;
-														if (slopeCount == -1)
-																slopeCount = 0;
-												} else {
-														slope += Mathf.Atan ((lastHitDistance - hitFeet.distance) / (feetCollider.offset.x - lastHitX)) * Mathf.Rad2Deg;
-														slopeCount++;
-														lastHitDistance = hitFeet.distance;
-														lastHitX = feetCollider.offset.x;
-												}
-										}
-								
 
 								// If we are hitting our feet on the ground we can't climb down a ladder
 								if (hitLadder.collider == null && hitFeet.distance <= feetCollider.DistanceToECB) {
@@ -439,10 +451,8 @@ public class RayCastColliders : MonoBehaviour {
 				}
 
 				if (hasHitFeet) {
-						if (PreviousBottom.y >= CurrentBottom.y && AboveECB == false) {
-								myTransform.Translate (0.0f, maxForce, 0.0f, Space.World);	
-								velocity.y = 0.0f;
-						}
+						myTransform.Translate (0.0f, maxForce, 0.0f, Space.World);	
+						velocity.y = 0.0f;
 				}
 
 				// Apply rotation from slopes

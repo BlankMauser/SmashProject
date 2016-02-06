@@ -112,22 +112,27 @@ public class FitState_AM_Jump : BaseFSMState
 
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						if (FastFall == false) {
-								controller.velocity.y += controller.jump.fallGravity;
-								if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
-										controller.velocity.y = controller.jump.MaxFallSpeed;
-								}
+								
+										controller.velocity.y += controller.jump.fallGravity;
+										if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
+												controller.velocity.y = controller.jump.MaxFallSpeed;
+										}
+								
 						} else {
-								controller.velocity.y = controller.jump.fastFallGravity;
+								
+										controller.velocity.y = controller.jump.fastFallGravity;
 								if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
 										controller.velocity.y = controller.jump.fastFallGravity;
 								}
-						} 
+						 
+				}
 				} else 
 				{
-						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
-						DoTransition(typeof(FitState_AM_Land));
-						return;
-						}
+//						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
+								DoTransition (typeof(FitState_AM_Land));
+								return;
+//						}
+						
 				}
 
 				if (controller.BfAction == BufferedAction.JUMP) {
