@@ -474,6 +474,7 @@ public enum CharacterState {
 	LANDING			=  35,
 	AIRJUMP			=  40,
 	CROUCH			=  45,
+	WAVEDASH		=  50,
 	
 	AIRBORNE		= 110,			// This is sent when you are in the air but are moving up or haven't reached the fall velocity
 	FALLING 		= 120,
@@ -518,13 +519,16 @@ public enum BufferedAction {
 		NONE 			=  -1,
 		WALKING 		=  40,
 		PIVOT 			=  45,
-		JAB 			=  50,
+		INIT_DASH 		=  50,
+		JAB 			=  55,
 		HOP 			=  60,
 		JUMP 			=  65,
-		INIT_DASH 		=  70,
 		RUNNING 		=  80,
 		AIR_NORMAL 		=  95,
 		GROUND_NORMAL 	=  100,
+		WAVEDASH		=  105,
+		SHIELD		 	=  110,
+
 
 };
 
@@ -601,6 +605,9 @@ public class JumpAttributes {
 		public float doubleJumpVelocity = 8.0f;	
 		public float jumpHorizontalVelocity = 12.0f;	
 		public float jumpMaxHVelocity = 25.0f;	
+
+		public float AirdashHeight = 25.0f;	
+		public float WavedashVelocity = 25.0f;	
 
 		/// <summary>
 		/// How fast to de-accel during an air hop.

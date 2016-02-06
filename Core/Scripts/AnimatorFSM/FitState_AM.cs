@@ -27,6 +27,8 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_AirHopBack));
 				children.Add(typeof(FitState_AM_Crouch));
 				children.Add(typeof(FitState_AM_Land));
+				children.Add(typeof(FitState_AM_Wavedash));
+				children.Add(typeof(FitState_AM_WavedashLand));
 		}
 
 		public override void Enter()

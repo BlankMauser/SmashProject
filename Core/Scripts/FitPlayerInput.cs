@@ -38,6 +38,8 @@ public class FitPlayerInput : FitCharacterInput {
 				AttackButtonDown = player.GetButtonDown("Attack");
 				jumpButtonDown = player.GetButtonDown("Jump");
 				jumpButtonHeld = player.GetButton("Jump");
+				ShieldButtonDown = player.GetButtonDown("ShieldLP") || player.GetButtonDown("ShieldRP");
+				ShieldButtonHeld = player.GetButton("ShieldLP") || player.GetButton("ShieldRP");
 				x = player.GetAxis ("Move Left/Right");
 				x_prev = player.GetAxisPrev ("Move Left/Right");
 				X_Axis = x;
@@ -59,9 +61,8 @@ public class FitPlayerInput : FitCharacterInput {
 						FramesYNeutral += 1;
 				}
 
-				if (Mathf.Abs(x) >= 0.06f && character.BfAction <= BufferedAction.WALKING) {
-						character.BfAction = BufferedAction.WALKING;
-						character.BufferTimer = MaxBuffer;
+				if (Mathf.Abs(x) >= 0.06f) {
+						SetAction (BufferedAction.WALKING);
 						if (x > 0) {
 								Init_Xdirection = 1;
 						} else {
@@ -71,14 +72,18 @@ public class FitPlayerInput : FitCharacterInput {
 				}
 
 				if (Mathf.Abs(x) >= 0.7f) {
-						character.BfAction = BufferedAction.INIT_DASH;
-						if (FramesXNeutral > 5) {
-						character.BfAction = BufferedAction.WALKING;
+						if (FramesXNeutral <= 5) 
+						{
+						SetAction (BufferedAction.INIT_DASH, 2);
+						} else 
+						{
+						SetAction (BufferedAction.WALKING);
 						}
-						character.BufferTimer = MaxBuffer;
-						if (x > 0) {
+						if (x > 0) 
+						{
 								Init_Xdirection = 1;
-						} else {
+						} else 
+						{
 								Init_Xdirection = -1;
 						}			
 				}
@@ -87,15 +92,16 @@ public class FitPlayerInput : FitCharacterInput {
 
 				// Process Attack
 				if (AttackButtonDown) {
-						character.BfAction = BufferedAction.JAB;
-						character.BufferTimer = MaxBuffer;
+						SetAction (BufferedAction.JAB);
 				}
 
 				if (jumpButtonDown) {
-						character.BfAction = BufferedAction.JUMP;
-						character.BufferTimer = MaxBuffer;
+						SetAction (BufferedAction.JUMP);
 				}
 
+				if (ShieldButtonDown) {
+						SetAction (BufferedAction.SHIELD, 3);
+				}
 
 
 
@@ -108,6 +114,24 @@ public class FitPlayerInput : FitCharacterInput {
 				//Frames Since Neutral Limit
 				if (FramesYNeutral >= 300) {
 						FramesYNeutral = 300;
+				}
+		}
+
+		public void SetAction(BufferedAction action)
+		{
+				if (character.BfAction <= action) 
+				{
+						character.BfAction = action;
+						character.BufferTimer = MaxBuffer;
+				}
+		}
+
+		public void SetAction(BufferedAction action, int buffer)
+		{
+				if (character.BfAction <= action) 
+				{
+						character.BfAction = action;
+						character.BufferTimer = buffer;
 				}
 		}
 }

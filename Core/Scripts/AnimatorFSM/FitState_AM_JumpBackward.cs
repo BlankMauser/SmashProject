@@ -25,13 +25,24 @@ public class FitState_AM_JumpBackward : BaseFSMState
 				FastFall = false;
 				anim.Play ("Jab");
 
-				if (controller.Inputter.jumpButtonHeld == true) {
-						controller.velocity.y = controller.jump.jumpVelocity;
-				} else {
-						controller.velocity.y = controller.jump.hopVelocity;
-				}
+				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 
+				{
+						controller.velocity.y = 25;
+						controller.BfAction = BufferedAction.SHIELD;
+				} 
+				else 
+				{
 
-				controller.ClearBuffer ();
+						if (controller.Inputter.jumpButtonHeld == true) 
+						{
+								controller.velocity.y = controller.jump.jumpVelocity;
+						} 
+						else 
+						{
+								controller.velocity.y = controller.jump.hopVelocity;
+						}
+				}
+						
 				controller.C_Drag = controller.jump.AirDrag;
 				if (Mathf.Abs (controller.velocity.x) >= controller.jump.jumpMaxHVelocity) {
 						JuDccel = true;
@@ -131,6 +142,15 @@ public class FitState_AM_JumpBackward : BaseFSMState
 				if (controller.BfAction == BufferedAction.JUMP) {
 						CheckJump ();
 						return;
+				}
+
+				if (controller.BfAction == BufferedAction.SHIELD)
+				{
+						if (controller.CanWavedash (controller.jump.AirdashHeight)) 
+						{
+								DoTransition (typeof(FitState_AM_Wavedash));
+								return;
+						}
 				}
 
 		}

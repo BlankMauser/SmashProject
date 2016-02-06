@@ -98,12 +98,15 @@ public class RayCastColliders : MonoBehaviour {
 	public int x_facing;
 
 	public bool ApplyFriction = true;
+	public bool IASA = false;
 	public int BufferTimer;
 
 	
 	public CharacterState state;
 	public CharacterState potentialState;
 	public CharacterState previousState;
+
+	
 
 
 	public Vector2 Velocity {
@@ -132,7 +135,20 @@ public class RayCastColliders : MonoBehaviour {
 				return false;
 	}
 
-	
+		public bool IsGrounded(float offset, bool PassThrough){
+				foreach (RaycastDiamond foot in ECBfeet) {
+						if (foot.IsColliding(backgroundLayer | (IsPassing == false ? 1 << passThroughLayer : 0), offset)) return true;
+				}
+				return false;
+		}
+
+	public bool CanWavedash(float offset){
+				foreach (RaycastDiamond DashC in ECBfeet) {
+						if (DashC.IsColliding(backgroundLayer | 1 << passThroughLayer | 1 << 13, offset)) return true;
+				}
+				return false;
+	}
+
 
 	/// <summary>
 	/// The maximum time a frame can take. Smaller values allow your character to move faster, larger values will tend to make lag

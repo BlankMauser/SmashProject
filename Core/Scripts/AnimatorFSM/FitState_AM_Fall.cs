@@ -101,6 +101,15 @@ public class FitState_AM_Fall : BaseFSMState
 						return;
 				}
 
+				if (controller.BfAction == BufferedAction.SHIELD)
+				{
+						if (controller.CanWavedash (controller.jump.AirdashHeight)) 
+						{
+								DoTransition (typeof(FitState_AM_Wavedash));
+								return;
+						}
+				}
+
 		}
 
 		public void CheckJump() {

@@ -25,13 +25,25 @@ public class FitState_AM_Jump : BaseFSMState
 				FastFall = false;
 				anim.Play ("Idle");
 
-				if (controller.Inputter.jumpButtonHeld == true) {
-						controller.velocity.y = controller.jump.jumpVelocity;
-				} else {
-						controller.velocity.y = controller.jump.hopVelocity;
-				}
 
-				controller.ClearBuffer ();
+				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 
+				{
+						controller.velocity.y = 25;
+						controller.BfAction = BufferedAction.SHIELD;
+				} 
+				else 
+				{
+
+						if (controller.Inputter.jumpButtonHeld == true) 
+						{
+								controller.velocity.y = controller.jump.jumpVelocity;
+						} 
+						else 
+						{
+								controller.velocity.y = controller.jump.hopVelocity;
+						}
+				}
+						
 				controller.C_Drag = controller.jump.AirDrag;
 				if (Mathf.Abs (controller.velocity.x) >= controller.jump.jumpMaxHVelocity) {
 						JuDccel = true;
@@ -64,11 +76,13 @@ public class FitState_AM_Jump : BaseFSMState
 						controller.ApplyFriction = true;
 				}
 
-				if (controller.ApplyFriction == false) {
+				if (controller.ApplyFriction == false) 
+				{
 						if (JuDccel == true) {
-								if (Mathf.Abs (controller.velocity.x) <= controller.jump.jumpMaxHVelocity) {
+								if (Mathf.Abs (controller.velocity.x) <= controller.jump.jumpMaxHVelocity) 
+								{
 								JuDccel = false;
-				}
+								}
 								float newVelocity = (Mathf.Abs (controller.velocity.x) - controller.C_Drag);
 								int localXdir;
 								if (controller.velocity.x > 0) {
@@ -138,6 +152,15 @@ public class FitState_AM_Jump : BaseFSMState
 				if (controller.BfAction == BufferedAction.JUMP) {
 						CheckJump ();
 						return;
+				}
+
+				if (controller.BfAction == BufferedAction.SHIELD)
+				{
+						if (controller.CanWavedash (controller.jump.AirdashHeight)) 
+						{
+								DoTransition (typeof(FitState_AM_Wavedash));
+								return;
+						}
 				}
 
 		}
