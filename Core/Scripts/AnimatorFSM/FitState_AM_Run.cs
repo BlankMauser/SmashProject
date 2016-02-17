@@ -18,7 +18,7 @@ public class FitState_AM_Run : BaseFSMState
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.RUNNING;
 				anim = controller.anima;
-				anim.Play ("Jab");
+				anim.Play ("Run");
 				DeAccel = false;
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.x_facing = Init_direction;

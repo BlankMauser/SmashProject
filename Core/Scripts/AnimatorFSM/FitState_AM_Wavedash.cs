@@ -8,6 +8,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 
 		RayCastColliders controller;
 		public Animation anim; 
+		public int IASA_Timer;
 
 		public override void Enter()
 		{
@@ -43,7 +44,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 				} else 
 				{
 						//						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
-						DoTransition (typeof(FitState_AM_Land));
+						DoTransition (typeof(FitState_AM_WavedashLand));
 						return;
 						//						}
 

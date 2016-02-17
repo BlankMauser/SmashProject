@@ -23,12 +23,12 @@ public class FitState_AM_Jump : BaseFSMState
 				controller.state = CharacterState.JUMPING;
 				anim = controller.anima;
 				FastFall = false;
-				anim.Play ("Idle");
+				anim.Play ("JumpF");
 
 
 				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 
 				{
-						controller.velocity.y = 25;
+						controller.velocity.y = 16;
 						controller.BfAction = BufferedAction.SHIELD;
 				} 
 				else 
@@ -161,6 +161,11 @@ public class FitState_AM_Jump : BaseFSMState
 								DoTransition (typeof(FitState_AM_Wavedash));
 								return;
 						}
+				}
+
+				if (!anim.isPlaying) {
+						DoTransition (typeof(FitState_AM_Fall));
+						return;
 				}
 
 		}

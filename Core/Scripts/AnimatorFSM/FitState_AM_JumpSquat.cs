@@ -62,11 +62,12 @@ public class FitState_AM_JumpSquat : BaseFSMState
 
 				if (controller.x_direction != controller.x_facing) {
 						if (controller.previousState != CharacterState.RUNTURN) {
-								controller.velocity.x = controller.velocity.x * 0.16f;
+								controller.velocity.x = controller.velocity.x * 0.05f;
 						}
 						DoTransition (typeof(FitState_AM_JumpBackward));
 						return;
 				} else {
+						controller.velocity.x = controller.velocity.x * controller.movement.JumpMomentum;
 						DoTransition (typeof(FitState_AM_Jump));
 						return;
 				}

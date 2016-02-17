@@ -25,10 +25,17 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_JumpSquat));
 				children.Add(typeof(FitState_AM_AirJump));
 				children.Add(typeof(FitState_AM_AirHopBack));
+				children.Add(typeof(FitState_AM_CrouchSquat));
 				children.Add(typeof(FitState_AM_Crouch));
 				children.Add(typeof(FitState_AM_Land));
 				children.Add(typeof(FitState_AM_Wavedash));
 				children.Add(typeof(FitState_AM_WavedashLand));
+				children.Add(typeof(FitState_AM_AirAction));
+				children.Add(typeof(FitState_AM_Pass));
+				children.Add(typeof(FitState_AM_ShieldEnter));
+				children.Add(typeof(FitState_AM_Shield));
+				children.Add(typeof(FitState_AM_ShieldOff));
+
 		}
 
 		public override void Enter()

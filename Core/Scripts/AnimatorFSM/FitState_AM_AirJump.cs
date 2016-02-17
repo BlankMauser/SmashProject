@@ -27,7 +27,7 @@ public class FitState_AM_AirJump : BaseFSMState
 				FastFall = false;
 				HopWindow = false;
 				HopDccel = false;
-				anim.Play ("Idle");
+				anim.Play ("JumpF");
 				HopTimer = 4;
 				controller.velocity.x = 0;
 				if (controller.Inputter.x > 0.7f) {
@@ -128,6 +128,11 @@ public class FitState_AM_AirJump : BaseFSMState
 								DoTransition (typeof(FitState_AM_Wavedash));
 								return;
 						}
+				}
+
+				if (!anim.isPlaying) {
+						DoTransition (typeof(FitState_AM_Fall));
+						return;
 				}
 
 		}

@@ -144,7 +144,7 @@ public class RayCastColliders : MonoBehaviour {
 
 	public bool CanWavedash(float offset){
 				foreach (RaycastDiamond DashC in ECBfeet) {
-						if (DashC.IsColliding(backgroundLayer | 1 << passThroughLayer | 1 << 13, offset)) return true;
+						if (DashC.IsCollidingDash(backgroundLayer | 1 << passThroughLayer | 1 << 13, offset)) return true;
 				}
 				return false;
 	}
@@ -379,7 +379,7 @@ public class RayCastColliders : MonoBehaviour {
 												closestLadder = collision.distance;
 										}
 								} else if (collision.distance < closest) {
-										if (collision.collider.gameObject.layer == passThroughLayer) {
+										if (collision.collider.gameObject.layer == passThroughLayer && state != CharacterState.WAVEDASH && state != CharacterState.WAVEDASHLAND) {
 												if (PreviousBottom.y >= CurrentBottom.y && PreviousBottom.y >= collision.transform.position.y) {
 														hitFeet = collision;
 														closest = collision.distance;
@@ -392,6 +392,7 @@ public class RayCastColliders : MonoBehaviour {
 										{
 												hitFeet = collision;
 												closest = collision.distance;	
+												IsPassing = false;
 										}
 								}
 								if (collision.collider.gameObject.layer != climableLayer)
@@ -619,6 +620,14 @@ public class RayCastColliders : MonoBehaviour {
 						offset = GetOffset ();
 						DistanceToECB = GetDistance ();
 						return Physics.Raycast (BOTTransform.position + BOTTransform.localRotation * offset, BOTTransform.localRotation * GetVectorForDirection(), DistanceToECB + skinSize, layerMask);
+				}
+
+				public bool IsCollidingDash(int layerMask, float extraDistance) {
+						offset = GetOffset ();
+						DistanceToECB = GetDistance ();
+						float height = DistanceToECB;
+						return Physics.Raycast (BOTTransform.position + BOTTransform.localRotation * new Vector3(offset.x, offset.y - height, offset.z), 
+								BOTTransform.localRotation * GetVectorForDirection(), extraDistance, layerMask);
 				}
 
 		public RaycastHit GetCollision() {

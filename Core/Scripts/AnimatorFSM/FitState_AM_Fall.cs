@@ -23,13 +23,13 @@ public class FitState_AM_Fall : BaseFSMState
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.FALLING;
 				controller.C_Drag = controller.jump.AirDrag;
-				if (controller.previousState != CharacterState.JUMPING || controller.previousState != CharacterState.DOUBLE_JUMPING) 
+				if (controller.previousState != CharacterState.JUMPING || controller.previousState != CharacterState.AIRJUMP) 
 				{
 						controller.velocity.x = controller.velocity.x * 0.6f;
 				}
 
 				anim = controller.anima;
-				anim.Play ("Idle");
+				anim.Play ("Fall");
 
 
 		}

@@ -475,6 +475,7 @@ public enum CharacterState {
 	AIRJUMP			=  40,
 	CROUCH			=  45,
 	WAVEDASH		=  50,
+	WAVEDASHLAND	=  55,
 	
 	AIRBORNE		= 110,			// This is sent when you are in the air but are moving up or haven't reached the fall velocity
 	FALLING 		= 120,
@@ -577,11 +578,7 @@ public class MovementAttributes {
 		public int jumpSquat = 4;
 
 		public float TurnAroundVelocity = 5.0f;
-		/// <summary>
-		/// If true when you jump you can move around in X at the run speed. Default is to use walk speed. 
-		/// This does not apply if movement is PHYSICS STYLE. In that case use jump drag instead.
-		/// </summary>
-		public bool jumpAtRunSpeed = false;
+		public float JumpMomentum = 0.9f;
 		/// <summary>
 		/// The acceleration to apply when input is left or right.
 		/// </summary>

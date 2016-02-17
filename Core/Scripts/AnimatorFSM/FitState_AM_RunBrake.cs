@@ -17,7 +17,7 @@ public class FitState_AM_RunBrake : BaseFSMState
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.RUNBRAKE;
 				anim = controller.anima;
-				anim.Play ("Land");
+				anim.Play ("Brake");
 				controller.ClearBuffer ();
 				BrakeTimer = 2;
 				controller.C_Drag = controller.movement.friction;
@@ -52,6 +52,7 @@ public class FitState_AM_RunBrake : BaseFSMState
 				}
 
 				if (BrakeTimer == 0) {
+						controller.IASA = true;
 						controller.ApplyFriction = true;
 				} else {
 						BrakeTimer -= 1;
