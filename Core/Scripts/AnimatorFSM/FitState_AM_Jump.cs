@@ -72,7 +72,8 @@ public class FitState_AM_Jump : BaseFSMState
 				} else if (controller.Inputter.x < -0.7f) {
 						controller.x_direction = -1;
 						controller.ApplyFriction = false;
-				} else {
+				} 
+				else {
 						controller.ApplyFriction = true;
 				}
 
@@ -110,7 +111,9 @@ public class FitState_AM_Jump : BaseFSMState
 								AxisVel = controller.jump.jumpMaxHVelocity * localXAxl;
 						}
 						if (Mathf.Abs (AxisVel) <= Mathf.Abs(InitVel) || Mathf.Abs (AxisVel) <= controller.jump.jumpMaxHVelocity) {
-								controller.velocity.x = AxisVel;
+//								if (JuDccel == false) {
+										controller.velocity.x = AxisVel;
+//								}
 						}
 				}
 
@@ -119,8 +122,11 @@ public class FitState_AM_Jump : BaseFSMState
 //				controller.Inputter.ProcessInput ();
 				if (controller.BfAction == BufferedAction.JAB)
 				{
-
-						DoTransition(typeof(FitState_AM_GroundAttack));
+						object[] args = new object[3];
+						args[0] = InitVel;
+						args[1] = JuDccel;
+						args[2] = FastFall;
+						DoTransition(typeof(FitState_AM_AirAttack), args);
 						return;
 				}
 
@@ -163,7 +169,8 @@ public class FitState_AM_Jump : BaseFSMState
 						}
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
 						return;
 				}

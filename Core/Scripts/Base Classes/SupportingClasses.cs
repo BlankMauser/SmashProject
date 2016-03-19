@@ -512,6 +512,7 @@ public enum CharacterState {
 	STUNNED 		= 1000,
 	GUARD           = 1100,
 	ATTACK          = 1200,
+	AIRATTACK       = 1205,
 };
 
 

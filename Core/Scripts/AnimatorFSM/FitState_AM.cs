@@ -31,6 +31,7 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_Wavedash));
 				children.Add(typeof(FitState_AM_WavedashLand));
 				children.Add(typeof(FitState_AM_AirAction));
+				children.Add(typeof(FitState_AM_AirAttack));
 				children.Add(typeof(FitState_AM_Pass));
 				children.Add(typeof(FitState_AM_ShieldEnter));
 				children.Add(typeof(FitState_AM_Shield));

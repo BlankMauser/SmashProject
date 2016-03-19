@@ -25,6 +25,7 @@ public class FitState_AM_JumpSquat : BaseFSMState
 
 		public override void Exit()
 		{
+				EndTerms ();
 		}
 
 		public override void Update()
@@ -41,10 +42,16 @@ public class FitState_AM_JumpSquat : BaseFSMState
 						return;
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						CheckJump ();
 				}
 
+
+		}
+
+		public override void LateUpdate()
+		{
 
 		}
 
@@ -72,6 +79,14 @@ public class FitState_AM_JumpSquat : BaseFSMState
 						return;
 				}
 
+		}
+
+		public void EndTerms() {
+
+				controller.previousState = controller.state;
+				controller.EndAnim = false;
+				controller.IASA = false;
+				return;
 		}
 
 

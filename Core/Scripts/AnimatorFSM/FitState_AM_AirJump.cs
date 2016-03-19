@@ -28,7 +28,7 @@ public class FitState_AM_AirJump : BaseFSMState
 				HopWindow = false;
 				HopDccel = false;
 				anim.Play ("JumpF");
-				HopTimer = 4;
+				HopTimer = 2;
 				controller.velocity.x = 0;
 				if (controller.Inputter.x > 0.7f) {
 						controller.x_direction = 1;
@@ -130,7 +130,8 @@ public class FitState_AM_AirJump : BaseFSMState
 						}
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
 						return;
 				}

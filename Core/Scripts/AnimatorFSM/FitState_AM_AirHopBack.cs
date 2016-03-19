@@ -130,7 +130,8 @@ public class FitState_AM_AirHopBack : BaseFSMState
 						}
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
 						return;
 				}

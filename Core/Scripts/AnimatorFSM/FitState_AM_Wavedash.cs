@@ -17,7 +17,6 @@ public class FitState_AM_Wavedash : BaseFSMState
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.WAVEDASH;
 				anim = controller.anima;
-				anim.Play ("InitDash");
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
 				controller.velocity.x = controller.jump.WavedashVelocity * controller.Inputter.x;
@@ -25,6 +24,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 				{
 						controller.velocity.y *= 0.08f;
 				}
+				IASA_Timer = 12;
 
 		}
 
@@ -35,6 +35,13 @@ public class FitState_AM_Wavedash : BaseFSMState
 
 		public override void Update()
 		{
+				if (IASA_Timer == 0) {
+						controller.IASA = true;
+				} else 
+				{
+						IASA_Timer -= 1;
+				}
+
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						controller.velocity.y += controller.jump.fallGravity;
 						if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
@@ -44,7 +51,9 @@ public class FitState_AM_Wavedash : BaseFSMState
 				} else 
 				{
 						//						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
-						DoTransition (typeof(FitState_AM_WavedashLand));
+						object[] args = new object[1];
+						args[0] = IASA_Timer;
+						DoTransition(typeof(FitState_AM_WavedashLand), args);
 						return;
 						//						}
 

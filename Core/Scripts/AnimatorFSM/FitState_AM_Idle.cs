@@ -22,7 +22,7 @@ public class FitState_AM_Idle : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.previousState = CharacterState.IDLE;
+				EndTerms();
 		}
 
 		public override void Update()
@@ -30,19 +30,60 @@ public class FitState_AM_Idle : BaseFSMState
 //				controller.Inputter.GetInput ();
 //				controller.Inputter.ProcessInput ();
 
-				if (controller.BfAction == BufferedAction.JAB) {
-								DoTransition (typeof(FitState_AM_GroundAttack));
-								return;
-						}
-						if (controller.BfAction == BufferedAction.JUMP) {
+				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
+						DoTransition (typeof(FitState_AM_Fall));
+						return;
+				}
 
-								DoTransition (typeof(FitState_AM_JumpSquat));
-								return;
-						}
-						if (controller.IsGrounded (controller.groundedLookAhead) == false) {
-								DoTransition (typeof(FitState_AM_Fall));
-								return;
-						}
+				CheckIASA ();
+//				if (controller.BfAction == BufferedAction.JAB) {
+//								DoTransition (typeof(FitState_AM_GroundAttack));
+//								return;
+//						}
+//
+//						if (controller.BfAction == BufferedAction.JUMP) {
+//
+//								DoTransition (typeof(FitState_AM_JumpSquat));
+//								return;
+//						}
+//
+//
+//				if (controller.BfAction == BufferedAction.WALKING) {
+//						if (Mathf.Abs (controller.Inputter.x) >= 0.5f) {
+//								DoTransition (typeof(FitState_AM_WalkFast));
+//								return;
+//						} else {
+//								DoTransition (typeof(FitState_AM_WalkSlow));
+//								return;
+//						}
+//				}
+//
+//				if (controller.BfAction == BufferedAction.INIT_DASH) {
+//						DoTransition (typeof(FitState_AM_InitDash));
+//						return;
+//				}
+
+				if (controller.Inputter.y <= -0.9f) {
+						DoTransition (typeof(FitState_AM_Crouch));
+						return;
+				}
+
+
+
+		}
+
+		public void CheckIASA() {
+				
+				if (controller.BfAction == BufferedAction.JAB) {
+						DoTransition (typeof(FitState_AM_GroundAttack));
+						return;
+				}
+
+				if (controller.BfAction == BufferedAction.JUMP) {
+
+						DoTransition (typeof(FitState_AM_JumpSquat));
+						return;
+				}
 
 				if (controller.BfAction == BufferedAction.WALKING) {
 						if (Mathf.Abs (controller.Inputter.x) >= 0.5f) {
@@ -59,11 +100,14 @@ public class FitState_AM_Idle : BaseFSMState
 						return;
 				}
 
-				if (controller.Inputter.y <= -0.9f) {
-						DoTransition (typeof(FitState_AM_Crouch));
-						return;
-				}
+		}
 
+		public void EndTerms() {
+
+				controller.previousState = controller.state;
+				controller.EndAnim = false;
+				controller.IASA = false;
+				return;
 		}
 
 

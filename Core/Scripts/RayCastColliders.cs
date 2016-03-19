@@ -73,6 +73,7 @@ public class RayCastColliders : MonoBehaviour {
 	/// </summary>
 	public float groundedLookAhead = 0.25f;
 
+	public FitStrike Strike;
 	public FitAnimator Animator;
 
 	public Animation anima;
@@ -87,7 +88,7 @@ public class RayCastColliders : MonoBehaviour {
 	public bool IsPassing;
 	
 	public int localXdir;
-
+	public bool EndAnim;
 	/// <summary>
 	/// X Axis of Controller.
 	/// </summary>
@@ -96,6 +97,16 @@ public class RayCastColliders : MonoBehaviour {
 	/// Direction character is facing.
 	/// </summary>
 	public int x_facing;
+
+	/// <summary>
+	/// Drag on outside forces.
+	/// </summary>
+	public int MoDragX;
+
+	/// <summary>
+	/// Drag on outside forces.
+	/// </summary>
+	public int MoDragY;
 
 	public bool ApplyFriction = true;
 	public bool IASA = false;
@@ -223,6 +234,7 @@ public class RayCastColliders : MonoBehaviour {
 			myTransform = transform;	
 			velocity = Vector3.zero;
 			currentDrag = movement.friction;
+			EndAnim = false;
 
 				// Assign default transforms
 				if (ECBfeet != null) {
@@ -264,19 +276,19 @@ public class RayCastColliders : MonoBehaviour {
 				CurrentBottom = BOTTransform.position;
 	}
 				
-		void LateUpdate () {
-			frameTime = maxFrameTime;
-				CheckDirection ();
-				MoveInXDirection();
-				MoveInYDirection();
-				UpdateECB ();
-				if (BufferTimer == 0) {
-						ClearBuffer ();
-				} else {
-						BufferTimer -= 1;
-				}
-
-		}
+//		void LateUpdate () {
+//			frameTime = maxFrameTime;
+//				CheckDirection ();
+//				MoveInXDirection();
+//				MoveInYDirection();
+//				UpdateECB ();
+//				if (BufferTimer == 0) {
+//						ClearBuffer ();
+//				} else {
+//						BufferTimer -= 1;
+//				}
+//
+//		}
 
 		protected void MoveInXDirection()	{
 

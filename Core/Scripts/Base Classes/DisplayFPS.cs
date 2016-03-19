@@ -4,6 +4,7 @@ using System.Collections;
 public class DisplayFPS : MonoBehaviour
 {
 		float deltaTime = 0.0f;
+		public SuperSampling_SSAA Cam;
 
 		void Start()
 		{
@@ -16,6 +17,11 @@ public class DisplayFPS : MonoBehaviour
 		{
 
 				deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+
+				if (Input.GetButtonDown("Fire2"))
+				{
+						Cam.TakeHighScaledShot(1920,1080,4f,SSAA.SSAAFilter.LanczosHigh,"/MyImage/screenshot");
+				}
 		}
 
 		void OnGUI()

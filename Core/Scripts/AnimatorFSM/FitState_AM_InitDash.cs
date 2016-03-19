@@ -82,12 +82,14 @@ public class FitState_AM_InitDash : BaseFSMState
 						if (Init_direction != controller.x_direction) {
 								DoTransition (typeof(FitState_AM_Pivot));
 						}
-				if (!anim.isPlaying || controller.velocity.x == 0) {
+				if (controller.EndAnim == true || controller.velocity.x == 0) {
 						if (DeAccel == true) {
+								controller.EndAnim = false;
 								DoTransition (typeof(FitState_AM_Idle));
 								return;
 						}
 						if (DeAccel == false) {
+								controller.EndAnim = false;
 								DoTransition (typeof(FitState_AM_Run));
 								return;
 						}

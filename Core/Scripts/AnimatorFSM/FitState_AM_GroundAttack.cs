@@ -30,7 +30,8 @@ public class FitState_AM_GroundAttack : BaseFSMState
 
 		public override void Update()
 		{
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						DoTransition(typeof(FitState_AM_Idle));
 						return;
 				}

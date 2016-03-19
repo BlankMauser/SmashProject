@@ -22,7 +22,7 @@ public class FitState_AM_RunTurn : BaseFSMState
 				controller.BfAction = BufferedAction.PIVOT;
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.ApplyFriction = false;
-				BrakeTimer = 4;
+				BrakeTimer = 2;
 				controller.C_Drag = controller.movement.friction;
 		}
 
@@ -46,7 +46,8 @@ public class FitState_AM_RunTurn : BaseFSMState
 						DoTransition (typeof(FitState_AM_Fall));
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						if (Mathf.Abs (controller.Inputter.x_prev) >= 0.18f) {
 								if (Mathf.Abs(controller.Inputter.x) >= 0.7f) {
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Xft;
 
 public class FitAnimator : MonoBehaviour {
 
@@ -14,6 +15,10 @@ public class FitAnimator : MonoBehaviour {
 	public Transform ECB_Left;
 	public Quaternion RotateRight;
 	public Quaternion RotateRight2;
+	public float AnimX;
+	public float AnimY;
+
+	public XWeaponTrail Trail;
 
 		void Start () {
 				RotateRight = lightsource.transform.rotation;
@@ -39,6 +44,40 @@ public class FitAnimator : MonoBehaviour {
 						transform.localScale = ScaleLeft;
 						controller.SwitchColliders();
 				}
+		}
+
+		public void EndAnim() {
+				controller.EndAnim = true;
+		}
+
+		public void IASAstart() {
+				controller.IASA = true;
+		}
+
+		public void TrailPlay() {
+				Trail.Activate ();
+		}
+
+		public void TrailStop() {
+				Trail.Deactivate ();
+		}
+
+		public void TrailStopSmooth(float time) {
+				Trail.StopSmoothly (time);
+		}
+
+		public void SetVelocityX(float x) {
+				controller.velocity.x = x;
+		}
+
+		public void SetVelocityY(float y) {
+				controller.velocity.y = y;
+		}
+
+		//For Animating X and Y values through curves
+		public void AnimCurves() {
+				controller.velocity.x = AnimX;
+				controller.velocity.y = AnimY;
 		}
 
 

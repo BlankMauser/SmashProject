@@ -36,7 +36,8 @@ public class FitState_AM_RunBrake : BaseFSMState
 						return;
 				}
 
-				if (!anim.isPlaying) {
+				if (controller.EndAnim == true) {
+						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Idle));
 						return;
 				}

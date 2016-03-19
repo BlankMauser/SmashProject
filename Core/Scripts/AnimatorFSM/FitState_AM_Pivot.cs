@@ -26,7 +26,7 @@ public class FitState_AM_Pivot : BaseFSMState
 				controller.velocity.x = 0;
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
-				PivotTimer = 1;
+				PivotTimer = 0;
 		}
 
 		public override void Exit()
