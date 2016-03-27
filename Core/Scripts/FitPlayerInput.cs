@@ -72,7 +72,7 @@ public class FitPlayerInput : FitCharacterInput {
 				}
 
 				if (Mathf.Abs(x) >= 0.7f) {
-						if (FramesXNeutral <= 5) 
+						if (FramesXNeutral <= 2) 
 						{
 						SetAction (BufferedAction.INIT_DASH, 2);
 						} else 

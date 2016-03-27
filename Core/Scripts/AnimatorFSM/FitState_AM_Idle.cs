@@ -7,15 +7,15 @@ public class FitState_AM_Idle : BaseFSMState
 {
 		
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 
 		public override void Enter()
 		{
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.IDLE;
-				anim = controller.anima;
-				anim.Play ("Idle");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Idle");
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
 		}
@@ -72,6 +72,16 @@ public class FitState_AM_Idle : BaseFSMState
 
 		}
 
+		public override void LateUpdate()
+		{
+
+				if (controller.Strike.ApplyHitboxFrame == true) 
+				{
+						Debug.Log ("Got Here");
+						HitboxCollision ();
+				}
+		}
+
 		public void CheckIASA() {
 				
 				if (controller.BfAction == BufferedAction.JAB) {
@@ -108,6 +118,13 @@ public class FitState_AM_Idle : BaseFSMState
 				controller.EndAnim = false;
 				controller.IASA = false;
 				return;
+		}
+
+		public void HitboxCollision() {
+				controller.Strike.DamageCalc ();
+				DoTransition (typeof(FitState_AM_HitStop));
+				return;
+
 		}
 
 

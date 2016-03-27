@@ -8,7 +8,7 @@ public class FitState_AM_AirHopBack : BaseFSMState
 
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public float InitVel;
 		public bool FastFall;
 		public bool HopWindow;
@@ -23,11 +23,11 @@ public class FitState_AM_AirHopBack : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.AIRJUMP;
-				anim = controller.anima;
+				//anim = controller.anima;
 				FastFall = false;
 				HopWindow = false;
 				HopDccel = false;
-				anim.Play ("JumpB");
+				controller.FitAnima.Play ("JumpB");
 				HopTimer = 4;
 				controller.velocity.x = 0;
 				if (controller.Inputter.x > 0.7f) {

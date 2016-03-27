@@ -7,7 +7,7 @@ public class FitState_AM_JumpSquat : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int localXdir;
 
 		public override void Enter()
@@ -16,8 +16,8 @@ public class FitState_AM_JumpSquat : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.PRE_JUMP;
-				anim = controller.anima;
-				anim.Play ("JumpSq");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("JumpSq");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = false;
 

@@ -509,6 +509,7 @@ public enum CharacterState {
 	PUSHING			= 510,
 	PULLING			= 520,
 	
+	HITSTOP			= 900,
 	STUNNED 		= 1000,
 	GUARD           = 1100,
 	ATTACK          = 1200,

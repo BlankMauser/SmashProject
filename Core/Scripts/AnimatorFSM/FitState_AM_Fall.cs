@@ -8,7 +8,7 @@ public class FitState_AM_Fall : BaseFSMState
 
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public bool JuDccel;
 		public float InitVel;
 		public bool FastFall;
@@ -28,8 +28,8 @@ public class FitState_AM_Fall : BaseFSMState
 						controller.velocity.x = controller.velocity.x * 0.6f;
 				}
 
-				anim = controller.anima;
-				anim.Play ("Fall");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Fall");
 
 				if (controller.Inputter.y <= -0.75f) {
 						FastFall = true;

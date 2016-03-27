@@ -7,15 +7,15 @@ public class FitState_AM_Crouch : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 
 		public override void Enter()
 		{
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.CROUCH;
-				anim = controller.anima;
-				anim.Play ("Idle");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Idle");
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
 		}

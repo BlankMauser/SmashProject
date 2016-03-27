@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 5085065}
-  - 95: {fileID: 5085064}
   m_Layer: 0
   m_Name: RockStart1
   m_TagString: Untagged
@@ -101,24 +100,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &5085064
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9500000, guid: fe8e6fea72efc9c4e8d1e2f5ddf7db51,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 5085063}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fe8e6fea72efc9c4e8d1e2f5ddf7db51, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &5085065
 Transform:
   m_ObjectHideFlags: 0
@@ -694,7 +675,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 86879846}
-  - 95: {fileID: 86879845}
   m_Layer: 9
   m_Name: IceSpireWIP
   m_TagString: Untagged
@@ -702,24 +682,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &86879845
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9500000, guid: 1504e582fb1da6444b3b91096c353295,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 86879844}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1504e582fb1da6444b3b91096c353295, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &86879846
 Transform:
   m_ObjectHideFlags: 0
@@ -1413,7 +1375,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &189037526
@@ -1487,7 +1450,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &195435177
@@ -1719,7 +1683,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: f03c461dcea891f49ae226c3dcfd5229, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: f03c461dcea891f49ae226c3dcfd5229, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &262010450 stripped
@@ -1881,7 +1846,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &313701419 stripped
@@ -2213,7 +2179,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &419951415
@@ -2287,7 +2254,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &480050120
@@ -2552,7 +2520,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &520522597 stripped
@@ -2585,6 +2554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41246a12ba80b214ba9fd02afe62a54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ApplyHitboxFrame: 0
+  ApplyProjFrame: 0
   hitboxes:
   - {fileID: 0}
   - {fileID: 0}
@@ -2594,12 +2565,47 @@ MonoBehaviour:
   - {fileID: 0}
   controller: {fileID: 0}
   animator: {fileID: 0}
+  MyId: 2
   Percent: 0
-  Hitboxes: []
-  HitSeed: 0
-  currentCSeed: 0
-  currentCPriority: 0
-  currentCHurtbox: 0
+  AttackBoxes: []
+  HitComboSeed: 1
+  CurrentDmg:
+    MyPriority: 0
+    Damage: 0
+    TrueDamage: 0
+    HboxSeed: 0
+    BaseKnockback: 0
+    WeightKnockback: 0
+    KnockbackGrowth: 0
+    Hitlag: 0
+    Blockstun: 0
+    ShieldPush: 0
+    Hitstun: 0
+    type: 0
+    effect: {fileID: 0}
+    soundname: 
+    Xflipped: 0
+    ownerID: 0
+    effectspawn: {x: 0, y: 0, z: 0}
+    cStart: {r: 0, g: 0, b: 0, a: 0}
+    cEnd: {r: 0, g: 0, b: 0, a: 0}
+--- !u!95 &520522603
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 520522597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 3ef34c38a540cce44b825d34f9aa3fd3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9823c85000680124db5bcfe97a9cb210, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &525098113 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
@@ -2687,7 +2693,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &561602334
@@ -2886,7 +2893,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!21 &583761009
@@ -3049,6 +3057,23 @@ Mesh:
 GameObject:
   m_PrefabParentObject: {fileID: 195778, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
   m_PrefabInternal: {fileID: 900900414}
+--- !u!95 &630774982
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630774981}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 3ef34c38a540cce44b825d34f9aa3fd3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9823c85000680124db5bcfe97a9cb210, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!54 &630774983
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3075,6 +3100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41246a12ba80b214ba9fd02afe62a54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ApplyHitboxFrame: 0
+  ApplyProjFrame: 0
   hitboxes:
   - {fileID: 1018345309}
   - {fileID: 2111633764}
@@ -3084,17 +3111,35 @@ MonoBehaviour:
   - {fileID: 0}
   controller: {fileID: 0}
   animator: {fileID: 0}
+  MyId: 1
   Percent: 0
-  Hitboxes:
+  AttackBoxes:
+  - {fileID: 11400000, guid: 0fe5cb4c0e8d30a4a946d720b22160a9, type: 2}
+  - {fileID: 11400000, guid: 0fe5cb4c0e8d30a4a946d720b22160a9, type: 2}
+  - {fileID: 11400000, guid: 0fe5cb4c0e8d30a4a946d720b22160a9, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  HitSeed: 0
-  currentCSeed: 0
-  currentCPriority: 0
-  currentCHurtbox: 0
+  HitComboSeed: 1
+  CurrentDmg:
+    MyPriority: 0
+    Damage: 0
+    TrueDamage: 0
+    HboxSeed: 0
+    BaseKnockback: 0
+    WeightKnockback: 0
+    KnockbackGrowth: 0
+    Hitlag: 0
+    Blockstun: 0
+    ShieldPush: 0
+    Hitstun: 0
+    type: 0
+    effect: {fileID: 0}
+    soundname: 
+    Xflipped: 0
+    ownerID: 0
+    effectspawn: {x: 0, y: 0, z: 0}
+    cStart: {r: 0, g: 0, b: 0, a: 0}
+    cEnd: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &637258143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,7 +3509,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: d24637b965565a141bf1fb3e37d50245, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: d24637b965565a141bf1fb3e37d50245, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &704516656
@@ -5043,6 +5089,26 @@ Prefab:
       propertyPath: jump.AirHopMultiplier
       value: 0.87
       objectReference: {fileID: 0}
+    - target: {fileID: 195778, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: m_Name
+      value: PalanteP2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: Strike
+      value: 
+      objectReference: {fileID: 520522602}
+    - target: {fileID: 11116678, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: FitAnima
+      value: 
+      objectReference: {fileID: 520522603}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: jump.AirDrag
+      value: 0.76
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
   m_IsPrefabParent: 0
@@ -5116,7 +5182,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 763525516}
-  - 95: {fileID: 763525517}
   m_Layer: 9
   m_Name: IceSpireWIP
   m_TagString: Untagged
@@ -5138,24 +5203,6 @@ Transform:
   - {fileID: 277379843}
   m_Father: {fileID: 0}
   m_RootOrder: 18
---- !u!95 &763525517
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9500000, guid: 1504e582fb1da6444b3b91096c353295,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763525515}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1504e582fb1da6444b3b91096c353295, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &793826680 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
@@ -5450,7 +5497,7 @@ SphereCollider:
   m_GameObject: {fileID: 851400490}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
@@ -5468,10 +5515,12 @@ MonoBehaviour:
   MyHbox: {fileID: 0}
   Hitbox: {fileID: 851400492}
   Type: 0
+  OwnerStrike: {fileID: 630774985}
+  MyOwnerId: 0
   HitboxSeed: 0
   PriorityId: 0
   AttackQueue: 0
-  Size: 0
+  Size: 0.15
 --- !u!1 &858824208
 GameObject:
   m_ObjectHideFlags: 0
@@ -5667,7 +5716,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &871585381
@@ -5869,7 +5919,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &881128692 stripped
@@ -6051,7 +6102,36 @@ Prefab:
       propertyPath: jump.AirHopMultiplier
       value: 0.87
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: Strike
+      value: 
+      objectReference: {fileID: 630774985}
+    - target: {fileID: 195778, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: m_Name
+      value: PalanteP1
+      objectReference: {fileID: 0}
+    - target: {fileID: 110388, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11116678, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: FitAnima
+      value: 
+      objectReference: {fileID: 630774982}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: anima
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
+      propertyPath: jump.AirDrag
+      value: 0.76
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11116678, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
   m_IsPrefabParent: 0
 --- !u!21 &907446113
@@ -6360,7 +6440,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1005530343 stripped
@@ -6457,7 +6538,7 @@ SphereCollider:
   m_GameObject: {fileID: 1018345306}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
@@ -6475,10 +6556,12 @@ MonoBehaviour:
   MyHbox: {fileID: 0}
   Hitbox: {fileID: 1018345308}
   Type: 0
+  OwnerStrike: {fileID: 630774985}
+  MyOwnerId: 0
   HitboxSeed: 0
   PriorityId: 0
-  AttackQueue: 5
-  Size: 1
+  AttackQueue: 0
+  Size: 0.25
 --- !u!1 &1020238748
 GameObject:
   m_ObjectHideFlags: 0
@@ -6612,7 +6695,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &1097874956
@@ -6686,7 +6770,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: d24637b965565a141bf1fb3e37d50245, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: d24637b965565a141bf1fb3e37d50245, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &1114117664 stripped
@@ -6915,13 +7000,13 @@ MonoBehaviour:
   Scale: 2
   unlocked: 0
   Filter: 0
-  renderTextureFormat: 2
+  renderTextureFormat: 0
   showScreenshot: 0
   screenshotWidth: 1920
   screenshotHeight: 1080
-  screenshotScale: 4
+  screenshotScale: 2
   scalingSelector: 0
-  screenshotFilter: 4
+  screenshotFilter: 0
   relativeScreenshotPath: /Assets/MyImage
 --- !u!81 &1174125816
 AudioListener:
@@ -7051,7 +7136,7 @@ GameObject:
   - 114: {fileID: 1199048693}
   - 114: {fileID: 1199048703}
   - 114: {fileID: 1199048704}
-  - 114: {fileID: 1199048705}
+  - 114: {fileID: 1199048695}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7135,6 +7220,28 @@ MonoBehaviour:
   EnableDepthFade: 0
   depthStart: 0.119
   depthEnd: 0.196
+--- !u!114 &1199048695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1199048692}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d339c2fa3e211408ebd9198c0f9961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scale: 2
+  unlocked: 0
+  Filter: 1
+  renderTextureFormat: 0
+  showScreenshot: 0
+  screenshotWidth: 1920
+  screenshotHeight: 1080
+  screenshotScale: 4
+  scalingSelector: 0
+  screenshotFilter: 4
+  relativeScreenshotPath: /Assets/MyImage
 --- !u!81 &1199048698
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7352,28 +7459,6 @@ MonoBehaviour:
     type: 3}
   colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544,
     type: 3}
---- !u!114 &1199048705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1199048692}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d339c2fa3e211408ebd9198c0f9961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Scale: 1.5
-  unlocked: 0
-  Filter: 0
-  renderTextureFormat: 2
-  showScreenshot: 0
-  screenshotWidth: 1920
-  screenshotHeight: 1080
-  screenshotScale: 2
-  scalingSelector: 0
-  screenshotFilter: 0
-  relativeScreenshotPath: /Assets/MyImage
 --- !u!1 &1213177354
 GameObject:
   m_ObjectHideFlags: 0
@@ -8006,7 +8091,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1450780848
@@ -8515,7 +8601,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1583985093
@@ -8819,7 +8906,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &1681955313
@@ -8893,7 +8981,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1698531442
@@ -9976,7 +10065,8 @@ Prefab:
       propertyPath: m_Name
       value: IceBlock (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &1804163437
@@ -11060,7 +11150,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &2074387787
@@ -11134,7 +11225,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1001 &2103676810
@@ -11203,7 +11295,7 @@ SphereCollider:
   m_GameObject: {fileID: 2111633761}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
@@ -11221,10 +11313,12 @@ MonoBehaviour:
   MyHbox: {fileID: 0}
   Hitbox: {fileID: 2111633763}
   Type: 0
+  OwnerStrike: {fileID: 630774985}
+  MyOwnerId: 0
   HitboxSeed: 0
   PriorityId: 0
   AttackQueue: 0
-  Size: 0
+  Size: 0.15
 --- !u!4 &2112994519 stripped
 Transform:
   m_PrefabParentObject: {fileID: 411282, guid: 53b727b5236876e4cb8f90d86f2b68e3, type: 2}
@@ -11300,7 +11394,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &2128160936
@@ -11455,6 +11550,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
   m_IsPrefabParent: 0

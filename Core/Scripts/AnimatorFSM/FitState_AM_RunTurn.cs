@@ -7,7 +7,7 @@ public class FitState_AM_RunTurn : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int Init_direction;
 		public int BrakeTimer;
 
@@ -17,8 +17,8 @@ public class FitState_AM_RunTurn : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.RUNTURN;
-				anim = controller.anima;
-				anim.Play ("Turn");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Turn");
 				controller.BfAction = BufferedAction.PIVOT;
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.ApplyFriction = false;

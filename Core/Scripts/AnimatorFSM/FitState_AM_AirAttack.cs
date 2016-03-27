@@ -8,7 +8,7 @@ public class FitState_AM_AirAttack : BaseFSMState
 
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public bool JuDccel;
 		public float InitVel;
 		public bool FastFall;
@@ -32,9 +32,9 @@ public class FitState_AM_AirAttack : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.AIRATTACK;
-				anim = controller.anima;
+				//anim = controller.anima;
 				FastFall = false;
-				anim.Play ("Nair");
+				controller.FitAnima.Play ("Nair");
 				controller.C_Drag = controller.jump.AirDrag;
 				controller.ClearBuffer ();
 		}
@@ -99,9 +99,9 @@ public class FitState_AM_AirAttack : BaseFSMState
 								AxisVel = controller.jump.jumpMaxHVelocity * localXAxl;
 						}
 						if (Mathf.Abs (AxisVel) <= Mathf.Abs(InitVel) || Mathf.Abs (AxisVel) <= controller.jump.jumpMaxHVelocity) {
-								if (JuDccel == false) {
+//								if (JuDccel == false) {
 										controller.velocity.x = AxisVel;
-								}
+//								}
 						}
 				}
 

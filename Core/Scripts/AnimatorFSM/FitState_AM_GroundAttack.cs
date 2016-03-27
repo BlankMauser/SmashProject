@@ -8,7 +8,7 @@ public class FitState_AM_GroundAttack : BaseFSMState
 
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 
 		public override void Enter()
 		{
@@ -16,11 +16,12 @@ public class FitState_AM_GroundAttack : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.ATTACK;
-				anim = controller.anima;
-				anim.Play ("Jab");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Jab");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
+				SeedUp ();
 		}
 
 		public override void Exit()
@@ -34,6 +35,15 @@ public class FitState_AM_GroundAttack : BaseFSMState
 						controller.EndAnim = false;
 						DoTransition(typeof(FitState_AM_Idle));
 						return;
+				}
+		}
+
+		void SeedUp()
+		{
+				controller.Strike.HitComboSeed += 1;
+				if (controller.Strike.HitComboSeed > 100000) 
+				{
+						controller.Strike.HitComboSeed = 1;
 				}
 		}
 

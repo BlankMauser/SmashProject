@@ -7,7 +7,7 @@ public class FitState_AM_WalkSlow : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int Init_direction;
 
 		public override void Enter()
@@ -16,8 +16,8 @@ public class FitState_AM_WalkSlow : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.WALKING;
-				anim = controller.anima;
-				anim.Play ("Walk");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Walk");
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.x_facing = Init_direction;
 				controller.Animator.CorrectColliders ();
@@ -61,7 +61,7 @@ public class FitState_AM_WalkSlow : BaseFSMState
 				if (Init_direction != controller.x_direction) {
 						DoTransition (typeof(FitState_AM_Pivot));
 				}
-				if (Mathf.Abs(controller.Inputter.x) >= 0.7f && controller.Inputter.FramesXNeutral <= 5) {
+				if (Mathf.Abs(controller.Inputter.x) >= 0.7f && controller.Inputter.FramesXNeutral <= 2) {
 								DoTransition (typeof(FitState_AM_InitDash));
 								return;
 				}

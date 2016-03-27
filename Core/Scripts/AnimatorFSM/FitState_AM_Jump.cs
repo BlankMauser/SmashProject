@@ -8,7 +8,7 @@ public class FitState_AM_Jump : BaseFSMState
 
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public bool JuDccel;
 		public float InitVel;
 		public bool FastFall;
@@ -21,9 +21,9 @@ public class FitState_AM_Jump : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.JUMPING;
-				anim = controller.anima;
+				//anim = controller.anima;
 				FastFall = false;
-				anim.Play ("JumpF");
+				controller.FitAnima.Play ("JumpF");
 
 
 				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 

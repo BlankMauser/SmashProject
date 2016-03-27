@@ -7,7 +7,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int IASA_Timer;
 
 		public override void Enter()
@@ -16,7 +16,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.WAVEDASH;
-				anim = controller.anima;
+				//anim = controller.anima;
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
 				controller.velocity.x = controller.jump.WavedashVelocity * controller.Inputter.x;

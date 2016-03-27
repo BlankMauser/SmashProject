@@ -21,7 +21,6 @@ public class FitPalante : RayCastColliders {
 				{
 						// update the state machine very frame
 						m_PlayerSM.UpdateSM();
-		
 						// this is how you can print the current active state tree to the log for debugging
 						if (Input.GetButtonDown("Fire2"))
 						{

@@ -76,6 +76,7 @@ public class RayCastColliders : MonoBehaviour {
 	public FitStrike Strike;
 	public FitAnimator Animator;
 
+	public Animator FitAnima;
 	public Animation anima;
 
 	public StunType stun;

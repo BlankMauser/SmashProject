@@ -7,7 +7,7 @@ public class FitState_AM_WavedashLand : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		int I_Timer;
 
 		public FitState_AM_WavedashLand()
@@ -25,8 +25,8 @@ public class FitState_AM_WavedashLand : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.WAVEDASHLAND;
-				anim = controller.anima;
-				anim.Play ("WaveDashL");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("WaveDashL");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;

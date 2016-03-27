@@ -52,13 +52,17 @@ public class DamageData {
 [System.Serializable]
 public class HitboxData {
 
+		public int MyPriority;
 		public float Damage;
 		public float TrueDamage;
+		public int HboxSeed;
+		public int SeedModifier;
 		public int BaseKnockback;
 		public int WeightKnockback;
 		public int KnockbackGrowth;
 		public int Hitlag;
 		public int Blockstun;
+		public int ShieldPush;
 		public int Hitstun;
 		public HitboxType type;
 		public GameObject effect;
@@ -78,6 +82,9 @@ public class HitboxData {
 		}
 
 		private void CopyData(HitboxData source, HitboxData destination) {
+				destination.MyPriority = source.MyPriority;
+				destination.HboxSeed = source.HboxSeed;
+				destination.SeedModifier = source.SeedModifier;
 				destination.soundname = source.soundname;
 				destination.cStart = source.cStart;
 				destination.cEnd = source.cEnd;
@@ -93,6 +100,7 @@ public class HitboxData {
 				destination.effect = source.effect;
 				destination.Hitlag = source.Hitlag;
 				destination.Blockstun = source.Blockstun;
+				destination.ShieldPush = source.ShieldPush;
 				destination.Hitstun = source.Hitstun;
 		}
 

@@ -7,7 +7,7 @@ public class FitState_AM_InitDash : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int Init_direction;
 		public bool DeAccel = false;
 
@@ -17,8 +17,8 @@ public class FitState_AM_InitDash : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.DASH_START;
-				anim = controller.anima;
-				anim.Play ("Dash");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Dash");
 				DeAccel = false;
 				if (controller.previousState == CharacterState.PIVOT) {
 						Init_direction = controller.x_facing;

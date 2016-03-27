@@ -7,7 +7,7 @@ public class FitState_AM_Run : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int Init_direction;
 		public bool DeAccel = false;
 
@@ -17,8 +17,8 @@ public class FitState_AM_Run : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.RUNNING;
-				anim = controller.anima;
-				anim.Play ("Run");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Run");
 				DeAccel = false;
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.x_facing = Init_direction;
@@ -54,16 +54,17 @@ public class FitState_AM_Run : BaseFSMState
 						controller.x_direction = -1;
 				}
 
-				if (DeAccel == true) {
-						DoTransition (typeof(FitState_AM_RunBrake));
-						return;
-				}
-
 				if (controller.BfAction == BufferedAction.JUMP) {
 
 						DoTransition (typeof(FitState_AM_JumpSquat));
 						return;
 				}
+
+				if (DeAccel == true) {
+						DoTransition (typeof(FitState_AM_RunBrake));
+						return;
+				}
+						
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						DoTransition (typeof(FitState_AM_Fall));
 						return;

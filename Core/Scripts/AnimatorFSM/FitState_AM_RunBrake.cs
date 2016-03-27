@@ -7,7 +7,7 @@ public class FitState_AM_RunBrake : BaseFSMState
 {
 
 		RayCastColliders controller;
-		public Animation anim; 
+		//public Animation anim; 
 		public int BrakeTimer;
 
 		public override void Enter()
@@ -16,8 +16,8 @@ public class FitState_AM_RunBrake : BaseFSMState
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
 				controller.state = CharacterState.RUNBRAKE;
-				anim = controller.anima;
-				anim.Play ("Brake");
+				//anim = controller.anima;
+				controller.FitAnima.Play ("Brake");
 				controller.ClearBuffer ();
 				BrakeTimer = 2;
 				controller.C_Drag = controller.movement.friction;
