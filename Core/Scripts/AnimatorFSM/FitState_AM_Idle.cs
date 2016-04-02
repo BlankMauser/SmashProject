@@ -122,7 +122,9 @@ public class FitState_AM_Idle : BaseFSMState
 
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();
-				DoTransition (typeof(FitState_AM_HitStop));
+				object[] args = new object[1];
+				args[0] = true;
+				DoTransition (typeof(FitState_AM_HitStop), args);
 				return;
 
 		}

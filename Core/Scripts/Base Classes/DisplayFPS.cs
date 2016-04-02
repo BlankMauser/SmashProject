@@ -20,7 +20,7 @@ public class DisplayFPS : MonoBehaviour
 
 				if (Input.GetButtonDown("Fire2"))
 				{
-						Cam.TakeHighScaledShot(1920,1080,4f,SSAA.SSAAFilter.LanczosHigh,"/MyImage/screenshot");
+						Cam.TakeHighScaledShot(1920,1080,4f,SSAA.SSAAFilter.NearestNeighbor,"/MyImage/screenshot");
 				}
 		}
 

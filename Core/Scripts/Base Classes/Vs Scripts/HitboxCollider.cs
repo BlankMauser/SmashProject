@@ -65,6 +65,7 @@ public class HitboxCollider : MonoBehaviour {
 								hitboxData.ownerID = MyOwnerId;
 								HitboxSeed += hitboxData.SeedModifier;
 								hitboxData.HboxSeed = HitboxSeed;
+								hitboxData.OwnerCollider = OwnerStrike.controller;
 										if (OwnerStrike.HitComboSeed < HitboxSeed) 
 										{
 												OwnerStrike.HitComboSeed = HitboxSeed;

@@ -647,3 +647,23 @@ public class JumpAttributes {
 		/// </summary>
 		public float MaxFallSpeed = -30.0f;
 }
+
+[System.Serializable]
+public class BattleAttributes {
+		/// <summary>
+		/// Character Weight
+		/// </summary>
+		public float Weight = 1;
+		/// <summary>
+		/// Character Combo Gravity
+		/// </summary>
+		public float ComboGravity = 1;
+		/// <summary>
+		/// Character Wavedash Friction
+		/// </summary>
+		public float WavedashFriction = 1;
+		/// <summary>
+		/// Character Knockback Drag
+		/// </summary>
+		public float KnockbackDrag = 1;
+}

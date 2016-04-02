@@ -13,19 +13,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationName: 
   _hitboxData:
+    OwnerCollider: {fileID: 0}
+    SetKnockback: 0
     MyPriority: 1
     Damage: 20
-    TrueDamage: 0
+    TrueDamage: 5
     HboxSeed: 0
+    SeedModifier: 0
     BaseKnockback: 0
     WeightKnockback: 0
     KnockbackGrowth: 0
-    Hitlag: 0
-    Blockstun: 0
-    ShieldPush: 0
-    Hitstun: 0
+    Hitlag: 5
+    Blockstun: 9
+    ShieldPush: 5
+    Hitstun: 10
+    HitstunWeightMultiplier: 0
     type: 0
-    effect: {fileID: 0}
+    effect: {fileID: 100000, guid: 9431ba5b04ae3934a8cde0abd640ad65, type: 2}
     soundname: 
     Xflipped: 0
     ownerID: 0

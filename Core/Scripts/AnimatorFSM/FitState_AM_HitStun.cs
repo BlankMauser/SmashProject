@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using FSMHelper;
 
-public class FitState_AM_HitStop : BaseFSMState {
+public class FitState_AM_HitStun : BaseFSMState {
 
 		RayCastColliders controller;
 		public int HitStopTimer;
 		public HitboxData MyHitboxData;
-		public HitboxData SendKnockback;
+		public HitboxData SentKnockback;
 		public bool FromGround = false;
 		//public Animation anim; 
 
-		public FitState_AM_HitStop()
+		public FitState_AM_HitStun()
 		{
 		}
 
-		public FitState_AM_HitStop(bool Grounded)
+		public FitState_AM_HitStun(bool Grounded, HitboxData Sent)
 		{
 				FromGround = Grounded;
+				SentKnockback = Sent;
 		}
 
 		public override void Enter()

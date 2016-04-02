@@ -52,6 +52,8 @@ public class DamageData {
 [System.Serializable]
 public class HitboxData {
 
+		public RayCastColliders OwnerCollider;
+		public bool SetKnockback;
 		public int MyPriority;
 		public float Damage;
 		public float TrueDamage;
@@ -64,6 +66,7 @@ public class HitboxData {
 		public int Blockstun;
 		public int ShieldPush;
 		public int Hitstun;
+		public int HitstunWeightMultiplier;
 		public HitboxType type;
 		public GameObject effect;
 
@@ -82,6 +85,8 @@ public class HitboxData {
 		}
 
 		private void CopyData(HitboxData source, HitboxData destination) {
+				destination.OwnerCollider = source.OwnerCollider;
+				destination.SetKnockback = source.SetKnockback;
 				destination.MyPriority = source.MyPriority;
 				destination.HboxSeed = source.HboxSeed;
 				destination.SeedModifier = source.SeedModifier;
@@ -102,6 +107,7 @@ public class HitboxData {
 				destination.Blockstun = source.Blockstun;
 				destination.ShieldPush = source.ShieldPush;
 				destination.Hitstun = source.Hitstun;
+				destination.HitstunWeightMultiplier = source.HitstunWeightMultiplier;
 		}
 
 		public HitboxData Clone() {

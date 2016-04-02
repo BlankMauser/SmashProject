@@ -32,14 +32,17 @@ public class FitPalante : RayCastColliders {
 
 		void LateUpdate () {
 				frameTime = maxFrameTime;
-				CheckDirection ();
-				MoveInXDirection();
-				MoveInYDirection();
-				UpdateECB ();
-				if (BufferTimer == 0) {
-						ClearBuffer ();
-				} else {
-						BufferTimer -= 1;
+				if (FitAnima.enabled == true) 
+				{
+						CheckDirection ();
+						MoveInXDirection ();
+						MoveInYDirection ();
+						UpdateECB ();
+						if (BufferTimer == 0) {
+								ClearBuffer ();
+						} else {
+								BufferTimer -= 1;
+						}
 				}
 				// update the state machine very frame
 				m_PlayerSM.LateUpdateSM();

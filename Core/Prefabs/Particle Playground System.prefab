@@ -161,7 +161,7 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     y:
       serializedVersion: 2
       m_Curve:
@@ -177,7 +177,7 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     z:
       serializedVersion: 2
       m_Curve:
@@ -193,7 +193,7 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     xRepeat: 1
     yRepeat: 1
     zRepeat: 1
@@ -214,7 +214,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   lifetimePositioningPositionScale:
     serializedVersion: 2
     m_Curve:
@@ -230,7 +230,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   lifetimePositioningScale: 1
   lifetimePositioningUsesSourceDirection: 0
   applyLifetimeVelocity: 0
@@ -2192,7 +2192,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16

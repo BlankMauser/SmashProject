@@ -40,7 +40,7 @@ public class FitStrike : MonoBehaviour {
 		void ApplyHitbox(HitboxData hitbox) 
 		{
 
-				if (!DamageHitboxes.Contains(CurrentDmg.HboxSeed)) 
+				if (!DamageHitboxes.Contains(hitbox.HboxSeed)) 
 						{
 								if (CurrentDmg.MyPriority != hitbox.MyPriority) 
 								{
