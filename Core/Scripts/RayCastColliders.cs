@@ -42,6 +42,9 @@ public class RayCastColliders : MonoBehaviour {
 		public Vector3 CurrentLeft;
 		public Vector3 CurrentRight;
 		public Vector3 CurrentBottom;
+		
+		public Transform LedgeGrabbed;
+		public Vector3 LedgeOffset;
 
 	/// <summary>
 	/// Movement attributes.
@@ -55,6 +58,10 @@ public class RayCastColliders : MonoBehaviour {
 	/// The slopes details. Controls how the character handles sloped platforms.
 	/// </summary>
 	public SlopeDetails slopes;
+	/// <summary>
+	/// The battle details.
+	/// </summary>
+	public BattleAttributes battle;
 	public FitPlayerInput Inputter;
 	/// <summary>
 	/// The layer of normal objects that the chracter cannot pass through.
@@ -82,11 +89,16 @@ public class RayCastColliders : MonoBehaviour {
 	public StunType stun;
 
 	public Vector3 velocity;
+	public Vector3 kbvelocity;
+	public Vector3 windvelocity;
+	public Vector2 kbdecay;
 
 	public float C_Drag;
 
 	// Passing through a platform/rising
 	public bool IsPassing;
+	//Can't Fall off ledge
+	public bool NoFall;
 	
 	public int localXdir;
 	public bool EndAnim;
@@ -126,6 +138,16 @@ public class RayCastColliders : MonoBehaviour {
 				set { velocity = value; }
 	}
 
+	public Vector2 KBVelocity {
+			get { return kbvelocity; }	
+			set { kbvelocity = value; }
+	}
+
+	public Vector2 WindVelocity {
+			get { return windvelocity; }	
+			set { windvelocity = value; }
+	}
+
 //	public CharacterState State{
 //			get { return state; }
 //			private set {
@@ -161,6 +183,12 @@ public class RayCastColliders : MonoBehaviour {
 				return false;
 	}
 
+	public bool CanTech(Vector3 Direction,float distance, bool PassThrough){
+	return Physics.Raycast (this.myTransform.position, Direction, distance, backgroundLayer | (IsPassing == false ? 1 << passThroughLayer : 0));
+	}
+
+	public bool Fledge = false;
+	public bool Bledge = false;
 
 	/// <summary>
 	/// The maximum time a frame can take. Smaller values allow your character to move faster, larger values will tend to make lag
@@ -313,13 +341,24 @@ public class RayCastColliders : MonoBehaviour {
 						myTransform.Translate (velocity.x * frameTime, 0.0f, 0.0f);		
 				}
 
+				//Knockback Code
+				if ((myParent == null || !myParent.overrideX) && kbvelocity.x > movement.skinSize || kbvelocity.x * -1 > movement.skinSize) {
+						myTransform.Translate (kbvelocity.x * frameTime, 0.0f, 0.0f);		
+				}
+						
+				float newKBx = Mathf.Abs (kbvelocity.x) - Mathf.Abs (kbdecay.x);
+				if (newKBx < 0) {
+						newKBx = 0;
+				}
+				kbvelocity.x = newKBx*Mathf.Sign(kbvelocity.x);
+
 				float forceSide = 0.0f;
 
 				for (int i = 0; i < ECBsides.Length; i++) {
 						RaycastHit hitSides;
 						float additionalDistance = 0.0f;
 
-						hitSides = ECBsides [i].GetCollision (backgroundLayer, additionalDistance);
+			hitSides = ECBsides [i].GetCollision (backgroundLayer | (NoFall == true ? 1 << 15 : 0), additionalDistance);
 
 								// Hit something ...
 								if (hitSides.collider != null) {
@@ -364,6 +403,16 @@ public class RayCastColliders : MonoBehaviour {
 						myTransform.Translate (0.0f, velocity.y * frameTime, 0.0f, Space.World);
 				}
 
+				// Knockback Gravity
+				if ((myParent == null || !myParent.overrideY) && (kbvelocity.y > movement.skinSize || kbvelocity.y * -1 > movement.skinSize)) {
+						myTransform.Translate (0.0f, kbvelocity.y * frameTime, 0.0f, Space.World);
+				}
+
+				float newKBy = Mathf.Abs (kbvelocity.y) - Mathf.Abs (kbdecay.y);
+				if (newKBy < 0) {
+						newKBy = 0;
+				}
+				kbvelocity.y = newKBy*Mathf.Sign(kbvelocity.y);
 
 				// Fall/Stop
 				bool hasHitFeet = false;
@@ -482,6 +531,8 @@ public class RayCastColliders : MonoBehaviour {
 
 				if (hasHitFeet) {
 						myTransform.Translate (0.0f, maxForce, 0.0f, Space.World);	
+						CurrentBottom = BOTTransform.position;
+						PreviousBottom.y = CurrentBottom.y;
 						velocity.y = 0.0f;
 				}
 

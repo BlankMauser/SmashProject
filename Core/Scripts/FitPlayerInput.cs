@@ -13,6 +13,8 @@ public class FitPlayerInput : FitCharacterInput {
 	public int MaxBuffer;
 	public int FramesXNeutral = 0;
 	public int FramesYNeutral = 0;
+	public int FramesLPressed = 0;
+	public int TechPenalty = 0;
 	// Use this for initialization
 
 	void Awake() {
@@ -60,6 +62,12 @@ public class FitPlayerInput : FitCharacterInput {
 				} else {
 						FramesYNeutral += 1;
 				}
+				
+		if (TechPenalty > 0) {
+			TechPenalty -= 1;
+		}
+
+				FramesLPressed += 1;
 
 				if (Mathf.Abs(x) >= 0.06f) {
 						SetAction (BufferedAction.WALKING);
@@ -100,6 +108,12 @@ public class FitPlayerInput : FitCharacterInput {
 				}
 
 				if (ShieldButtonDown) {
+			if (TechPenalty == 0) {
+				FramesLPressed = 0;
+				TechPenalty = 20;
+			} else {
+				TechPenalty = 20;
+			}
 						SetAction (BufferedAction.SHIELD, 3);
 				}
 
@@ -108,13 +122,18 @@ public class FitPlayerInput : FitCharacterInput {
 
 
 				//Frames Since Neutral Limit
-				if (FramesXNeutral >= 300) {
-						FramesXNeutral = 300;
+				if (FramesXNeutral >= 80) {
+						FramesXNeutral = 80;
 				}
 				//Frames Since Neutral Limit
-				if (FramesYNeutral >= 300) {
-						FramesYNeutral = 300;
+				if (FramesYNeutral >= 80) {
+						FramesYNeutral = 80;
 				}
+
+		if (FramesLPressed >= 80) {
+			FramesLPressed = 80;
+		}
+
 		}
 
 		public void SetAction(BufferedAction action)
@@ -134,4 +153,38 @@ public class FitPlayerInput : FitCharacterInput {
 						character.BufferTimer = buffer;
 				}
 		}
+
+	public Cardinals ReturnAxis()
+	{
+		float AxAngle = (Mathf.Atan2 (Y_Axis, X_Axis)) * Mathf.Rad2Deg;
+		if (Mathf.Abs (X_Axis) > 0.18f || Mathf.Abs (Y_Axis) > 0.18f) {
+			if (AxAngle >= -20 && AxAngle <= 20) {
+				return Cardinals.Right;
+			}
+			if (AxAngle >= 21 && AxAngle <= 69) {
+				return Cardinals.UpRight;
+			}
+			if (AxAngle >= 70 && AxAngle <= 110) {
+				return Cardinals.Up;
+			}
+			if (AxAngle >= 111 && AxAngle <= 159) {
+				return Cardinals.UpLeft;
+			}
+			if (AxAngle >= 160 || AxAngle <= -160) {
+				return Cardinals.Left;
+			}
+			if (AxAngle <= -111 && AxAngle >= -159) {
+				return Cardinals.DownLeft;
+			}
+			if (AxAngle <= -70 && AxAngle >= -110) {
+				return Cardinals.Down;
+			}
+			if (AxAngle <= -21 && AxAngle >= -69) {
+				return Cardinals.DownRight;
+			}
+		}
+			
+		return Cardinals.Center;
+		
+	}
 }

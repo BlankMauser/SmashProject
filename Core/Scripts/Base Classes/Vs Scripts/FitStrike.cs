@@ -16,6 +16,8 @@ public class FitStrike : MonoBehaviour {
 		public int HitComboSeed = 1;
 		public HitboxData CurrentDmg;
 
+		public int kbStackTimer = 0;
+
 		//Deprecated?
 //		public void UpdateHitboxSize(int id)
 //		{
@@ -37,15 +39,22 @@ public class FitStrike : MonoBehaviour {
 //				}
 //		}
 
+		public void Update()
+		{
+				TimersTick ();
+		}
+				
+
 		void ApplyHitbox(HitboxData hitbox) 
 		{
 
 				if (!DamageHitboxes.Contains(hitbox.HboxSeed)) 
 						{
-								if (CurrentDmg.MyPriority != hitbox.MyPriority) 
+								if (CurrentDmg.MyPriority <= hitbox.MyPriority) 
 								{
-										CurrentDmg = hitbox;
-										DamageHitboxes.Enqueue (CurrentDmg.HboxSeed);
+										HitboxData hitboxData = hitbox;
+										CurrentDmg = hitboxData;
+
 										ApplyHitboxFrame = true;
 								}
 						}
@@ -54,8 +63,16 @@ public class FitStrike : MonoBehaviour {
 		public void DamageCalc()
 		{
 				Percent += CurrentDmg.Damage;
+				DamageHitboxes.Enqueue (CurrentDmg.HboxSeed);
 				CurrentDmg.MyPriority = 0;
 				ApplyHitboxFrame = false;
 		}
 
+		public void TimersTick()
+		{
+				if (kbStackTimer > 0) 
+				{
+						kbStackTimer -= 1;
+				}
+		}
 }

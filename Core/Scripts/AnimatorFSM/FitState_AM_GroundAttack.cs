@@ -20,7 +20,11 @@ public class FitState_AM_GroundAttack : BaseFSMState
 				controller.FitAnima.Play ("Jab");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = true;
-				controller.C_Drag = controller.movement.friction;
+		if (controller.previousState == CharacterState.WAVEDASHLAND) {
+			controller.C_Drag = controller.battle.WavedashFriction;
+		} else {
+			controller.C_Drag = controller.movement.friction;
+		}
 				SeedUp ();
 		}
 

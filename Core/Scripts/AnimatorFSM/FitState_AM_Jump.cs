@@ -53,7 +53,7 @@ public class FitState_AM_Jump : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.previousState = CharacterState.JUMPING;
+		EndTerms ();
 		}
 
 		public override void Update()
@@ -169,12 +169,23 @@ public class FitState_AM_Jump : BaseFSMState
 						}
 				}
 
+				CheckLedge ();
+
 				if (controller.EndAnim == true) {
 						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
 						return;
 				}
 
+		}
+
+		public void CheckLedge() {
+		if (controller.Fledge == true) {
+			if (controller.PreviousBottom.y > controller.CurrentBottom.y && controller.Inputter.y >= -0.5f) {
+				DoTransition (typeof(FitState_AM_LedgeCatch));
+				return;
+				}
+			}
 		}
 
 		public void CheckJump() {
@@ -205,5 +216,13 @@ public class FitState_AM_Jump : BaseFSMState
 				}
 
 		}
+
+	public void EndTerms() {
+
+		controller.previousState = controller.state;
+		controller.EndAnim = false;
+		controller.IASA = false;
+		return;
+	}
 
 }

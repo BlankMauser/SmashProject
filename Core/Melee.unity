@@ -112,7 +112,6 @@ Transform:
   m_Children:
   - {fileID: 1698696002}
   - {fileID: 2133975555}
-  - {fileID: 1068957493}
   m_Father: {fileID: 0}
   m_RootOrder: 20
 --- !u!1001 &15625136
@@ -124,11 +123,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.06
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.4
+      value: 9.23
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -192,11 +191,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
@@ -1026,7 +1025,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 426004, guid: 1d1f5903f0e6a3342965e4c5782a07e9, type: 2}
       propertyPath: m_RootOrder
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 152554, guid: 1d1f5903f0e6a3342965e4c5782a07e9, type: 2}
       propertyPath: m_Name
@@ -2173,7 +2172,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 330441162}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -5680,7 +5679,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.AirHopMultiplier
-      value: 0.9
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 195778, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: m_Name
@@ -5732,39 +5731,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: movement.friction
-      value: 3.4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.fallGravity
-      value: -4.62
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.MaxFallSpeed
-      value: -67
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.fastFallGravity
-      value: -68.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: movement.initDashVelocity
-      value: 58
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.WavedashVelocity
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.doubleJumpVelocity
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.jumpVelocity
-      value: 78
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: movement.acceleration
-      value: 24.5
+      value: -66.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
@@ -6706,7 +6685,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.AirHopMultiplier
-      value: 0.9
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: Strike
@@ -6802,39 +6781,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: movement.friction
-      value: 3.4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.fallGravity
-      value: -4.62
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.MaxFallSpeed
-      value: -67
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
       propertyPath: jump.fastFallGravity
-      value: -68.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: movement.initDashVelocity
-      value: 58
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.WavedashVelocity
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.doubleJumpVelocity
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: jump.jumpVelocity
-      value: 78
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409048, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
-      propertyPath: movement.acceleration
-      value: 24.5
+      value: -66.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11116678, guid: 5f4e4d88be9ea8340880fc16c98d9aaa, type: 2}
@@ -7409,33 +7368,6 @@ MonoBehaviour:
   voiceLimitCount: 1
   isSoloed: 0
   isMuted: 0
---- !u!1 &1068957492
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1068957493}
-  m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1068957493
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1068957492}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.154, z: 3.674}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5085065}
-  m_RootOrder: 2
 --- !u!1001 &1074863524
 Prefab:
   m_ObjectHideFlags: 0
@@ -7505,7 +7437,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f03c461dcea891f49ae226c3dcfd5229, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f03c461dcea891f49ae226c3dcfd5229, type: 3}
       propertyPath: m_Name
@@ -7735,10 +7667,6 @@ MonoBehaviour:
     TargetInfluenceH: 1
     TargetInfluenceV: 1
     TargetOffset: {x: 0, y: 0}
-  - TargetTransform: {fileID: 1068957493}
-    TargetInfluenceH: 0
-    TargetInfluenceV: 1
-    TargetOffset: {x: 0, y: 0}
   OverallOffset: {x: 0, y: 6}
   UpdateType: 0
   LimitHorizontalCameraDistance: 0
@@ -7763,12 +7691,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProCamera2D: {fileID: 1174125811}
-  ZoomOutBorder: 0.68
-  ZoomInBorder: 0.61
+  ZoomOutBorder: 0.58
+  ZoomInBorder: 0.4
   ZoomInSmoothness: 0.1
   ZoomOutSmoothness: 0.55
-  MaxZoomInAmount: 1.4
-  MaxZoomOutAmount: 2.5
+  MaxZoomInAmount: 1.2565
+  MaxZoomOutAmount: 6
   DisableWhenOneTarget: 1
 --- !u!114 &1174125813
 MonoBehaviour:
@@ -9200,7 +9128,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1506772921}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62cd7e0b3a08cf84e82658d9a3eaeb32, type: 3}
   m_Name: 
@@ -11119,28 +11047,6 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 2
-        _elementType: 1
-        _elementIdentifierId: 8
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 2
-        _elementType: 0
-        _elementIdentifierId: 1
-        _axisRange: 1
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
     keyboardMaps: []
     mouseMaps: []
     customControllerMaps: []
@@ -11182,11 +11088,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.22
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.4
+      value: 9.23
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11250,11 +11156,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
@@ -11269,11 +11175,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.06
+      value: -18.21
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.5
+      value: 21.08
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11329,7 +11235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 37
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_Name
@@ -11337,11 +11243,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: c27946b45c896e34794ad4c1bcadd5e2, type: 3}

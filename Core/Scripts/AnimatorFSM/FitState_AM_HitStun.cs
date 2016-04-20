@@ -6,20 +6,22 @@ using FSMHelper;
 public class FitState_AM_HitStun : BaseFSMState {
 
 		RayCastColliders controller;
-		public int HitStopTimer;
+		public int HitStunTimer;
 		public HitboxData MyHitboxData;
 		public HitboxData SentKnockback;
 		public bool FromGround = false;
+		public double CalcKB;
 		//public Animation anim; 
 
 		public FitState_AM_HitStun()
 		{
 		}
 
-		public FitState_AM_HitStun(bool Grounded, HitboxData Sent)
+		public FitState_AM_HitStun(HitboxData Sent, double calcKB)
 		{
-				FromGround = Grounded;
 				SentKnockback = Sent;
+				CalcKB = calcKB;
+
 		}
 
 		public override void Enter()
@@ -27,11 +29,12 @@ public class FitState_AM_HitStun : BaseFSMState {
 				//Check Amount of Knockback
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
-				MyHitboxData = controller.Strike.CurrentDmg;
-				controller.state = CharacterState.HITSTOP;
-				HitStopTimer = MyHitboxData.Hitlag;
-
-				CheckKnockback ();
+				controller.state = CharacterState.STUNNED;
+				controller.ApplyFriction = true;
+				HitStunTimer = (SentKnockback.Hitstun-2);
+				controller.C_Drag = controller.movement.friction;
+				DICalc ();
+				KnockbackCalc ();
 		}
 
 		public override void Exit()
@@ -41,12 +44,19 @@ public class FitState_AM_HitStun : BaseFSMState {
 		// Update is called once per frame
 		public override void Update () {
 
-
-				if (controller.EndAnim == true && controller.Animator.HitStopAnim == 0) {
+				if (controller.EndAnim == true) {
 						controller.EndAnim = false;
-						DoTransition (typeof(FitState_AM_Idle));
+						DoTransition(typeof(FitState_AM_Idle));
 						return;
 				}
+
+				if (controller.IASA == true) 
+				{
+						CheckIASA ();
+				}
+
+
+
 		}
 
 		public override void LateUpdate()
@@ -54,32 +64,55 @@ public class FitState_AM_HitStun : BaseFSMState {
 
 				if (controller.Strike.ApplyHitboxFrame == true) 
 				{
-						Debug.Log ("Got Here");
 						HitboxCollision ();
 				}
+
+				if (HitStunTimer == 0) {
+						controller.IASA = true;
+				} else {
+						HitStunTimer -= 1;
+				}
+
+
 		}
 				
 
-		public void CheckKnockback() {
-				if (FromGround == true) 
-				{
-						
-						controller.FitAnima.Play ("GDamage2", -1, 0f);
-						controller.ApplyFriction = true;
-						controller.C_Drag = controller.movement.friction;
-						controller.FitAnima.Update (0);
-						controller.Animator.HitStopAnim = HitStopTimer;
-						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
-				}
+		public void KnockbackCalc() {
+		controller.kbvelocity.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad) * (float)CalcKB;
+		controller.kbdecay.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad);
+		}
+
+		public void DICalc() {
+
 		}
 
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();
-				MyHitboxData = controller.Strike.CurrentDmg;
-				controller.state = CharacterState.HITSTOP;
-				HitStopTimer = MyHitboxData.Hitlag;
+				object[] args = new object[1];
+				args[0] = true;
+				DoTransition (typeof(FitState_AM_HitStop), args);
+				return;
 
-				CheckKnockback ();
+		}
+
+		public void CheckIASA() {
+
+				if (controller.BfAction == BufferedAction.JAB) {
+						DoTransition (typeof(FitState_AM_GroundAttack));
+						return;
+				}
+
+				if (controller.BfAction == BufferedAction.JUMP) {
+
+						DoTransition (typeof(FitState_AM_JumpSquat));
+						return;
+				}
+						
+
+				if (controller.BfAction == BufferedAction.INIT_DASH) {
+						DoTransition (typeof(FitState_AM_InitDash));
+						return;
+				}
 
 		}
 

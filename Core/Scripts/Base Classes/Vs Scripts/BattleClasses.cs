@@ -1,7 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum HitboxType { Melee, Bullet, Hurtbox, Wind }
+public enum HitboxType { Melee, Bullet, Ungraze, Wind }
+public enum Reversible { Normal, Forward, Reverse}
+public enum Cardinals { 
+
+	Right = 0,
+	UpRight = 1,
+	Up = 2,
+	UpLeft = 3,
+	Left = 4,
+	DownLeft = 5,
+	Down = 6,
+	DownRight = 7,
+	Center = 8,
+}
 
 [System.Serializable]
 public class DamageData {
@@ -59,14 +72,18 @@ public class HitboxData {
 		public float TrueDamage;
 		public int HboxSeed;
 		public int SeedModifier;
-		public int BaseKnockback;
-		public int WeightKnockback;
-		public int KnockbackGrowth;
+		public int Direction;
+		public Cardinals OptimalDI;
+		public Reversible Reversible;
+		public float BaseKnockback;
+		public float WeightKnockback;
+		public float KnockbackGrowth;
 		public int Hitlag;
 		public int Blockstun;
-		public int ShieldPush;
+		public float ShieldPush;
 		public int Hitstun;
 		public int HitstunWeightMultiplier;
+		public float AirThreshhold;
 		public HitboxType type;
 		public GameObject effect;
 
@@ -99,6 +116,9 @@ public class HitboxData {
 				destination.Damage = source.Damage;
 				destination.TrueDamage = source.TrueDamage;
 				destination.type = source.type;
+				destination.Direction = source.Direction;
+				destination.OptimalDI = source.OptimalDI;
+				destination.Reversible = source.Reversible;
 				destination.BaseKnockback = source.BaseKnockback;
 				destination.WeightKnockback = source.WeightKnockback;
 				destination.KnockbackGrowth = source.KnockbackGrowth;
@@ -108,6 +128,7 @@ public class HitboxData {
 				destination.ShieldPush = source.ShieldPush;
 				destination.Hitstun = source.Hitstun;
 				destination.HitstunWeightMultiplier = source.HitstunWeightMultiplier;
+				destination.AirThreshhold = source.AirThreshhold;
 		}
 
 		public HitboxData Clone() {

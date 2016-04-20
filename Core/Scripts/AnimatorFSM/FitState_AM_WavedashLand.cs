@@ -29,7 +29,7 @@ public class FitState_AM_WavedashLand : BaseFSMState
 				controller.FitAnima.Play ("WaveDashL");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = true;
-				controller.C_Drag = controller.movement.friction;
+				controller.C_Drag = controller.battle.WavedashFriction;
 		}
 
 		public override void Exit()

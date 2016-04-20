@@ -35,7 +35,7 @@ public class FitState_AM_Idle : BaseFSMState
 						return;
 				}
 
-				CheckIASA ();
+				CheckIASAIdle ();
 //				if (controller.BfAction == BufferedAction.JAB) {
 //								DoTransition (typeof(FitState_AM_GroundAttack));
 //								return;
@@ -82,7 +82,7 @@ public class FitState_AM_Idle : BaseFSMState
 				}
 		}
 
-		public void CheckIASA() {
+		public void CheckIASAIdle() {
 				
 				if (controller.BfAction == BufferedAction.JAB) {
 						DoTransition (typeof(FitState_AM_GroundAttack));

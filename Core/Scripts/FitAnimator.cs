@@ -8,6 +8,10 @@ public class FitAnimator : MonoBehaviour {
 	public RayCastColliders controller;
 	public Transform  lightsource;
 	public Transform  lightsource2;
+	public Transform  spine;
+	public Transform  CorrectScale1;
+	public Transform  CorrectScale2;
+	public Vector3 spinespin;
 
 	public Vector3 ScaleRight;
 	public Vector3 ScaleLeft;
@@ -20,6 +24,8 @@ public class FitAnimator : MonoBehaviour {
 
 	public SkinnedMeshRenderer[] MyMaterials;
 	public bool AnimateMaterials = false;
+	public bool AnimateVelocity = false;
+	public bool AnimateSpine = false;
 	public Color RimColor;
 	public float RimSize;
 	public Color DefaultRimColor;
@@ -46,6 +52,12 @@ public class FitAnimator : MonoBehaviour {
 						}
 				}
 
+		if (AnimateVelocity == true) 
+		{
+			controller.velocity.x = AnimX*controller.x_facing;
+			controller.velocity.y = AnimY*controller.x_facing;
+		}
+
 
 				if (HitStopAnim > 0) 
 				{
@@ -56,6 +68,16 @@ public class FitAnimator : MonoBehaviour {
 				{
 						controller.FitAnima.enabled = true;
 				}
+
+		if (AnimateSpine) {
+			spine.eulerAngles = spine.eulerAngles + spinespin;
+//			Vector3 newPos = (controller.CurrentTop - controller.PreviousTop);
+//			spine.transform.LookAt (spine.transform.position + newPos);
+
+		}
+
+		CorrectScale1.localScale = Vector3.one;
+		CorrectScale2.localScale = Vector3.one;
 
 		}
 
@@ -101,7 +123,7 @@ public class FitAnimator : MonoBehaviour {
 		}
 
 		public void SetVelocityX(float x) {
-				controller.velocity.x = x;
+		controller.velocity.x = x * controller.x_facing;
 		}
 
 		public void SetVelocityY(float y) {
@@ -110,8 +132,12 @@ public class FitAnimator : MonoBehaviour {
 
 		//For Animating X and Y values through curves
 		public void AnimCurves() {
-				controller.velocity.x = AnimX;
-				controller.velocity.y = AnimY;
+		controller.velocity.x = AnimX*controller.x_facing;
+		controller.velocity.y = AnimY*controller.x_facing;
+		}
+
+		public void RotateBones() {
+
 		}
 
 

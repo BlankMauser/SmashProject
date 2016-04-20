@@ -19,6 +19,7 @@ public class FitState_AM_RunTurn : BaseFSMState
 				controller.state = CharacterState.RUNTURN;
 				//anim = controller.anima;
 				controller.FitAnima.Play ("Turn");
+				controller.NoFall = true;
 				controller.BfAction = BufferedAction.PIVOT;
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.ApplyFriction = false;
@@ -28,9 +29,7 @@ public class FitState_AM_RunTurn : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.x_facing = Init_direction;
-				controller.Animator.CorrectColliders ();
-				controller.previousState = CharacterState.RUNTURN;
+				EndTerms();
 		}
 
 		public override void Update()
@@ -78,6 +77,17 @@ public class FitState_AM_RunTurn : BaseFSMState
 				}
 
 		}
+
+	public void EndTerms() {
+
+		controller.NoFall = false;
+		controller.x_facing = Init_direction;
+		controller.Animator.CorrectColliders ();
+		controller.previousState = controller.state;
+		controller.EndAnim = false;
+		controller.IASA = false;
+		return;
+	}
 
 
 }

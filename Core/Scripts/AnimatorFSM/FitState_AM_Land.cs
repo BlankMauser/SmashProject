@@ -17,6 +17,8 @@ public class FitState_AM_Land : BaseFSMState
 				controller.state = CharacterState.LANDING;
 				//anim = controller.anima;
 				controller.FitAnima.Play ("Land");
+				controller.velocity.y = 0;
+				controller.kbvelocity.y = 0;
 				controller.ClearBuffer ();
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;

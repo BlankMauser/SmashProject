@@ -4,7 +4,6 @@ using System.Collections;
 public class HitboxCollider : MonoBehaviour {
 
 		public Hbox MyHbox;
-		public SphereCollider Hitbox;
 		public HitboxType Type;
 		public FitStrike OwnerStrike;
 		public int MyOwnerId;
@@ -17,12 +16,7 @@ public class HitboxCollider : MonoBehaviour {
 		{
 				MyOwnerId = OwnerStrike.MyId;
 		}
-
-		public void UpdateSize()
-		{
-				Hitbox.radius = Size;
-
-		}
+		
 
 		public void LateUpdate()
 		{
@@ -53,7 +47,6 @@ public class HitboxCollider : MonoBehaviour {
 
 		void OnTriggerDouble(Collider c) {
 				if (c.gameObject.layer == 20) {
-						Debug.Log ("DOUBLE");
 						FitStrike enemy = c.GetComponentInParent<FitStrike> ();
 						if (enemy.MyId != MyOwnerId) 
 						{

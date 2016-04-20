@@ -30,11 +30,14 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_Land));
 				children.Add(typeof(FitState_AM_Wavedash));
 				children.Add(typeof(FitState_AM_WavedashLand));
+				children.Add(typeof(FitState_AM_Ukemi));
+				children.Add(typeof(FitState_AM_LedgeCatch));
 				children.Add(typeof(FitState_AM_AirAction));
 				children.Add(typeof(FitState_AM_AirAttack));
 				children.Add(typeof(FitState_AM_Pass));
 				children.Add(typeof(FitState_AM_HitStop));
-				children.Add(typeof(FitState_AM_GDamage1));
+				children.Add(typeof(FitState_AM_HitStun));
+				children.Add(typeof(FitState_AM_HitStunFly));
 //				children.Add(typeof(FitState_AM_GDamage2));
 //				children.Add(typeof(FitState_AM_ADamage1));
 //				children.Add(typeof(FitState_AM_ADamage2));

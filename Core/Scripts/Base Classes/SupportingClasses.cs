@@ -476,6 +476,7 @@ public enum CharacterState {
 	CROUCH			=  45,
 	WAVEDASH		=  50,
 	WAVEDASHLAND	=  55,
+	UKEMI			=  60,
 	
 	AIRBORNE		= 110,			// This is sent when you are in the air but are moving up or haven't reached the fall velocity
 	FALLING 		= 120,
