@@ -44,7 +44,7 @@ public class FitState_AM_Crouch : BaseFSMState
 						return;
 				}
 
-				if (controller.BfAction == BufferedAction.WALKING) {
+		if (controller.BfAction == BufferedAction.WALKING && controller.Inputter.y > -0.65f) {
 						if (Mathf.Abs (controller.Inputter.x) >= 0.5f) {
 								DoTransition (typeof(FitState_AM_WalkFast));
 								return;
@@ -59,7 +59,7 @@ public class FitState_AM_Crouch : BaseFSMState
 						return;
 				}
 
-				if (controller.Inputter.y > -0.9f) {
+				if (controller.Inputter.y > -0.65f) {
 						DoTransition (typeof(FitState_AM_Idle));
 						return;
 				}

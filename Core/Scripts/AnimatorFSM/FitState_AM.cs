@@ -38,6 +38,7 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_HitStop));
 				children.Add(typeof(FitState_AM_HitStun));
 				children.Add(typeof(FitState_AM_HitStunFly));
+				children.Add(typeof(FitState_AM_Tumble));
 //				children.Add(typeof(FitState_AM_GDamage2));
 //				children.Add(typeof(FitState_AM_ADamage1));
 //				children.Add(typeof(FitState_AM_ADamage2));

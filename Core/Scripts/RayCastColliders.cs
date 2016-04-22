@@ -183,6 +183,13 @@ public class RayCastColliders : MonoBehaviour {
 				return false;
 	}
 
+	public bool OnPassThrough(float offset){
+		foreach (RaycastDiamond foot in ECBfeet) {
+			if (foot.IsColliding(1 << passThroughLayer, offset)) return true;
+		}
+		return false;
+	}
+
 	public bool CanTech(Vector3 Direction,float distance, bool PassThrough){
 	return Physics.Raycast (this.myTransform.position, Direction, distance, backgroundLayer | (IsPassing == false ? 1 << passThroughLayer : 0));
 	}
@@ -441,8 +448,8 @@ public class RayCastColliders : MonoBehaviour {
 												closestLadder = collision.distance;
 										}
 								} else if (collision.distance < closest) {
-										if (collision.collider.gameObject.layer == passThroughLayer && state != CharacterState.WAVEDASH && state != CharacterState.WAVEDASHLAND) {
-												if (PreviousBottom.y >= CurrentBottom.y && PreviousBottom.y >= collision.transform.position.y) {
+					if (collision.collider.gameObject.layer == passThroughLayer && state != CharacterState.WAVEDASH && state != CharacterState.WAVEDASHLAND) {
+						if (PreviousBottom.y >= CurrentBottom.y && PreviousBottom.y >= collision.transform.position.y && Animator.PassThroughTimer == 0) {
 														hitFeet = collision;
 														closest = collision.distance;
 														IsPassing = false;

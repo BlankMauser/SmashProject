@@ -512,6 +512,7 @@ public enum CharacterState {
 	
 	HITSTOP			= 900,
 	STUNNED 		= 1000,
+	TUMBLE 			= 1010,
 	GUARD           = 1100,
 	ATTACK          = 1200,
 	AIRATTACK       = 1205,

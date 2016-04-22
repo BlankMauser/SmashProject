@@ -29,7 +29,7 @@ MonoBehaviour:
     Hitlag: 5
     Blockstun: 9
     ShieldPush: 5
-    Hitstun: 100
+    Hitstun: 11
     HitstunWeightMultiplier: 0
     AirThreshhold: 10
     type: 0

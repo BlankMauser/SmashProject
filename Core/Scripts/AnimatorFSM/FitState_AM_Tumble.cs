@@ -3,56 +3,77 @@ using System.Collections;
 using System.Collections.Generic;
 using FSMHelper;
 
-public class FitState_AM_HitStunFly : BaseFSMState {
+public class FitState_AM_Tumble : BaseFSMState {
 
 		RayCastColliders controller;
-		public int HitStunTimer;
-		public HitboxData MyHitboxData;
-		public HitboxData SentKnockback;
-		public bool FromGround = false;
-		public double CalcKB;
-		//public Animation anim; 
+		public int localXdir;
+		public int localXAxl;
+		public float AxisVel;
+		public float AnimRot;
 
-		public FitState_AM_HitStunFly()
-		{
-		}
-
-		public FitState_AM_HitStunFly(HitboxData Sent, double calcKB)
-		{
-				SentKnockback = Sent;
-				CalcKB = calcKB;
-
-		}
 
 		public override void Enter()
 		{
 				//Check Amount of Knockback
 				FitAnimatorStateMachine SM = (FitAnimatorStateMachine)GetStateMachine();
 				controller = SM.m_GameObject.GetComponent<RayCastColliders>();
-				controller.state = CharacterState.STUNNED;
+				controller.state = CharacterState.TUMBLE;
+				controller.ClearBuffer ();
+				controller.EndAnim = false;
+				controller.IASA = true;
 				controller.ApplyFriction = false;
-				HitStunTimer = (SentKnockback.Hitstun-2);
-				DICalc ();
-				KnockbackCalc ();
+				controller.Animator.AnimateSpine = true;
+				controller.FitAnima.Play ("Tumble");
+				AnimRot = 0;
+				
+
 		}
 
 		public override void Exit()
 		{
+		controller.EndAnim = false;
+		controller.IASA = false;
+		controller.Animator.AnimateSpine = false;
+		controller.Animator.spinespin = Vector3.zero;
 		}
 
 		// Update is called once per frame
 		public override void Update () {
 
-				if (controller.EndAnim == true) {
-						controller.EndAnim = false;
-						DoTransition (typeof(FitState_AM_Fall));
-						return;
-				}
+		AnimRot -= 3f;
 
 				if (controller.IASA == true) 
 				{
 						CheckIASA ();
 				}
+
+		// If stick is neutral, apply friction.
+		if (controller.Inputter.x > 0.7f) {
+			controller.x_direction = 1;
+			controller.ApplyFriction = false;
+		} else if (controller.Inputter.x < -0.7f) {
+			controller.x_direction = -1;
+			controller.ApplyFriction = false;
+		} else {
+			controller.ApplyFriction = true;
+		}
+
+		if (controller.ApplyFriction == false) {
+			AxisVel = controller.velocity.x + (controller.jump.AirMobility * controller.x_direction);
+			if (controller.velocity.x > 0) {
+				localXAxl = 1;
+			} else if (controller.velocity.x < 0) {
+				localXAxl = -1;
+			} else if (controller.velocity.x == 0) {
+				localXAxl = controller.x_facing;
+			}
+			if (Mathf.Abs (AxisVel) > controller.jump.jumpMaxHVelocity) {
+				AxisVel = controller.jump.jumpMaxHVelocity * localXAxl;
+			}
+			if (Mathf.Abs (AxisVel) <= controller.jump.jumpMaxHVelocity) {
+				controller.velocity.x = AxisVel;
+			}
+		}
 
 		if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 
@@ -125,95 +146,19 @@ public class FitState_AM_HitStunFly : BaseFSMState {
 		public override void LateUpdate()
 		{
 
+		controller.Animator.spinespin.x = AnimRot;
+
 				if (controller.Strike.ApplyHitboxFrame == true) 
 				{
 						HitboxCollision ();
 				}
+			
 
-				if (HitStunTimer == 0) {
-						controller.IASA = true;
-				} else {
-						HitStunTimer -= 1;
-				}
 
 
 		}
 
 
-		public void KnockbackCalc() 
-		{
-		controller.kbvelocity.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad) * (float)CalcKB;
-		controller.kbdecay.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad) * 2f;
-		controller.kbvelocity.y = Mathf.Sin (SentKnockback.Direction*Mathf.Deg2Rad) * (float)CalcKB;
-		controller.kbdecay.y = Mathf.Sin (SentKnockback.Direction*Mathf.Deg2Rad) * 2f;
-
-		if (SentKnockback.Reversible == Reversible.Normal) 
-			{
-			if (Mathf.Sign (SentKnockback.OwnerCollider.CurrentBottom.x - controller.CurrentBottom.x) == Mathf.Sign(SentKnockback.OwnerCollider.x_facing)) {
-				Debug.Log (Mathf.Sign (SentKnockback.OwnerCollider.CurrentBottom.x - controller.CurrentBottom.x));
-				controller.kbvelocity.x *= (SentKnockback.OwnerCollider.x_facing*-1);
-			} else {
-				controller.kbvelocity.x *= SentKnockback.OwnerCollider.x_facing;
-			}
-			}
-
-		if (SentKnockback.Reversible == Reversible.Forward) {
-			controller.kbvelocity.x *= SentKnockback.OwnerCollider.x_facing;
-		}
-
-		if (SentKnockback.Reversible == Reversible.Reverse) {
-			controller.kbvelocity.x *= (SentKnockback.OwnerCollider.x_facing*-1);
-		}
-
-		}
-
-		public void DICalc() {
-		Cardinals Ang = controller.Inputter.ReturnAxis();
-		Cardinals OptimalP = Circular((int)SentKnockback.OptimalDI + 2);
-		Cardinals HalfP = Circular((int)SentKnockback.OptimalDI + 1);
-		Cardinals OptimalN = Circular((int)SentKnockback.OptimalDI - 2);
-		Cardinals HalfN = Circular((int)SentKnockback.OptimalDI - 1);
-		if (Ang != OptimalP && Ang != HalfP && Ang != OptimalN && Ang != HalfN) {
-			return;
-		} else {
-			if (Ang == OptimalP) {
-				SentKnockback.Direction += 18;
-				if (SentKnockback.Direction > 360) {
-					SentKnockback.Direction -= 360;
-					Debug.Log (OptimalP);
-					}
-				return;
-				}
-			if (Ang == HalfP) {
-				SentKnockback.Direction += 9;
-				if (SentKnockback.Direction > 360) {
-					SentKnockback.Direction -= 360;
-				}
-				return;
-			}
-			if (Ang == HalfN) {
-				SentKnockback.Direction -= 9;
-				if (SentKnockback.Direction < 0) {
-					SentKnockback.Direction += 360;
-				}
-				return;
-			}
-			if (Ang == OptimalN) {
-				SentKnockback.Direction -= 18;
-				if (SentKnockback.Direction < 0) {
-					SentKnockback.Direction += 360;
-				}
-				return;
-			}
-		}
-	}
-
-	public Cardinals Circular(int input){
-		if (input > 7) {
-			input -= 8;
-		}
-		return (Cardinals)input;
-		}
 
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();
@@ -225,6 +170,7 @@ public class FitState_AM_HitStunFly : BaseFSMState {
 		}
 
 			public void Teching(int animnumber) {
+			controller.IASA = false;
 			object[] args = new object[1];
 			args[0] = animnumber;
 			DoTransition (typeof(FitState_AM_Ukemi), args);

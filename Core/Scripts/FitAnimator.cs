@@ -32,6 +32,7 @@ public class FitAnimator : MonoBehaviour {
 	public float DefaultRimSize;
 
 	public int HitStopAnim = 0;
+	public int PassThroughTimer = 0;
 
 	public XWeaponTrail Trail;
 
@@ -68,6 +69,10 @@ public class FitAnimator : MonoBehaviour {
 				{
 						controller.FitAnima.enabled = true;
 				}
+		if (PassThroughTimer > 0) 
+		{
+			PassThroughTimer -= 1;
+		}
 
 		if (AnimateSpine) {
 			spine.eulerAngles = spine.eulerAngles + spinespin;

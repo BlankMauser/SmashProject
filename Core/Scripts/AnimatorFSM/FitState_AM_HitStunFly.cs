@@ -43,11 +43,11 @@ public class FitState_AM_HitStunFly : BaseFSMState {
 		// Update is called once per frame
 		public override void Update () {
 
-				if (controller.EndAnim == true) {
-						controller.EndAnim = false;
-						DoTransition (typeof(FitState_AM_Fall));
-						return;
-				}
+//				if (controller.EndAnim == true) {
+//						controller.EndAnim = false;
+//						DoTransition (typeof(FitState_AM_Tumble));
+//						return;
+//				}
 
 				if (controller.IASA == true) 
 				{
@@ -131,7 +131,9 @@ public class FitState_AM_HitStunFly : BaseFSMState {
 				}
 
 				if (HitStunTimer == 0) {
-						controller.IASA = true;
+				controller.EndAnim = false;
+				DoTransition (typeof(FitState_AM_Tumble));
+				return;
 				} else {
 						HitStunTimer -= 1;
 				}

@@ -75,6 +75,16 @@ public class FitState_AM_WalkFast : BaseFSMState
 						return;
 				}
 
+		if (controller.Inputter.y <= -0.65f) {
+			if (controller.Inputter.FramesYNeutral <= 5 && controller.OnPassThrough (controller.groundedLookAhead)) {
+				DoTransition (typeof(FitState_AM_Pass));
+				return;
+			} else {
+				DoTransition (typeof(FitState_AM_Crouch));
+				return;
+			}
+		}
+
 		}
 
 
