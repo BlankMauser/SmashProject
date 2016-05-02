@@ -34,6 +34,11 @@ public class FitAnimator : MonoBehaviour {
 	public int HitStopAnim = 0;
 	public int PassThroughTimer = 0;
 
+	public Object[] Effects;
+	public Transform FXSpawner1;
+	public Transform FXSpawner2;
+
+
 	public XWeaponTrail Trail;
 
 		void Start () {
@@ -141,9 +146,34 @@ public class FitAnimator : MonoBehaviour {
 		controller.velocity.y = AnimY*controller.x_facing;
 		}
 
+	public void SetComboRef(int AttackID) {
+		controller.Strike.ComboReference = AttackID;
+	}
+
+	public void SetHunterChain(int Chain) {
+		controller.Strike.HunterChain = Chain;
+	}
+
+	public void SetOnHit(int prop) {
+		controller.Strike.CancelOn = prop;
+	}
+
+	public void SetCancelWindow(int CanCancel) {
+		if (CanCancel == 1) {
+			controller.Strike.CancelWindow = true;
+		} else {
+			controller.Strike.CancelWindow = false;
+		}
+	}
+
 		public void RotateBones() {
 
 		}
+
+	public void SpawnFX1(int fxid) {
+		Instantiate (Effects [fxid], FXSpawner1.transform.position, Quaternion.identity);
+
+	}
 
 
 

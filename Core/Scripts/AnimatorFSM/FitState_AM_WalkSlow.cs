@@ -69,6 +69,13 @@ public class FitState_AM_WalkSlow : BaseFSMState
 						DoTransition (typeof(FitState_AM_WalkFast));
 						return;
 				}
+
+
+		if (controller.BfAction == BufferedAction.SHIELD) {
+			DoTransition (typeof(FitState_AM_ShieldEnter));
+			return;
+		}
+
 				if (Mathf.Abs(controller.Inputter.x) <= 0.05f) {
 						controller.ClearBuffer ();
 						DoTransition (typeof(FitState_AM_Idle));

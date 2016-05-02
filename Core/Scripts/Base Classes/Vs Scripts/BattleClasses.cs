@@ -80,9 +80,10 @@ public class HitboxData {
 		public float KnockbackGrowth;
 		public int Hitlag;
 		public int Blockstun;
+		public int ShieldDamage;
 		public float ShieldPush;
 		public int Hitstun;
-		public int HitstunWeightMultiplier;
+		public int HitstunScaling;
 		public float AirThreshhold;
 		public HitboxType type;
 		public GameObject effect;
@@ -127,7 +128,7 @@ public class HitboxData {
 				destination.Blockstun = source.Blockstun;
 				destination.ShieldPush = source.ShieldPush;
 				destination.Hitstun = source.Hitstun;
-				destination.HitstunWeightMultiplier = source.HitstunWeightMultiplier;
+				destination.HitstunScaling = source.HitstunScaling;
 				destination.AirThreshhold = source.AirThreshhold;
 		}
 

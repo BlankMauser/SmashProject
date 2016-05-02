@@ -130,30 +130,56 @@ public class FitState_AM_Jump : BaseFSMState
 						return;
 				}
 
-				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
-						if (FastFall == false) {
-								
-										controller.velocity.y += controller.jump.fallGravity;
-										if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
-												controller.velocity.y = controller.jump.MaxFallSpeed;
-										}
-								
-						} else {
-								
-										controller.velocity.y = controller.jump.fastFallGravity;
-								if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
-										controller.velocity.y = controller.jump.fastFallGravity;
-								}
-						 
+// DEPRECATED
+//				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
+//						if (FastFall == false) {
+//								
+//										controller.velocity.y += controller.jump.fallGravity;
+//										if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
+//												controller.velocity.y = controller.jump.MaxFallSpeed;
+//										}
+//								
+//						} else {
+//								
+//										controller.velocity.y = controller.jump.fastFallGravity;
+//								if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
+//										controller.velocity.y = controller.jump.fastFallGravity;
+//								}
+//						 
+//				}
+//				} else 
+//				{
+////						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
+//								DoTransition (typeof(FitState_AM_Land));
+//								return;
+////						}
+//						
+//				}
+
+		if (FastFall) {
+			bool input = (controller.Inputter.y <= -0.7f);
+			if (controller.IsGrounded (controller.groundedLookAhead, input) == false) {
+				controller.velocity.y = controller.jump.fastFallGravity;
+				if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
+					controller.velocity.y = controller.jump.fastFallGravity;
 				}
-				} else 
-				{
-//						if (controller.PreviousBottom.y >= controller.CurrentBottom.y) {
-								DoTransition (typeof(FitState_AM_Land));
-								return;
-//						}
-						
+				controller.Animator.PassThroughTimer = 1;
+			} else {
+				controller.Animator.PassThroughTimer = 0;
+				DoTransition (typeof(FitState_AM_Land));
+				return;
+			}
+		} else {
+			if (controller.IsGrounded (controller.groundedLookAhead) == false) {
+				controller.velocity.y += controller.jump.fallGravity;
+				if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
+					controller.velocity.y = controller.jump.MaxFallSpeed;
 				}
+			} else {
+				DoTransition (typeof(FitState_AM_Land));
+				return;
+			}
+		}
 
 				if (controller.BfAction == BufferedAction.JUMP) {
 						CheckJump ();

@@ -18,6 +18,25 @@ public class FitStrike : MonoBehaviour {
 
 		public int kbStackTimer = 0;
 
+		public int ComboReference;
+		public int AnimReference;
+		public bool CancelWindow = false;
+	public bool HIT = false;
+	public bool BLOCKED = false;
+
+	//Cancel On:
+	//1: Hit
+	//2: Block
+	//3: Hit/Block
+	//4: Whiff
+	public int CancelOn = 0;
+	//Chains Into:
+	//1: Jab
+	//2: Jab/Dtilt/Ftilt
+	//3: Dtilt
+	//4: Ftilt
+	public int HunterChain = 0;
+
 		//Deprecated?
 //		public void UpdateHitboxSize(int id)
 //		{
@@ -68,6 +87,13 @@ public class FitStrike : MonoBehaviour {
 				ApplyHitboxFrame = false;
 		}
 
+		public void ShieldCalc()
+		{
+		DamageHitboxes.Enqueue (CurrentDmg.HboxSeed);
+		CurrentDmg.MyPriority = 0;
+		ApplyHitboxFrame = false;
+		}
+
 		public void TimersTick()
 		{
 				if (kbStackTimer > 0) 
@@ -75,4 +101,5 @@ public class FitStrike : MonoBehaviour {
 						kbStackTimer -= 1;
 				}
 		}
+		
 }

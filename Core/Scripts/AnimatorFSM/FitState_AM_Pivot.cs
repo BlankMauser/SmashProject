@@ -10,6 +10,7 @@ public class FitState_AM_Pivot : BaseFSMState
 		//public Animation anim; 
 		public int Init_direction;
 		public int PivotTimer;
+		public float TurnVel;
 
 		public override void Enter()
 		{
@@ -23,6 +24,7 @@ public class FitState_AM_Pivot : BaseFSMState
 				Init_direction = controller.Inputter.Init_Xdirection;
 				controller.x_facing = Init_direction;
 				controller.Animator.CorrectColliders ();
+				TurnVel = Mathf.Abs(controller.velocity.x);
 				controller.velocity.x = 0;
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.movement.friction;
@@ -50,9 +52,11 @@ public class FitState_AM_Pivot : BaseFSMState
 				}
 
 				if (PivotTimer == 0) {
-						if (Mathf.Abs (controller.Inputter.x_prev) >= 0.18f) {
-								DoTransition (typeof(FitState_AM_InitDash));
-								return;
+						if (Mathf.Abs (controller.Inputter.x) >= 0.7f) {
+						object[] args = new object[1];
+						args[0] = TurnVel;
+						DoTransition (typeof(FitState_AM_InitDash), args);
+										return;
 						} else {
 								DoTransition (typeof(FitState_AM_Idle));
 						}

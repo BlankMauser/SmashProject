@@ -9,6 +9,8 @@ public class FitPlayerInput : FitCharacterInput {
 	public int playerId = 0;
 	public float X_Axis;
 	public float Y_Axis;
+	public float buffer_x;
+	public float buffer_y;
 	public int Init_Xdirection;
 	public int MaxBuffer;
 	public int FramesXNeutral = 0;
@@ -40,7 +42,7 @@ public class FitPlayerInput : FitCharacterInput {
 				AttackButtonDown = player.GetButtonDown("Attack");
 				jumpButtonDown = player.GetButtonDown("Jump");
 				jumpButtonHeld = player.GetButton("Jump");
-				ShieldButtonDown = player.GetButtonDown("ShieldLP") || player.GetButtonDown("ShieldRP");
+				ShieldButtonDown = player.GetButtonDown("ShieldL") || player.GetButtonDown("ShieldR");
 				ShieldButtonHeld = player.GetButton("ShieldLP") || player.GetButton("ShieldRP");
 				x = player.GetAxis ("Move Left/Right");
 				x_prev = player.GetAxisPrev ("Move Left/Right");

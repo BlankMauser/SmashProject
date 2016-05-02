@@ -11,6 +11,18 @@ public class FitState_AM_InitDash : BaseFSMState
 		public int Init_direction;
 		public bool DeAccel = false;
 
+		public float PrevVelocity = 0;
+
+		public FitState_AM_InitDash()
+		{
+		}
+
+	public FitState_AM_InitDash(float smashturn)
+		{
+		PrevVelocity = smashturn;
+
+		}
+		
 		public override void Enter()
 		{
 
@@ -30,6 +42,9 @@ public class FitState_AM_InitDash : BaseFSMState
 				controller.Animator.CorrectColliders ();
 				controller.ClearBuffer ();
 				controller.ApplyFriction = false;
+		if (PrevVelocity > 0) {
+			controller.velocity.x = (PrevVelocity * 0.5f) * Init_direction;
+		}
 
 		}
 
@@ -41,7 +56,7 @@ public class FitState_AM_InitDash : BaseFSMState
 		public override void Update()
 		{
 
-				if (Mathf.Abs (controller.Inputter.x) <= 0.7f && Mathf.Abs (controller.velocity.x) == controller.movement.initDashVelocity) {
+				if (Mathf.Abs (controller.Inputter.x) <= 0.65f && Mathf.Abs (controller.velocity.x) == controller.movement.initDashVelocity) {
 						DeAccel = true;
 				}
 
@@ -53,9 +68,9 @@ public class FitState_AM_InitDash : BaseFSMState
 				}
 				
 
-				if (controller.Inputter.x > 0.7f) {
+				if (controller.Inputter.x > 0.65f) {
 						controller.x_direction = 1;
-				} else if (controller.Inputter.x < -0.7f) {
+				} else if (controller.Inputter.x < -0.65f) {
 						controller.x_direction = -1;
 				}
 
@@ -79,9 +94,15 @@ public class FitState_AM_InitDash : BaseFSMState
 						return;
 				}
 						
-						if (Init_direction != controller.x_direction) {
-								DoTransition (typeof(FitState_AM_Pivot));
-						}
+				if (Init_direction != controller.x_direction) {
+						DoTransition (typeof(FitState_AM_Pivot));
+				}
+
+				if (controller.BfAction == BufferedAction.SHIELD) {
+					DoTransition (typeof(FitState_AM_ShieldEnter));
+					return;
+				}
+
 				if (controller.EndAnim == true || controller.velocity.x == 0) {
 						if (DeAccel == true) {
 								controller.EndAnim = false;

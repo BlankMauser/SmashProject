@@ -171,7 +171,7 @@ public class RayCastColliders : MonoBehaviour {
 
 		public bool IsGrounded(float offset, bool PassThrough){
 				foreach (RaycastDiamond foot in ECBfeet) {
-						if (foot.IsColliding(backgroundLayer | (IsPassing == false ? 1 << passThroughLayer : 0), offset)) return true;
+						if (foot.IsColliding(backgroundLayer | (PassThrough == false ? 1 << passThroughLayer : 0), offset)) return true;
 				}
 				return false;
 		}

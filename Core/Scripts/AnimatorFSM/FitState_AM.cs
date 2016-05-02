@@ -45,6 +45,8 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_ShieldEnter));
 				children.Add(typeof(FitState_AM_Shield));
 				children.Add(typeof(FitState_AM_ShieldOff));
+				children.Add(typeof(FitState_AM_ShieldStop));
+				children.Add(typeof(FitState_AM_ShieldStun));
 
 		}
 

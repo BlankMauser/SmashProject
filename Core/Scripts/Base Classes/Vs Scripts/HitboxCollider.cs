@@ -22,7 +22,9 @@ public class HitboxCollider : MonoBehaviour {
 		{
 				foreach(var c in  Physics.OverlapSphere(transform.position, Size)) 
 				{
-						this.gameObject.SendMessage("OnTriggerDouble", c);
+			if (Size > 0) {
+				this.gameObject.SendMessage ("OnTriggerDouble", c);
+			}
 				}
 		}
 
@@ -67,6 +69,11 @@ public class HitboxCollider : MonoBehaviour {
 								}
 						}
 				}
-		}	
+		}
+
+	void OnDrawGizmosSelected() {
+		Gizmos.color = new Color (1, 0, 0, 0.25f);
+		Gizmos.DrawSphere(transform.position, Size);
+	}
 			
 }

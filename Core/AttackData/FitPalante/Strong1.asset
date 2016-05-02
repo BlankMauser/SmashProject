@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec9b0d132979da64c81f59d16fb09e56, type: 3}
-  m_Name: Jab1
+  m_Name: Strong1
   m_EditorClassIdentifier: 
-  _animationName: 
+  _animationName: Strong
   _hitboxData:
     OwnerCollider: {fileID: 0}
     SetKnockback: 0
-    MyPriority: 1
+    MyPriority: 2
     Damage: 18
-    TrueDamage: 2
+    TrueDamage: 5
     HboxSeed: 0
     SeedModifier: 0
     Direction: 80
@@ -26,10 +26,10 @@ MonoBehaviour:
     BaseKnockback: 30
     WeightKnockback: 0
     KnockbackGrowth: 112
-    Hitlag: 7
+    Hitlag: 8
     Blockstun: 9
     ShieldDamage: 0
-    ShieldPush: 14
+    ShieldPush: 15
     Hitstun: 11
     HitstunScaling: 0
     AirThreshhold: 10

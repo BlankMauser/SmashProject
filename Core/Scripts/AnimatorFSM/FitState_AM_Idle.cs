@@ -82,7 +82,9 @@ public class FitState_AM_Idle : BaseFSMState
 
 				if (controller.Strike.ApplyHitboxFrame == true) 
 				{
+			#if UNITY_EDITOR
 						Debug.Log ("Got Here");
+			#endif
 						HitboxCollision ();
 				}
 		}
@@ -114,6 +116,11 @@ public class FitState_AM_Idle : BaseFSMState
 						DoTransition (typeof(FitState_AM_InitDash));
 						return;
 				}
+
+		if (controller.BfAction == BufferedAction.SHIELD) {
+			DoTransition (typeof(FitState_AM_ShieldEnter));
+			return;
+		}
 
 		}
 

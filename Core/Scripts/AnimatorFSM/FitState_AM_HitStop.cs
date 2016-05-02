@@ -69,7 +69,9 @@ public class FitState_AM_HitStop : BaseFSMState {
 
 		public void CheckKnockback() {
 				CalcKB = ((( ((controller.Strike.Percent/10) + ((controller.Strike.Percent*MyHitboxData.Damage)/20)) * (200/(controller.battle.Weight+100)) * 1.4 ) + 18) * (MyHitboxData.KnockbackGrowth/100) ) + MyHitboxData.BaseKnockback;
-				Debug.Log (CalcKB);
+		#if UNITY_EDITOR
+		Debug.Log (CalcKB);
+		#endif
 				//Check if we will stay Grounded
 				if (MyHitboxData.Direction >= 180 && MyHitboxData.Direction <= 360) 
 				{
@@ -84,6 +86,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 								controller.FitAnima.Update (0);
 								controller.Animator.HitStopAnim = HitStopTimer;
 								MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+								MyHitboxData.OwnerCollider.Strike.HIT = true;
 						
 				}
 				if (MyHitboxData.Direction < 180 && MyHitboxData.Direction > 0) 
@@ -94,6 +97,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 						controller.FitAnima.Update (0);
 						controller.Animator.HitStopAnim = HitStopTimer;
 						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+						MyHitboxData.OwnerCollider.Strike.HIT = true;
 				}
 				if (MyHitboxData.Direction > 360) 
 				{
@@ -109,6 +113,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 						controller.FitAnima.Update (0);
 						controller.Animator.HitStopAnim = HitStopTimer;
 						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+						MyHitboxData.OwnerCollider.Strike.HIT = true;
 				}
 
 				if (FromGround == true) 
@@ -117,6 +122,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 						controller.FitAnima.Update (0);
 						controller.Animator.HitStopAnim = HitStopTimer;
 						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+						MyHitboxData.OwnerCollider.Strike.HIT = true;
 				}
 		}
 
