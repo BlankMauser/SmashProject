@@ -53,7 +53,7 @@ public class FitState_AM_AirJump : BaseFSMState
 		{
 
 				if (HopTimer == 0 && HopWindow == false) {
-						if (controller.velocity.y > 0 && controller.Inputter.jumpButtonHeld == false) {
+			if (controller.velocity.y > 0 && controller.Inputter.jumpButtonHeld == false && controller.Inputter.TapjumpButtonHeld == false) {
 								HopDccel = true;
 						}
 						HopWindow = true;
@@ -130,11 +130,24 @@ public class FitState_AM_AirJump : BaseFSMState
 						}
 				}
 
+		if (controller.BfAction == BufferedAction.ATTACK)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = false;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirAttack), args);
+			return;
+		}
+
 				if (controller.EndAnim == true) {
 						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
 						return;
 				}
+
+
+
 
 		}
 

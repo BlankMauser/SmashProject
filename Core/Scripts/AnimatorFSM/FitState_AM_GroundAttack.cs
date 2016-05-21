@@ -41,7 +41,7 @@ public class FitState_AM_GroundAttack : BaseFSMState
 						return;
 				}
 
-		if (controller.BfAction == BufferedAction.JAB) {
+		if (controller.BfAction == BufferedAction.ATTACK && controller.FitAnima.enabled) {
 			CheckCancel ();
 			return;
 		}

@@ -38,6 +38,8 @@ public class FitAnimator : MonoBehaviour {
 	public Transform FXSpawner1;
 	public Transform FXSpawner2;
 
+	public bool fading = false;
+
 
 	public XWeaponTrail Trail;
 
@@ -61,7 +63,7 @@ public class FitAnimator : MonoBehaviour {
 		if (AnimateVelocity == true) 
 		{
 			controller.velocity.x = AnimX*controller.x_facing;
-			controller.velocity.y = AnimY*controller.x_facing;
+			controller.velocity.y = AnimY;
 		}
 
 
@@ -112,9 +114,24 @@ public class FitAnimator : MonoBehaviour {
 				}
 		}
 
+
+	public void MultiComboUp() {
+		controller.Strike.HitComboSeed += 1;
+		if (controller.Strike.HitComboSeed > 100000) 
+		{
+			controller.Strike.HitComboSeed = 1;
+		}
+	}
+
 		public void EndAnim() {
 				controller.EndAnim = true;
 		}
+
+	public void FadeFall(float t) {
+		controller.FitAnima.CrossFade ("Fall", t); 
+		fading = true;
+		controller.EndAnim = true;
+	}
 
 		public void IASAstart() {
 				controller.IASA = true;
@@ -175,6 +192,10 @@ public class FitAnimator : MonoBehaviour {
 
 	}
 
+	public void ReverseDirection() {
+		controller.x_facing *= -1;
+		CorrectColliders ();
+	}
 
 
 

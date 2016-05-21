@@ -31,6 +31,9 @@ public abstract class FitCharacterInput : MonoBehaviour {
 		/// </summary>
 		virtual public bool jumpButtonDown{get; protected set;}
 
+	virtual public bool TapjumpButtonDown{get; protected set;}
+	virtual public bool TapjumpButtonHeld{get; protected set;}
+
 		virtual public bool AttackButtonDown{get; protected set;}
 		virtual public bool AttackButtonHeld{get; protected set;}
 
@@ -40,13 +43,17 @@ public abstract class FitCharacterInput : MonoBehaviour {
 		virtual public bool SpecialButtonDown{get; protected set;}
 		virtual public bool SpecialButtonHeld{get; protected set;}
 
+		virtual public bool ShieldHardPress{get; protected set;}
 		virtual public bool ShieldButtonDown{get; protected set;}
 		virtual public bool ShieldButtonHeld{get; protected set;}
 
 		virtual public bool QAButtonDown{get; protected set;}
 		virtual public bool QAButtonHeld{get; protected set;}
 
-
+	virtual public bool CLeftDown{get; protected set;}
+	virtual public bool CRightDown{get; protected set;}
+	virtual public bool CUpDown{get; protected set;}
+	virtual public bool CDownDown{get; protected set;}
 
 		public bool NoInput;
 		public bool NoJump;

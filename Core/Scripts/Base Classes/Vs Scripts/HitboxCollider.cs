@@ -61,6 +61,18 @@ public class HitboxCollider : MonoBehaviour {
 								HitboxSeed += hitboxData.SeedModifier;
 								hitboxData.HboxSeed = HitboxSeed;
 								hitboxData.OwnerCollider = OwnerStrike.controller;
+
+//Raycast
+//								RaycastHit spark;
+//								Vector3 fwd = (c.transform.position - transform.position).normalized;
+//								Physics.Raycast (transform.position, fwd, out spark, Size, 1 << 20);
+//					if (spark.point == Vector3.zero) {
+//						hitboxData.effectspawn = c.transform.position;
+//					} else {
+//						hitboxData.effectspawn = spark.point;
+//					}
+					hitboxData.effectspawn = transform.position + (Size* (c.transform.position - transform.position).normalized);
+
 										if (OwnerStrike.HitComboSeed < HitboxSeed) 
 										{
 												OwnerStrike.HitComboSeed = HitboxSeed;
@@ -71,7 +83,7 @@ public class HitboxCollider : MonoBehaviour {
 				}
 		}
 
-	void OnDrawGizmosSelected() {
+	void OnDrawGizmos() {
 		Gizmos.color = new Color (1, 0, 0, 0.25f);
 		Gizmos.DrawSphere(transform.position, Size);
 	}

@@ -31,6 +31,8 @@ public class FitState_AM_HitStop : BaseFSMState {
 				controller.state = CharacterState.HITSTOP;
 				HitStopTimer = MyHitboxData.Hitlag;
 				CheckKnockback ();
+				EffectSpawn ();
+
 		}
 
 		public override void Exit()
@@ -69,9 +71,9 @@ public class FitState_AM_HitStop : BaseFSMState {
 
 		public void CheckKnockback() {
 				CalcKB = ((( ((controller.Strike.Percent/10) + ((controller.Strike.Percent*MyHitboxData.Damage)/20)) * (200/(controller.battle.Weight+100)) * 1.4 ) + 18) * (MyHitboxData.KnockbackGrowth/100) ) + MyHitboxData.BaseKnockback;
-		#if UNITY_EDITOR
-		Debug.Log (CalcKB);
-		#endif
+//		#if UNITY_EDITOR
+//		Debug.Log (CalcKB);
+//		#endif
 				//Check if we will stay Grounded
 				if (MyHitboxData.Direction >= 180 && MyHitboxData.Direction <= 360) 
 				{
@@ -126,13 +128,19 @@ public class FitState_AM_HitStop : BaseFSMState {
 				}
 		}
 
+	public void EffectSpawn()
+	{
+
+		GameObject hurtFX = (GameObject)GameObject.Instantiate(MyHitboxData.effect, MyHitboxData.effectspawn, Random.rotation);
+	}
+
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();
 				MyHitboxData = controller.Strike.CurrentDmg;
 				controller.state = CharacterState.HITSTOP;
 				HitStopTimer = MyHitboxData.Hitlag;
-
 				CheckKnockback ();
+				EffectSpawn ();
 
 		}
 

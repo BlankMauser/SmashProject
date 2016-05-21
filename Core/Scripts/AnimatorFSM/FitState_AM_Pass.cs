@@ -113,6 +113,16 @@ public class FitState_AM_Pass : BaseFSMState
 			}
 		}
 
+		if (controller.BfAction == BufferedAction.ATTACK)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = JuDccel;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirAttack), args);
+			return;
+		}
+
 		CheckLedge ();
 
 		if (controller.EndAnim == true) {

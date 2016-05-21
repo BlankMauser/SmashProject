@@ -54,7 +54,7 @@ public class FitState_AM_Land : BaseFSMState
 
 		public void CheckIASA() {
 
-				if (controller.BfAction == BufferedAction.JAB) {
+				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;
 				}

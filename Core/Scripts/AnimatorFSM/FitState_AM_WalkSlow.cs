@@ -42,7 +42,7 @@ public class FitState_AM_WalkSlow : BaseFSMState
 						controller.x_direction = -1;
 				}
 
-				if (controller.BfAction == BufferedAction.JAB) {
+				if (controller.BfAction == BufferedAction.ATTACK) {
 						controller.velocity.x = 0;
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;

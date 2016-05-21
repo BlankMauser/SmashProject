@@ -151,7 +151,7 @@ public class FitState_AM_HitStunFly : BaseFSMState {
 
 		if (SentKnockback.Reversible == Reversible.Normal) 
 			{
-			if (Mathf.Sign (SentKnockback.OwnerCollider.CurrentBottom.x - controller.CurrentBottom.x) == Mathf.Sign(SentKnockback.OwnerCollider.x_facing)) {
+			if (Mathf.Sign (SentKnockback.OwnerCollider.PreviousBottom.x - controller.CurrentBottom.x) == Mathf.Sign(SentKnockback.OwnerCollider.x_facing)) {
 				#if UNITY_EDITOR
 				Debug.Log (Mathf.Sign (SentKnockback.OwnerCollider.CurrentBottom.x - controller.CurrentBottom.x));
 				#endif

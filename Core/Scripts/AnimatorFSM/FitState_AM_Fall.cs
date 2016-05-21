@@ -29,7 +29,12 @@ public class FitState_AM_Fall : BaseFSMState
 				}
 
 				//anim = controller.anima;
-				controller.FitAnima.Play ("Fall");
+		if (!controller.Animator.fading) {
+			controller.FitAnima.Play ("Fall");
+		} else {
+			controller.Animator.fading = false;
+		}
+		controller.ClearBuffer ();
 
 				if (controller.Inputter.y <= -0.75f) {
 						FastFall = true;
@@ -113,6 +118,16 @@ public class FitState_AM_Fall : BaseFSMState
 						}
 				}
 
+		if (controller.BfAction == BufferedAction.ATTACK)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = JuDccel;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirAttack), args);
+			return;
+		}
+
 		CheckLedge ();
 
 		}
@@ -160,6 +175,7 @@ public class FitState_AM_Fall : BaseFSMState
 		controller.previousState = controller.state;
 		controller.EndAnim = false;
 		controller.IASA = false;
+		controller.Animator.fading = false;
 		return;
 	}
 

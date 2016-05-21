@@ -529,7 +529,7 @@ public enum BufferedAction {
 		WALKING 		=  40,
 		PIVOT 			=  45,
 		INIT_DASH 		=  50,
-		JAB 			=  55,
+		ATTACK 			=  55,
 		HOP 			=  60,
 		JUMP 			=  65,
 		RUNNING 		=  80,

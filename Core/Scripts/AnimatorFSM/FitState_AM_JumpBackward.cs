@@ -25,7 +25,7 @@ public class FitState_AM_JumpBackward : BaseFSMState
 				FastFall = false;
 				controller.FitAnima.Play ("JumpB");
 
-				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 
+				if (controller.BfAction == BufferedAction.SHIELD) 
 				{
 						controller.velocity.y = 16;
 						controller.BfAction = BufferedAction.SHIELD;
@@ -33,7 +33,7 @@ public class FitState_AM_JumpBackward : BaseFSMState
 				else 
 				{
 
-						if (controller.Inputter.jumpButtonHeld == true) 
+			if (controller.Inputter.jumpButtonHeld == true || controller.Inputter.TapjumpButtonHeld == true) 
 						{
 								controller.velocity.y = controller.jump.jumpVelocity;
 						} 
@@ -116,12 +116,15 @@ public class FitState_AM_JumpBackward : BaseFSMState
 
 				//				controller.Inputter.GetInput ();
 				//				controller.Inputter.ProcessInput ();
-				if (controller.BfAction == BufferedAction.JAB)
-				{
-
-						DoTransition(typeof(FitState_AM_GroundAttack));
-						return;
-				}
+		if (controller.BfAction == BufferedAction.ATTACK)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = JuDccel;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirAttack), args);
+			return;
+		}
 
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						if (FastFall == false) {

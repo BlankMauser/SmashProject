@@ -37,7 +37,9 @@ public class FitState_AM_LedgeCatch : BaseFSMState
 
 		public override void Update()
 		{
-		
+
+
+
 				if (controller.EndAnim == true) {
 			controller.FitAnima.Play ("LedgeHang");
 				}
@@ -50,6 +52,11 @@ public class FitState_AM_LedgeCatch : BaseFSMState
 		}
 
 		}
+
+	public override void LateUpdate()
+	{
+		controller.transform.position =	controller.LedgeGrabbed.position + LedgeAnchor;
+	}
 
 
 	public void CheckIASA() {

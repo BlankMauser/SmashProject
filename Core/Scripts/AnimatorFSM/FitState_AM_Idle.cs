@@ -82,16 +82,16 @@ public class FitState_AM_Idle : BaseFSMState
 
 				if (controller.Strike.ApplyHitboxFrame == true) 
 				{
-			#if UNITY_EDITOR
-						Debug.Log ("Got Here");
-			#endif
+//			#if UNITY_EDITOR
+//						Debug.Log ("Got Here");
+//			#endif
 						HitboxCollision ();
 				}
 		}
 
 		public void CheckIASAIdle() {
 				
-				if (controller.BfAction == BufferedAction.JAB) {
+				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;
 				}

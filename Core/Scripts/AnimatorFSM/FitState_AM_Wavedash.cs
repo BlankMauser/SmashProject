@@ -19,7 +19,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 				//anim = controller.anima;
 				controller.ApplyFriction = true;
 				controller.C_Drag = controller.battle.WavedashFriction;
-				controller.velocity.x = controller.jump.WavedashVelocity * controller.Inputter.x;
+				controller.velocity.x = controller.jump.WavedashVelocity * controller.Inputter.buffer_x;
 				if (controller.velocity.y > 0) 
 				{
 						controller.velocity.y *= 0.08f;

@@ -19,6 +19,8 @@ public class FitPlayerInput : FitCharacterInput {
 	public int TechPenalty = 0;
 	// Use this for initialization
 
+
+
 	void Awake() {
 				// Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
 				player = ReInput.players.GetPlayer(playerId);
@@ -41,9 +43,18 @@ public class FitPlayerInput : FitCharacterInput {
 				// whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
 				AttackButtonDown = player.GetButtonDown("Attack");
 				jumpButtonDown = player.GetButtonDown("Jump");
+				TapjumpButtonDown = player.GetButtonDown("TapJump");
 				jumpButtonHeld = player.GetButton("Jump");
+				TapjumpButtonHeld = player.GetButton("TapJump");
+				ShieldHardPress = player.GetButtonDown("ShieldLP") || player.GetButtonDown("ShieldRP");
 				ShieldButtonDown = player.GetButtonDown("ShieldL") || player.GetButtonDown("ShieldR");
-				ShieldButtonHeld = player.GetButton("ShieldLP") || player.GetButton("ShieldRP");
+				ShieldButtonHeld = player.GetButton("ShieldL") || player.GetButton("ShieldR");
+
+				CLeftDown = player.GetButtonDown("CLeft");
+				CRightDown = player.GetButtonDown("CRight");
+				CUpDown = player.GetButtonDown("CUp");
+				CDownDown = player.GetButtonDown("CDown");
+
 				x = player.GetAxis ("Move Left/Right");
 				x_prev = player.GetAxisPrev ("Move Left/Right");
 				X_Axis = x;
@@ -102,10 +113,37 @@ public class FitPlayerInput : FitCharacterInput {
 
 				// Process Attack
 				if (AttackButtonDown) {
-						SetAction (BufferedAction.JAB);
+			buffer_x = x;
+			buffer_y = y;
+						SetAction (BufferedAction.ATTACK, 1);
 				}
 
-				if (jumpButtonDown) {
+		//GOING TO BE REPLACED
+		if (CUpDown) {
+			buffer_x = 0;
+			buffer_y = 1;
+			SetAction (BufferedAction.ATTACK, 3);
+		}
+
+		if (CDownDown) {
+			buffer_x = 0;
+			buffer_y = -1;
+			SetAction (BufferedAction.ATTACK, 3);
+		}
+
+		if (CLeftDown) {
+			buffer_x = -1;
+			buffer_y = 0;
+			SetAction (BufferedAction.ATTACK, 3);
+		}
+
+		if (CRightDown) {
+			buffer_x = 1;
+			buffer_y = 0;
+			SetAction (BufferedAction.ATTACK, 3);
+		}
+
+		if (jumpButtonDown || TapjumpButtonDown) {
 						SetAction (BufferedAction.JUMP);
 				}
 
@@ -116,6 +154,7 @@ public class FitPlayerInput : FitCharacterInput {
 			} else {
 				TechPenalty = 20;
 			}
+						buffer_x = x;
 						SetAction (BufferedAction.SHIELD, 3);
 				}
 
@@ -158,7 +197,7 @@ public class FitPlayerInput : FitCharacterInput {
 
 	public Cardinals ReturnAxis()
 	{
-		float AxAngle = (Mathf.Atan2 (Y_Axis, X_Axis)) * Mathf.Rad2Deg;
+		float AxAngle = Mathf.Round((Mathf.Atan2 (Y_Axis, X_Axis)) * Mathf.Rad2Deg);
 		if (Mathf.Abs (X_Axis) > 0.18f || Mathf.Abs (Y_Axis) > 0.18f) {
 			if (AxAngle >= -20 && AxAngle <= 20) {
 				return Cardinals.Right;
@@ -189,4 +228,27 @@ public class FitPlayerInput : FitCharacterInput {
 		return Cardinals.Center;
 		
 	}
+
+	public Cardinals ReturnAxisAerial()
+	{
+		float AxAngle = Mathf.Round((Mathf.Atan2 (buffer_y, buffer_x)) * Mathf.Rad2Deg);
+		if (Mathf.Abs (buffer_x) > 0.18f || Mathf.Abs (buffer_y) > 0.18f) {
+			if (AxAngle >= -45 && AxAngle <= 45) {
+				return Cardinals.Right;
+			}
+			if (AxAngle >= 46 && AxAngle <= 134) {
+				return Cardinals.Up;
+			}
+			if (AxAngle >= 135 || AxAngle <= -135) {
+				return Cardinals.Left;
+			}
+			if (AxAngle <= -46 && AxAngle >= -134) {
+				return Cardinals.Down;
+			}
+		}
+
+		return Cardinals.Center;
+
+	}
+
 }

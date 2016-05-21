@@ -23,9 +23,9 @@ MonoBehaviour:
     Direction: 80
     OptimalDI: 2
     Reversible: 0
-    BaseKnockback: 30
+    BaseKnockback: 8
     WeightKnockback: 0
-    KnockbackGrowth: 112
+    KnockbackGrowth: 75
     Hitlag: 7
     Blockstun: 9
     ShieldDamage: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     HitstunScaling: 0
     AirThreshhold: 10
     type: 0
-    effect: {fileID: 100000, guid: 9431ba5b04ae3934a8cde0abd640ad65, type: 2}
+    effect: {fileID: 180892, guid: 444c3aa5b3fe18a42b29fda0323bf90c, type: 2}
     soundname: 
     Xflipped: 0
     ownerID: 0

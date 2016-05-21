@@ -26,7 +26,7 @@ public class FitState_AM_Jump : BaseFSMState
 				controller.FitAnima.Play ("JumpF");
 
 
-				if (controller.Inputter.ShieldButtonHeld == true || controller.BfAction == BufferedAction.SHIELD) 
+				if (controller.BfAction == BufferedAction.SHIELD) 
 				{
 						controller.velocity.y = 16;
 						controller.BfAction = BufferedAction.SHIELD;
@@ -34,7 +34,7 @@ public class FitState_AM_Jump : BaseFSMState
 				else 
 				{
 
-						if (controller.Inputter.jumpButtonHeld == true) 
+			if (controller.Inputter.jumpButtonHeld == true || controller.Inputter.TapjumpButtonHeld == true) 
 						{
 								controller.velocity.y = controller.jump.jumpVelocity;
 						} 
@@ -120,7 +120,7 @@ public class FitState_AM_Jump : BaseFSMState
 
 //				controller.Inputter.GetInput ();
 //				controller.Inputter.ProcessInput ();
-				if (controller.BfAction == BufferedAction.JAB)
+				if (controller.BfAction == BufferedAction.ATTACK)
 				{
 						object[] args = new object[3];
 						args[0] = InitVel;

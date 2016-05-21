@@ -40,7 +40,7 @@ public class FitState_AM_Pivot : BaseFSMState
 		{
 
 
-				if (controller.BfAction == BufferedAction.JAB) {
+				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 				}
 				if (controller.BfAction == BufferedAction.JUMP) {
