@@ -477,7 +477,10 @@ public enum CharacterState {
 	WAVEDASH		=  50,
 	WAVEDASHLAND	=  55,
 	UKEMI			=  60,
-	
+
+	CAUGHT			=  80,
+	THROWN			=  82,
+
 	AIRBORNE		= 110,			// This is sent when you are in the air but are moving up or haven't reached the fall velocity
 	FALLING 		= 120,
 	AIRBORNE_CROUCH	= 130,			// This is sent if you are crouching during airborne or falling state
@@ -529,9 +532,12 @@ public enum BufferedAction {
 		WALKING 		=  40,
 		PIVOT 			=  45,
 		INIT_DASH 		=  50,
+		HOP 			=  51,
+		JUMP 			=  52,
 		ATTACK 			=  55,
-		HOP 			=  60,
-		JUMP 			=  65,
+		BULLET 			=  56,
+		SPECIAL 		=  58,
+		QA				=  70,
 		RUNNING 		=  80,
 		AIR_NORMAL 		=  95,
 		GROUND_NORMAL 	=  100,

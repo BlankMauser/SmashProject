@@ -64,6 +64,16 @@ public class FitState_AM_AirAttack : BaseFSMState
 			}
 		}
 
+		if (controller.BfAction == BufferedAction.BULLET) {
+			CheckBulletCancel ();
+
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			CheckSpecialCancel ();
+
+		}
+
 				if (controller.EndAnim == true) {
 						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));
@@ -123,7 +133,7 @@ public class FitState_AM_AirAttack : BaseFSMState
 			}
 
 		case Cardinals.Up:
-			controller.FitAnima.Play ("UpSpecial",0,0f);
+			controller.FitAnima.Play ("Uair",0,0f);
 			break;
 
 		case Cardinals.Down:
@@ -137,6 +147,54 @@ public class FitState_AM_AirAttack : BaseFSMState
 
 
 
+	}
+		
+	void CheckBulletCancel()
+	{
+		switch ((int)controller.Animator.CancelOn) {
+		case 1:
+			if (controller.Strike.HIT && controller.Animator.CancelWindow) {
+				if (controller.FitAnima.enabled) {
+					DoTransition (typeof(FitState_AM_AirBullet));
+					return;
+				}
+			}
+			break;
+		case 3:
+			if (controller.Strike.BLOCKED || controller.Strike.HIT) {
+				if (controller.Animator.CancelWindow) {
+					if (controller.FitAnima.enabled) {
+						DoTransition (typeof(FitState_AM_AirBullet));
+						return;
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	void CheckSpecialCancel()
+	{
+		switch ((int)controller.Animator.CancelOn) {
+		case 1:
+			if (controller.Strike.HIT && controller.Animator.CancelWindow) {
+				if (controller.FitAnima.enabled) {
+					DoTransition (typeof(FitState_AM_AirSpecial));
+					return;
+				}
+			}
+			break;
+		case 3:
+			if (controller.Strike.BLOCKED || controller.Strike.HIT) {
+				if (controller.Animator.CancelWindow) {
+					if (controller.FitAnima.enabled) {
+						DoTransition (typeof(FitState_AM_AirSpecial));
+						return;
+					}
+				}
+			}
+			break;
+		}
 	}
 
 	public void ApplyGravity()
@@ -240,6 +298,24 @@ public class FitState_AM_AirAttack : BaseFSMState
 			controller.EndAnim = false;
 			controller.IASA = false;
 		}
+
+		if (controller.BfAction == BufferedAction.BULLET)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = false;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirBullet), args);
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			if (controller.FitAnima.enabled) {
+				DoTransition (typeof(FitState_AM_AirSpecial));
+				return;
+			}
+
+		}
 			
 		if (controller.BfAction == BufferedAction.SHIELD)
 		{
@@ -267,7 +343,8 @@ public class FitState_AM_AirAttack : BaseFSMState
 	}
 
 	public void EndTerms() {
-
+		controller.Strike.HIT = false;
+		controller.Strike.BLOCKED = false;
 		controller.previousState = controller.state;
 		controller.EndAnim = false;
 		controller.IASA = false;

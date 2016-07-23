@@ -128,6 +128,12 @@ public class FitState_AM_Fall : BaseFSMState
 			return;
 		}
 
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			DoTransition (typeof(FitState_AM_AirSpecial));
+			return;
+
+		}
+
 		CheckLedge ();
 
 		}

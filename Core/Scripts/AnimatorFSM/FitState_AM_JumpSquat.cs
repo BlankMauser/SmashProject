@@ -37,6 +37,11 @@ public class FitState_AM_JumpSquat : BaseFSMState
 						return;
 				}
 
+				if (controller.BfAction == BufferedAction.QA) {
+					DoTransition (typeof(FitState_AM_Grab));
+					return;
+				}
+
 				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;

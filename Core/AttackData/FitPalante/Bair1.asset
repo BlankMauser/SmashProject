@@ -27,6 +27,7 @@ MonoBehaviour:
     WeightKnockback: 0
     KnockbackGrowth: 70
     Hitlag: 8
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15

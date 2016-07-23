@@ -16,17 +16,18 @@ MonoBehaviour:
     OwnerCollider: {fileID: 0}
     SetKnockback: 0
     MyPriority: 2
-    Damage: 5
+    Damage: 8
     TrueDamage: 5
     HboxSeed: 0
     SeedModifier: 0
     Direction: 82
     OptimalDI: 2
     Reversible: 0
-    BaseKnockback: 300
+    BaseKnockback: 200
     WeightKnockback: 0
-    KnockbackGrowth: 25
+    KnockbackGrowth: 0
     Hitlag: 12
+    HitlagDisparity: -2
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15

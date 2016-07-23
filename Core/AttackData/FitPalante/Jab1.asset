@@ -11,28 +11,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9b0d132979da64c81f59d16fb09e56, type: 3}
   m_Name: Jab1
   m_EditorClassIdentifier: 
-  _animationName: 
+  _animationName: Jab
   _hitboxData:
     OwnerCollider: {fileID: 0}
     SetKnockback: 0
     MyPriority: 1
-    Damage: 18
+    Damage: 5
     TrueDamage: 2
     HboxSeed: 0
     SeedModifier: 0
-    Direction: 80
+    Direction: 361
     OptimalDI: 2
     Reversible: 0
     BaseKnockback: 5
     WeightKnockback: 0
     KnockbackGrowth: 100
     Hitlag: 7
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 14
     Hitstun: 11
     HitstunScaling: 0
-    AirThreshhold: 10
+    AirThreshhold: 45
     type: 0
     effect: {fileID: 180892, guid: 444c3aa5b3fe18a42b29fda0323bf90c, type: 2}
     soundname: 

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9b0d132979da64c81f59d16fb09e56, type: 3}
+  m_Name: SideSpecialSever
+  m_EditorClassIdentifier: 
+  _animationName: Strong
+  _hitboxData:
+    OwnerCollider: {fileID: 0}
+    SetKnockback: 0
+    MyPriority: 2
+    Damage: 12
+    TrueDamage: 5
+    HboxSeed: 0
+    SeedModifier: 0
+    Direction: 85
+    OptimalDI: 2
+    Reversible: 0
+    BaseKnockback: 110
+    WeightKnockback: 0
+    KnockbackGrowth: 10
+    Hitlag: 10
+    HitlagDisparity: 2
+    Blockstun: 9
+    ShieldDamage: 0
+    ShieldPush: 15
+    Hitstun: 20
+    HitstunScaling: 0
+    AirThreshhold: 10
+    type: 0
+    effect: {fileID: 115696, guid: 802fa76e32ac9de4fb7e6abe7c194549, type: 2}
+    soundname: 
+    Xflipped: 0
+    ownerID: 0
+    effectspawn: {x: 0, y: 0, z: 0}
+    cStart: {r: 0, g: 0, b: 0, a: 0}
+    cEnd: {r: 0, g: 0, b: 0, a: 0}

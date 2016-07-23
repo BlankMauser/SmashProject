@@ -27,7 +27,7 @@ public class FitState_AM_AirJump : BaseFSMState
 				FastFall = false;
 				HopWindow = false;
 				HopDccel = false;
-				controller.FitAnima.Play ("JumpF");
+		controller.FitAnima.Play ("JumpF",0,0f);
 				HopTimer = 2;
 				controller.velocity.x = 0;
 				if (controller.Inputter.x > 0.7f) {
@@ -46,7 +46,7 @@ public class FitState_AM_AirJump : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.previousState = CharacterState.AIRJUMP;
+				EndTerms ();
 		}
 
 		public override void Update()
@@ -140,16 +140,40 @@ public class FitState_AM_AirJump : BaseFSMState
 			return;
 		}
 
-				if (controller.EndAnim == true) {
-						controller.EndAnim = false;
-						DoTransition (typeof(FitState_AM_Fall));
-						return;
-				}
+		if (controller.BfAction == BufferedAction.BULLET)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = false;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirBullet), args);
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			DoTransition (typeof(FitState_AM_AirSpecial));
+			return;
+
+		}
+
+		if (controller.EndAnim == true) {
+			controller.EndAnim = false;
+			DoTransition (typeof(FitState_AM_Fall));
+			return;
+		}
 
 
 
 
 		}
+
+	public void EndTerms() {
+
+		controller.previousState = controller.state;
+		controller.EndAnim = false;
+		controller.IASA = false;
+		return;
+	}
 
 
 }

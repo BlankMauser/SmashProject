@@ -163,7 +163,7 @@ public class FitState_AM_Tumble : BaseFSMState {
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();
 				object[] args = new object[1];
-				args[0] = true;
+				args[0] = false;
 				DoTransition (typeof(FitState_AM_HitStop), args);
 				return;
 

@@ -20,6 +20,8 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_RunTurn));
 				children.Add(typeof(FitState_AM_Pivot));
 				children.Add(typeof(FitState_AM_GroundAttack));
+				children.Add(typeof(FitState_AM_GroundSpecial));
+				children.Add(typeof(FitState_AM_AirSpecial));
 				children.Add(typeof(FitState_AM_Jump));
 				children.Add(typeof(FitState_AM_JumpBackward));
 				children.Add(typeof(FitState_AM_JumpSquat));
@@ -31,9 +33,15 @@ public class FitState_AM : BaseFSMState
 				children.Add(typeof(FitState_AM_Wavedash));
 				children.Add(typeof(FitState_AM_WavedashLand));
 				children.Add(typeof(FitState_AM_Ukemi));
+				children.Add(typeof(FitState_AM_Grab));
+				children.Add(typeof(FitState_AM_Caught));
+				children.Add(typeof(FitState_AM_Holding));
+				children.Add(typeof(FitState_AM_Thrown));
+				children.Add(typeof(FitState_AM_Throwing));
 				children.Add(typeof(FitState_AM_LedgeCatch));
 				children.Add(typeof(FitState_AM_AirAction));
 				children.Add(typeof(FitState_AM_AirAttack));
+				children.Add(typeof(FitState_AM_AirBullet));
 				children.Add(typeof(FitState_AM_Pass));
 				children.Add(typeof(FitState_AM_HitStop));
 				children.Add(typeof(FitState_AM_HitStun));

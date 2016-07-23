@@ -19,12 +19,13 @@ public class FitState_AM_LedgeCatch : BaseFSMState
 				controller.state = CharacterState.ATTACK;
 				//anim = controller.anima;
 				controller.EndAnim = false;
-				controller.FitAnima.Play ("LedgeCatch");
 				controller.ClearBuffer ();
 				controller.ApplyFriction = false;
 				controller.velocity = Vector3.zero;
 				controller.kbvelocity = Vector3.zero;
-				controller.x_facing = (int)Mathf.Sign (controller.LedgeGrabbed.position.x - controller.CurrentBottom.x);
+				controller.x_facing = (int)Mathf.Sign(controller.LedgeGrabbed.localRotation.z);
+				controller.Animator.CorrectColliders ();
+				controller.FitAnima.Play ("LedgeCatch");
 				LedgeAnchor = new Vector3 (controller.LedgeOffset.x * controller.x_facing, controller.LedgeOffset.y);
 				controller.transform.position =	controller.LedgeGrabbed.position + LedgeAnchor;
 				

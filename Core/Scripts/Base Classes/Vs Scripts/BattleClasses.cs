@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum HitboxType { Melee, Bullet, Ungraze, Wind }
+public enum HitboxType { Melee, Bullet, Ungraze, Hybrid, Wind, Throw }
 public enum Reversible { Normal, Forward, Reverse}
 public enum Cardinals { 
 
@@ -79,6 +79,7 @@ public class HitboxData {
 		public float WeightKnockback;
 		public float KnockbackGrowth;
 		public int Hitlag;
+		public int HitlagDisparity;
 		public int Blockstun;
 		public int ShieldDamage;
 		public float ShieldPush;
@@ -88,8 +89,9 @@ public class HitboxData {
 		public HitboxType type;
 		public GameObject effect;
 
-		public string soundname;
+		public Vector3 BulletCenter;
 		public bool Xflipped;
+		public bool IsGrab;
 		public int ownerID;
 		public Vector3 effectspawn;
 
@@ -108,11 +110,12 @@ public class HitboxData {
 				destination.MyPriority = source.MyPriority;
 				destination.HboxSeed = source.HboxSeed;
 				destination.SeedModifier = source.SeedModifier;
-				destination.soundname = source.soundname;
+				destination.BulletCenter = source.BulletCenter;
 				destination.cStart = source.cStart;
 				destination.cEnd = source.cEnd;
 				destination.ownerID = source.ownerID;
 				destination.Xflipped = source.Xflipped;
+				destination.IsGrab = source.IsGrab;
 				destination.effectspawn = source.effectspawn;
 				destination.Damage = source.Damage;
 				destination.TrueDamage = source.TrueDamage;
@@ -125,6 +128,7 @@ public class HitboxData {
 				destination.KnockbackGrowth = source.KnockbackGrowth;
 				destination.effect = source.effect;
 				destination.Hitlag = source.Hitlag;
+				destination.HitlagDisparity = source.HitlagDisparity;
 				destination.Blockstun = source.Blockstun;
 				destination.ShieldPush = source.ShieldPush;
 				destination.Hitstun = source.Hitstun;

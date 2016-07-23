@@ -50,7 +50,7 @@ public class FitState_AM_InitDash : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.previousState = CharacterState.DASH_START;
+		EndTerms ();
 		}
 
 		public override void Update()
@@ -103,6 +103,11 @@ public class FitState_AM_InitDash : BaseFSMState
 					return;
 				}
 
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
+				}
+
 				if (controller.EndAnim == true || controller.velocity.x == 0) {
 						if (DeAccel == true) {
 								controller.EndAnim = false;
@@ -118,6 +123,14 @@ public class FitState_AM_InitDash : BaseFSMState
 						
 
 		}
+
+	public void EndTerms() {
+
+		controller.previousState = controller.state;
+		controller.EndAnim = false;
+		controller.IASA = false;
+		return;
+	}
 
 
 

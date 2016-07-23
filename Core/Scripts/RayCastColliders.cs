@@ -45,6 +45,9 @@ public class RayCastColliders : MonoBehaviour {
 		
 		public Transform LedgeGrabbed;
 		public Vector3 LedgeOffset;
+		public RayCastColliders GrabOpponent;
+		public Transform GrabTransform;
+		public Vector3 GrabbedOffset;
 
 	/// <summary>
 	/// Movement attributes.
@@ -79,6 +82,11 @@ public class RayCastColliders : MonoBehaviour {
 	/// How far to look ahead when considering if this character is grounded.
 	/// </summary>
 	public float groundedLookAhead = 0.25f;
+
+	/// <summary>
+	/// Switch this to use custom scripts.
+	/// </summary>
+	public int UpdateSwitch;
 
 	public FitStrike Strike;
 	public FitAnimator Animator;
@@ -790,6 +798,111 @@ public class RayCastColliders : MonoBehaviour {
 		}
 
 	}
+
+	#endregion
+
+	#region Virtual Override classes
+
+	public virtual void UpSpecialGroundInit()
+	{
+
+	}
+
+	public virtual void UpSpecialAirInit()
+	{
+
+	}
+
+	public virtual void UpSpecialGroundUpdate()
+	{
+
+	}
+
+	public virtual void UpSpecialAirUpdate()
+	{
+
+	}
+
+	public virtual void UpSpecialGroundLateUpdate()
+	{
+
+	}
+
+	public virtual void UpSpecialAirLateUpdate()
+	{
+
+	}
+
+	public virtual void SideSpecialGroundInit()
+	{
+
+	}
+
+	public virtual void SideSpecialAirInit()
+	{
+
+	}
+
+	public virtual void SideSpecialGroundUpdate()
+	{
+
+	}
+
+	public virtual void SideSpecialAirUpdate()
+	{
+
+	}
+
+	public virtual void DownSpecialGroundInit()
+	{
+
+	}
+
+	public virtual void DownSpecialAirInit()
+	{
+
+	}
+
+	public virtual void DownSpecialGroundUpdate()
+	{
+
+	}
+
+	public virtual void DownSpecialAirUpdate()
+	{
+
+	}
+
+	public virtual void NeutralSpecialGroundInit()
+	{
+
+	}
+
+	public virtual void NeutralSpecialAirInit()
+	{
+
+	}
+
+	public virtual void NeutralSpecialGroundUpdate()
+	{
+
+	}
+
+	public virtual void NeutralSpecialAirUpdate()
+	{
+
+	}
+
+	public virtual void CustomCode1()
+	{
+
+	}
+
+	public virtual void CustomCode2()
+	{
+
+	}
+
 
 	#endregion
 

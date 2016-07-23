@@ -26,7 +26,8 @@ MonoBehaviour:
     BaseKnockback: 30
     WeightKnockback: 0
     KnockbackGrowth: 70
-    Hitlag: 5
+    Hitlag: 6
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15
@@ -34,9 +35,10 @@ MonoBehaviour:
     HitstunScaling: 0
     AirThreshhold: 10
     type: 0
-    effect: {fileID: 115696, guid: 802fa76e32ac9de4fb7e6abe7c194549, type: 2}
-    soundname: 
+    effect: {fileID: 180892, guid: 444c3aa5b3fe18a42b29fda0323bf90c, type: 2}
+    BulletCenter: {x: 0, y: 0, z: 0}
     Xflipped: 0
+    IsGrab: 0
     ownerID: 0
     effectspawn: {x: 0, y: 0, z: 0}
     cStart: {r: 0, g: 0, b: 0, a: 0}

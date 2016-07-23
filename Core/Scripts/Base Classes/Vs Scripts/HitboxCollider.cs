@@ -11,10 +11,19 @@ public class HitboxCollider : MonoBehaviour {
 		public float PriorityId;
 		public float AttackQueue;
 		public float Size;
+		public bool Interp;
+
+		public Vector3 PrevPosition;
+		public Vector3 NewPosition;
 
 		public void Start()
 		{
 				MyOwnerId = OwnerStrike.MyId;
+		}
+
+		public void Update()
+		{
+		PrevPosition = transform.position;
 		}
 		
 
@@ -26,6 +35,17 @@ public class HitboxCollider : MonoBehaviour {
 				this.gameObject.SendMessage ("OnTriggerDouble", c);
 			}
 				}
+
+		if (Interp) {
+			RaycastHit[] sphereHit = Physics.SphereCastAll(transform.position, Size, (PrevPosition - transform.position).normalized, Vector3.Distance(PrevPosition, transform.position));
+				foreach(RaycastHit hit in sphereHit) 
+			{
+				if (Size > 0) {
+					this.gameObject.SendMessage ("OnTriggerDouble", hit.collider);
+				}
+			}
+		}
+
 		}
 
 //		void OnTriggerEnter(Collider c) {
@@ -47,7 +67,7 @@ public class HitboxCollider : MonoBehaviour {
 //				}
 //		}	
 
-		void OnTriggerDouble(Collider c) {
+		public virtual void OnTriggerDouble(Collider c) {
 				if (c.gameObject.layer == 20) {
 						FitStrike enemy = c.GetComponentInParent<FitStrike> ();
 						if (enemy.MyId != MyOwnerId) 
@@ -71,6 +91,7 @@ public class HitboxCollider : MonoBehaviour {
 //					} else {
 //						hitboxData.effectspawn = spark.point;
 //					}
+
 					hitboxData.effectspawn = transform.position + (Size* (c.transform.position - transform.position).normalized);
 
 										if (OwnerStrike.HitComboSeed < HitboxSeed) 

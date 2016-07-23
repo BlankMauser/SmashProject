@@ -6,6 +6,8 @@ using FSMHelper;
 public class FitState_AM_HitStun : BaseFSMState {
 
 		RayCastColliders controller;
+		public float Center;
+		public int CenterXDir;
 		public int HitStunTimer;
 		public HitboxData MyHitboxData;
 		public HitboxData SentKnockback;
@@ -77,14 +79,88 @@ public class FitState_AM_HitStun : BaseFSMState {
 		}
 				
 
-		public void KnockbackCalc() {
+	public void KnockbackCalc() 
+	{
 		controller.kbvelocity.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad) * (float)CalcKB;
-		controller.kbdecay.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad);
+		controller.kbdecay.x = Mathf.Cos (SentKnockback.Direction*Mathf.Deg2Rad) * 2f;
+		controller.kbvelocity.y = Mathf.Sin (SentKnockback.Direction*Mathf.Deg2Rad) * (float)CalcKB;
+		controller.kbdecay.y = Mathf.Sin (SentKnockback.Direction*Mathf.Deg2Rad) * 2f;
+
+		if (SentKnockback.type == HitboxType.Bullet) {
+			Center = SentKnockback.BulletCenter.x;
+			CenterXDir = (int)SentKnockback.BulletCenter.z;
+		} else {
+			Center = SentKnockback.OwnerCollider.CurrentBottom.x;
+			CenterXDir = SentKnockback.OwnerCollider.x_facing;
 		}
 
-		public void DICalc() {
-
+		if (SentKnockback.Reversible == Reversible.Normal) 
+		{
+			Debug.Log (Mathf.Sign (Center - controller.CurrentBottom.x));
+			if (Mathf.Sign (Center - controller.CurrentBottom.x) == Mathf.Sign(CenterXDir)) {
+				controller.kbvelocity.x *= (CenterXDir*-1);
+			} else {
+				controller.kbvelocity.x *= CenterXDir;
+			}
 		}
+
+		if (SentKnockback.Reversible == Reversible.Forward) {
+			controller.kbvelocity.x *= CenterXDir;
+		}
+
+		if (SentKnockback.Reversible == Reversible.Reverse) {
+			controller.kbvelocity.x *= (CenterXDir*-1);
+		}
+
+	}
+
+	public void DICalc() {
+		Cardinals Ang = controller.Inputter.ReturnAxis();
+		Cardinals OptimalP = Circular((int)SentKnockback.OptimalDI + 2);
+		Cardinals HalfP = Circular((int)SentKnockback.OptimalDI + 1);
+		Cardinals OptimalN = Circular((int)SentKnockback.OptimalDI - 2);
+		Cardinals HalfN = Circular((int)SentKnockback.OptimalDI - 1);
+		if (Ang != OptimalP && Ang != HalfP && Ang != OptimalN && Ang != HalfN) {
+			return;
+		} else {
+			if (Ang == OptimalP) {
+				SentKnockback.Direction += 18;
+				if (SentKnockback.Direction > 360) {
+					SentKnockback.Direction -= 360;
+					Debug.Log (OptimalP);
+				}
+				return;
+			}
+			if (Ang == HalfP) {
+				SentKnockback.Direction += 9;
+				if (SentKnockback.Direction > 360) {
+					SentKnockback.Direction -= 360;
+				}
+				return;
+			}
+			if (Ang == HalfN) {
+				SentKnockback.Direction -= 9;
+				if (SentKnockback.Direction < 0) {
+					SentKnockback.Direction += 360;
+				}
+				return;
+			}
+			if (Ang == OptimalN) {
+				SentKnockback.Direction -= 18;
+				if (SentKnockback.Direction < 0) {
+					SentKnockback.Direction += 360;
+				}
+				return;
+			}
+		}
+	}
+
+	public Cardinals Circular(int input){
+		if (input > 7) {
+			input -= 8;
+		}
+		return (Cardinals)input;
+	}
 
 		public void HitboxCollision() {
 				controller.Strike.DamageCalc ();

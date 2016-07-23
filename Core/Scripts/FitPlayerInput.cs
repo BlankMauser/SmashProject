@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using Rewired;
 
@@ -42,6 +43,13 @@ public class FitPlayerInput : FitCharacterInput {
 				// Get the input from the Rewired Player. All controllers that the Player owns will contribute, so it doesn't matter
 				// whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
 				AttackButtonDown = player.GetButtonDown("Attack");
+				AttackButtonHeld = player.GetButton("Attack");
+				BulletButtonDown = player.GetButtonDown("Bullet");
+				BulletButtonHeld = player.GetButton("Bullet");
+				SpecialButtonDown = player.GetButtonDown("Special");
+				SpecialButtonHeld = player.GetButton("Special");
+				QAButtonDown = player.GetButtonDown("QA");
+				QAButtonHeld = player.GetButton("QA");
 				jumpButtonDown = player.GetButtonDown("Jump");
 				TapjumpButtonDown = player.GetButtonDown("TapJump");
 				jumpButtonHeld = player.GetButton("Jump");
@@ -54,6 +62,8 @@ public class FitPlayerInput : FitCharacterInput {
 				CRightDown = player.GetButtonDown("CRight");
 				CUpDown = player.GetButtonDown("CUp");
 				CDownDown = player.GetButtonDown("CDown");
+
+				UpDebugDown = player.GetButtonDown("UpDebug");
 
 				x = player.GetAxis ("Move Left/Right");
 				x_prev = player.GetAxisPrev ("Move Left/Right");
@@ -109,6 +119,10 @@ public class FitPlayerInput : FitCharacterInput {
 						}			
 				}
 
+		if (jumpButtonDown || TapjumpButtonDown) {
+			SetAction (BufferedAction.JUMP);
+		}
+
 
 
 				// Process Attack
@@ -117,6 +131,24 @@ public class FitPlayerInput : FitCharacterInput {
 			buffer_y = y;
 						SetAction (BufferedAction.ATTACK, 1);
 				}
+			
+		if (BulletButtonDown) {
+			buffer_x = x;
+			buffer_y = y;
+			SetAction (BufferedAction.BULLET, 2);
+		}
+
+		if (SpecialButtonDown) {
+			buffer_x = x;
+			buffer_y = y;
+			SetAction (BufferedAction.SPECIAL, 2);
+		}
+
+		if (QAButtonDown) {
+			buffer_x = x;
+			buffer_y = y;
+			SetAction (BufferedAction.QA, 1);
+		}
 
 		//GOING TO BE REPLACED
 		if (CUpDown) {
@@ -143,9 +175,10 @@ public class FitPlayerInput : FitCharacterInput {
 			SetAction (BufferedAction.ATTACK, 3);
 		}
 
-		if (jumpButtonDown || TapjumpButtonDown) {
-						SetAction (BufferedAction.JUMP);
-				}
+		if (UpDebugDown) {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+
 
 				if (ShieldButtonDown) {
 			if (TechPenalty == 0) {

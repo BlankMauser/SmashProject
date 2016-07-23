@@ -126,6 +126,22 @@ public class FitState_AM_JumpBackward : BaseFSMState
 			return;
 		}
 
+		if (controller.BfAction == BufferedAction.BULLET)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = false;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirBullet), args);
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			DoTransition (typeof(FitState_AM_AirSpecial));
+			return;
+
+		}
+
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						if (FastFall == false) {
 								controller.velocity.y += controller.jump.fallGravity;

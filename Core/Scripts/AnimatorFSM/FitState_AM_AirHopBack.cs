@@ -140,6 +140,22 @@ public class FitState_AM_AirHopBack : BaseFSMState
 			return;
 		}
 
+		if (controller.BfAction == BufferedAction.BULLET)
+		{
+			object[] args = new object[3];
+			args[0] = InitVel;
+			args[1] = false;
+			args[2] = FastFall;
+			DoTransition(typeof(FitState_AM_AirBullet), args);
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			DoTransition (typeof(FitState_AM_AirSpecial));
+			return;
+
+		}
+
 				if (controller.EndAnim == true) {
 						controller.EndAnim = false;
 						DoTransition (typeof(FitState_AM_Fall));

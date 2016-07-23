@@ -60,6 +60,11 @@ public class FitState_AM_Run : BaseFSMState
 						return;
 				}
 
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
+				}
+
 				if (DeAccel == true) {
 						DoTransition (typeof(FitState_AM_RunBrake));
 						return;

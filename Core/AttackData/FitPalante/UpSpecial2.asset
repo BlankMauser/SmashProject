@@ -23,10 +23,11 @@ MonoBehaviour:
     Direction: 90
     OptimalDI: 2
     Reversible: 0
-    BaseKnockback: 120
+    BaseKnockback: 80
     WeightKnockback: 0
     KnockbackGrowth: 75
     Hitlag: 5
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15

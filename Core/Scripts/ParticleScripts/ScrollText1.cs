@@ -9,6 +9,6 @@ public class ScrollText1 : MonoBehaviour {
 	}
 	void Update() {
 		float offset = Time.time * scrollSpeed;
-		rend.material.SetTextureOffset("_EnvMap", new Vector2(offset, offset*-1));
+		rend.material.SetTextureOffset("_EnvMap", new Vector2(offset, 0));
 	}
 }

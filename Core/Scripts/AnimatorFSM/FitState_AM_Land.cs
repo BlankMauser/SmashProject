@@ -52,11 +52,33 @@ public class FitState_AM_Land : BaseFSMState
 
 		}
 
+
+		public override void LateUpdate()
+		{
+		
+		if (controller.Strike.ApplyHitboxFrame == true) 
+		{
+			HitboxCollision ();
+		}
+
+		if (controller.Strike.ApplyProjFrame == true) 
+		{
+			HitboxCollisionB ();
+		}
+
+
+		}
+
 		public void CheckIASA() {
 
 				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;
+				}
+
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
 				}
 
 				if (controller.BfAction == BufferedAction.JUMP) {
@@ -80,6 +102,24 @@ public class FitState_AM_Land : BaseFSMState
 						DoTransition (typeof(FitState_AM_InitDash));
 						return;
 				}
+
+		}
+
+		public void HitboxCollision() {
+			controller.Strike.DamageCalc ();
+			object[] args = new object[1];
+			args[0] = true;
+			DoTransition (typeof(FitState_AM_HitStop), args);
+			return;
+
+		}
+
+		public void HitboxCollisionB() {
+			controller.Strike.DamageCalcB ();
+			object[] args = new object[1];
+			args[0] = true;
+			DoTransition (typeof(FitState_AM_HitStop), args);
+			return;
 
 		}
 

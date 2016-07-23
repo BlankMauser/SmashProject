@@ -18,6 +18,7 @@ public class FitState_AM_Wavedash : BaseFSMState
 				controller.state = CharacterState.WAVEDASH;
 				//anim = controller.anima;
 				controller.ApplyFriction = true;
+				controller.IASA = false;
 				controller.C_Drag = controller.battle.WavedashFriction;
 				controller.velocity.x = controller.jump.WavedashVelocity * controller.Inputter.buffer_x;
 				if (controller.velocity.y > 0) 
@@ -42,6 +43,10 @@ public class FitState_AM_Wavedash : BaseFSMState
 						IASA_Timer -= 1;
 				}
 
+		if (controller.IASA) {
+			CheckIASAAir ();
+		}
+
 				if (controller.IsGrounded (controller.groundedLookAhead) == false) {
 						controller.velocity.y += controller.jump.fallGravity;
 						if (controller.velocity.y <= controller.jump.MaxFallSpeed) {
@@ -62,14 +67,59 @@ public class FitState_AM_Wavedash : BaseFSMState
 
 
 
-
-
-
-
-
-
-
 		}
+
+	public void CheckIASAAir() {
+
+//		if (controller.BfAction == BufferedAction.ATTACK) {
+//			controller.EndAnim = false;
+//			controller.IASA = false;
+//			DoTransition (typeof(FitState_AM_AirAttack));
+//			return;
+//		}
+
+//		if (controller.BfAction == BufferedAction.SPECIAL) {
+//			DoTransition (typeof(FitState_AM_AirSpecial));
+//			return;
+//
+//		}
+
+		if (controller.BfAction == BufferedAction.SHIELD)
+		{
+			if (controller.CanWavedash (controller.jump.AirdashHeight)) 
+			{
+				DoTransition (typeof(FitState_AM_Wavedash));
+				return;
+			}
+		}
+
+		if (controller.BfAction == BufferedAction.JUMP) {
+			CheckJump ();
+			return;
+		}
+
+	}
+
+	public void CheckJump() {
+		if (controller.Inputter.x > 0) {
+			controller.x_direction = 1;
+		} 
+		if (controller.Inputter.x < 0) {
+			controller.x_direction = -1;
+		}
+		if (controller.Inputter.x == 0) {
+			controller.x_direction = controller.x_facing;
+		}
+			
+		if (controller.x_direction != controller.x_facing) {
+			DoTransition (typeof(FitState_AM_AirHopBack));
+			return;
+		} else {
+			DoTransition (typeof(FitState_AM_AirJump));
+			return;
+		}
+
+	}
 
 
 

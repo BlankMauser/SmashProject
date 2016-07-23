@@ -77,6 +77,25 @@ public class FitPalante : RayCastColliders {
 				}
 		}
 
+	void SeedUp()
+	{
+		Strike.HitComboSeed += 1;
+		if (Strike.HitComboSeed > 100000) 
+		{
+			Strike.HitComboSeed = 1;
+		}
+	}
+
+	public override void UpSpecialAirInit() {
+		SeedUp ();
+		ApplyFriction = false;
+		UpdateSwitch = 1;
+		ClearBuffer ();
+	}
+
+	public override void UpSpecialAirUpdate() {
+		
+	}
 
 }
 

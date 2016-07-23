@@ -55,6 +55,8 @@ public abstract class FitCharacterInput : MonoBehaviour {
 	virtual public bool CUpDown{get; protected set;}
 	virtual public bool CDownDown{get; protected set;}
 
+	virtual public bool UpDebugDown{get; protected set;}
+
 		public bool NoInput;
 		public bool NoJump;
 

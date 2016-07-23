@@ -33,16 +33,26 @@ public class FitState_AM_Pivot : BaseFSMState
 
 		public override void Exit()
 		{
-				controller.previousState = CharacterState.PIVOT;
+		EndTerms ();
 		}
 
 		public override void Update()
 		{
 
+				if (controller.BfAction == BufferedAction.QA) {
+					DoTransition (typeof(FitState_AM_Grab));
+					return;
+				}
 
 				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 				}
+
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
+				}
+
 				if (controller.BfAction == BufferedAction.JUMP) {
 
 						DoTransition (typeof(FitState_AM_JumpSquat));
@@ -74,6 +84,14 @@ public class FitState_AM_Pivot : BaseFSMState
 				}
 
 		}
+
+	public void EndTerms() {
+
+		controller.previousState = controller.state;
+		controller.EndAnim = false;
+		controller.IASA = false;
+		return;
+	}
 
 
 }

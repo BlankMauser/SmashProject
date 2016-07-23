@@ -31,7 +31,9 @@ public class FitState_AM_HitStop : BaseFSMState {
 				controller.state = CharacterState.HITSTOP;
 				HitStopTimer = MyHitboxData.Hitlag;
 				CheckKnockback ();
-				EffectSpawn ();
+		if (MyHitboxData.effect != null) {
+			EffectSpawn ();
+		}
 
 		}
 
@@ -54,6 +56,11 @@ public class FitState_AM_HitStop : BaseFSMState {
 						HitboxCollision ();
 				}
 
+			if (controller.Strike.ApplyProjFrame == true) 
+			{
+				HitboxCollisionB ();
+			}
+
 				if (controller.Animator.HitStopAnim == 0) {
 						object[] args = new object[2];
 						args[0] = MyHitboxData;
@@ -70,6 +77,14 @@ public class FitState_AM_HitStop : BaseFSMState {
 				
 
 		public void CheckKnockback() {
+		if (MyHitboxData.IsGrab && MyHitboxData.OwnerCollider.GrabOpponent == null) {
+			controller.GrabOpponent = MyHitboxData.OwnerCollider;
+			MyHitboxData.OwnerCollider.GrabOpponent = controller;
+			object[] args2 = new object[1];
+			args2[0] = MyHitboxData.OwnerCollider;
+			DoTransition (typeof(FitState_AM_Caught), args2);
+			return;
+		}
 				CalcKB = ((( ((controller.Strike.Percent/10) + ((controller.Strike.Percent*MyHitboxData.Damage)/20)) * (200/(controller.battle.Weight+100)) * 1.4 ) + 18) * (MyHitboxData.KnockbackGrowth/100) ) + MyHitboxData.BaseKnockback;
 //		#if UNITY_EDITOR
 //		Debug.Log (CalcKB);
@@ -87,7 +102,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 
 								controller.FitAnima.Update (0);
 								controller.Animator.HitStopAnim = HitStopTimer;
-								MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+								MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-MyHitboxData.HitlagDisparity);
 								MyHitboxData.OwnerCollider.Strike.HIT = true;
 						
 				}
@@ -98,24 +113,35 @@ public class FitState_AM_HitStop : BaseFSMState {
 						controller.FitAnima.Play ("GDamageFly1", -1, 0f);
 						controller.FitAnima.Update (0);
 						controller.Animator.HitStopAnim = HitStopTimer;
-						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-MyHitboxData.HitlagDisparity);
 						MyHitboxData.OwnerCollider.Strike.HIT = true;
 				}
 				if (MyHitboxData.Direction > 360) 
 				{
-						if ((float)CalcKB >= MyHitboxData.AirThreshhold) {
-								FromGround = false;
-								MyHitboxData.Direction = 44;
-				controller.FitAnima.SetFloat ("GDamageFly1Spd", 32f/MyHitboxData.Hitstun);
-								controller.FitAnima.Play ("GDamageFly1", -1, 0f);
-						} else {
-								MyHitboxData.Direction = 0;
-								controller.FitAnima.Play ("GDamage2", -1, 0f);
-						}
-						controller.FitAnima.Update (0);
-						controller.Animator.HitStopAnim = HitStopTimer;
-						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
-						MyHitboxData.OwnerCollider.Strike.HIT = true;
+			if (FromGround) {
+				if ((float)CalcKB >= MyHitboxData.AirThreshhold) {
+					FromGround = false;
+					MyHitboxData.Direction = 44;
+					controller.FitAnima.SetFloat ("GDamageFly1Spd", 32f / MyHitboxData.Hitstun);
+					controller.FitAnima.Play ("GDamageFly1", -1, 0f);
+				} else {
+					MyHitboxData.Direction = 0;
+					controller.FitAnima.Play ("GDamage2", -1, 0f);
+				}
+				controller.FitAnima.Update (0);
+				controller.Animator.HitStopAnim = HitStopTimer;
+				MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer - MyHitboxData.HitlagDisparity);
+				MyHitboxData.OwnerCollider.Strike.HIT = true;
+			} else {
+				MyHitboxData.Direction = 44;
+				controller.FitAnima.SetFloat ("GDamageFly1Spd", 32f / MyHitboxData.Hitstun);
+				controller.FitAnima.Play ("GDamageFly1", -1, 0f);
+
+				controller.FitAnima.Update (0);
+				controller.Animator.HitStopAnim = HitStopTimer;
+				MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer - MyHitboxData.HitlagDisparity);
+				MyHitboxData.OwnerCollider.Strike.HIT = true;
+			}
 				}
 
 				if (FromGround == true) 
@@ -123,7 +149,7 @@ public class FitState_AM_HitStop : BaseFSMState {
 						controller.FitAnima.Play ("GDamage2", -1, 0f);
 						controller.FitAnima.Update (0);
 						controller.Animator.HitStopAnim = HitStopTimer;
-						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-1);
+						MyHitboxData.OwnerCollider.Animator.HitStopAnim = (HitStopTimer-MyHitboxData.HitlagDisparity);
 						MyHitboxData.OwnerCollider.Strike.HIT = true;
 				}
 		}
@@ -141,6 +167,16 @@ public class FitState_AM_HitStop : BaseFSMState {
 				HitStopTimer = MyHitboxData.Hitlag;
 				CheckKnockback ();
 				EffectSpawn ();
+
+		}
+
+		public void HitboxCollisionB() {
+			controller.Strike.DamageCalcB ();
+			MyHitboxData = controller.Strike.CurrentDmgB;
+			controller.state = CharacterState.HITSTOP;
+			HitStopTimer = MyHitboxData.Hitlag;
+			CheckKnockback ();
+			EffectSpawn ();
 
 		}
 

@@ -48,6 +48,11 @@ public class FitState_AM_WalkSlow : BaseFSMState
 						return;
 				}
 
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
+				}
+
 				if (controller.BfAction == BufferedAction.JUMP) {
 
 						DoTransition (typeof(FitState_AM_JumpSquat));

@@ -15,27 +15,18 @@ public class FitStrike : MonoBehaviour {
 		public Hbox[] AttackBoxes;
 		public int HitComboSeed = 1;
 		public HitboxData CurrentDmg;
+		public HitboxData CurrentDmgB;
 
 		public int kbStackTimer = 0;
 
 		public int ComboReference;
 		public int AnimReference;
-		public bool CancelWindow = false;
 	public bool HIT = false;
 	public bool BLOCKED = false;
 
-	//Cancel On:
-	//1: Hit
-	//2: Block
-	//3: Hit/Block
-	//4: Whiff
-	public int CancelOn = 0;
-	//Chains Into:
-	//1: Jab
-	//2: Jab/Dtilt/Ftilt
-	//3: Dtilt
-	//4: Ftilt
-	public int HunterChain = 0;
+	public EnergyBar MyPercent;
+
+
 
 		//Deprecated?
 //		public void UpdateHitboxSize(int id)
@@ -61,6 +52,12 @@ public class FitStrike : MonoBehaviour {
 		public void Update()
 		{
 				TimersTick ();
+
+		}
+
+		public void LateUpdate()
+		{
+		SetUI ();
 		}
 				
 
@@ -79,6 +76,21 @@ public class FitStrike : MonoBehaviour {
 						}
 		}
 
+		void ApplyProjectile(HitboxData proj) 
+		{
+
+		if (!DamageHitboxes.Contains(proj.HboxSeed)) 
+			{
+			if (CurrentDmg.MyPriority <= proj.MyPriority) 
+				{
+				HitboxData hitboxData = proj;
+					CurrentDmg = hitboxData;
+
+					ApplyProjFrame = true;
+				}
+			}
+		}
+
 		public void DamageCalc()
 		{
 				Percent += CurrentDmg.Damage;
@@ -94,12 +106,32 @@ public class FitStrike : MonoBehaviour {
 		ApplyHitboxFrame = false;
 		}
 
+	public void DamageCalcB()
+	{
+		Percent += CurrentDmgB.Damage;
+		DamageHitboxes.Enqueue (CurrentDmg.HboxSeed);
+		CurrentDmg.MyPriority = 0;
+		ApplyProjFrame = false;
+	}
+
+	public void ShieldCalcB()
+	{
+		DamageHitboxes.Enqueue (CurrentDmg.HboxSeed);
+		CurrentDmgB.MyPriority = 0;
+		ApplyProjFrame = false;
+	}
+
 		public void TimersTick()
 		{
 				if (kbStackTimer > 0) 
 				{
 						kbStackTimer -= 1;
 				}
+		}
+
+		public void SetUI()
+		{
+		MyPercent.valueCurrent = (int)Percent;
 		}
 		
 }

@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Xft;
+using CreativeSpore.SmartColliders;
 
 public class FitAnimator : MonoBehaviour {
 
 	public RayCastColliders controller;
+	public SmartRectCollider2D MyContCldr;
 	public Transform  lightsource;
 	public Transform  lightsource2;
 	public Transform  spine;
@@ -21,6 +23,7 @@ public class FitAnimator : MonoBehaviour {
 	public Quaternion RotateRight2;
 	public float AnimX;
 	public float AnimY;
+	public Color ReferenceColor1;
 
 	public SkinnedMeshRenderer[] MyMaterials;
 	public bool AnimateMaterials = false;
@@ -37,8 +40,42 @@ public class FitAnimator : MonoBehaviour {
 	public Object[] Effects;
 	public Transform FXSpawner1;
 	public Transform FXSpawner2;
+	public Transform FXSpawner3;
 
 	public bool fading = false;
+
+	#region Special Flags
+
+	public bool Grabbing = false;
+	public bool Grazing = false;
+	public int InvulTimer = 0;
+
+	public bool CanFastFall = false;
+	public bool ContinuousCollision = false;
+	public bool CanLand = false;
+	public bool NoFallAnim = false;
+	public bool ApplyGravity = false;
+	public bool CancelWindow = false;
+
+	//Cancel On:
+	//1: Hit
+	//2: Block
+	//3: Hit/Block
+	//4: Whiff
+	public float CancelOn = 0;
+	//Chains Into:
+	//1: Jab
+	//2: Jab/Dtilt/Ftilt
+	//3: Dtilt
+	//4: Ftilt
+	//5: SpecialsOnly
+	//6: Dsmash
+	//7: Fsmash
+	//8: Jab/Dtilt/Ftilt/Dsmash/Fsmash
+	public float HunterChain = 0;
+
+
+	#endregion
 
 
 	public XWeaponTrail Trail;
@@ -51,6 +88,12 @@ public class FitAnimator : MonoBehaviour {
 
 		public void LateUpdate()
 		{
+		if (ContinuousCollision) {
+			MyContCldr.enabled = true;
+		} else {
+			MyContCldr.enabled = false;
+		}
+
 				if (AnimateMaterials == true) 
 				{
 						for (int i = 1; i < MyMaterials.Length; ++i)
@@ -167,21 +210,21 @@ public class FitAnimator : MonoBehaviour {
 		controller.Strike.ComboReference = AttackID;
 	}
 
-	public void SetHunterChain(int Chain) {
-		controller.Strike.HunterChain = Chain;
-	}
+//	public void SetHunterChain(int Chain) {
+//		controller.Strike.HunterChain = Chain;
+//	}
 
-	public void SetOnHit(int prop) {
-		controller.Strike.CancelOn = prop;
-	}
+//	public void SetOnHit(int prop) {
+//		controller.Strike.CancelOn = prop;
+//	}
 
-	public void SetCancelWindow(int CanCancel) {
-		if (CanCancel == 1) {
-			controller.Strike.CancelWindow = true;
-		} else {
-			controller.Strike.CancelWindow = false;
-		}
-	}
+//	public void SetCancelWindow(int CanCancel) {
+//		if (CanCancel == 1) {
+//			controller.Strike.CancelWindow = true;
+//		} else {
+//			controller.Strike.CancelWindow = false;
+//		}
+//	}
 
 		public void RotateBones() {
 
@@ -189,6 +232,36 @@ public class FitAnimator : MonoBehaviour {
 
 	public void SpawnFX1(int fxid) {
 		Instantiate (Effects [fxid], FXSpawner1.transform.position, Quaternion.identity);
+
+	}
+
+	public void SpawnFX3Sever(int fxid) {
+		GameObject effects = Instantiate (Effects [fxid], FXSpawner3.transform.position, FXSpawner3.transform.rotation) as GameObject;
+		if (controller.x_facing == -1) {
+			effects.transform.rotation = new Quaternion(effects.transform.rotation.x * -1.0f,
+				effects.transform.rotation.y,
+				effects.transform.rotation.z,
+				effects.transform.rotation.w * -1.0f);
+
+			effects.transform.localScale = new Vector3 (5 * controller.x_facing, 5, 5);
+		}
+		effects.GetComponent<ParticleGreedSever> ().glowCol = ReferenceColor1;
+	}
+
+	public void BulletFX1(int bulletid) {
+		GameObject Bullet = Instantiate (Effects [bulletid], FXSpawner1.transform.position, Quaternion.identity) as GameObject;
+		ProjCollider Bvar = Bullet.GetComponent<ProjCollider> ();
+		Bullet.transform.localScale = new Vector3(controller.x_facing,1,1);
+		Bvar.OwnerStrike = controller.Strike;
+
+	}
+
+	public void BulletFX1SeedUp(int Bulletid) {
+		MultiComboUp ();
+		GameObject Bullet = Instantiate (Effects [Bulletid], FXSpawner1.transform.position, Quaternion.identity) as GameObject;
+		ProjCollider Bvar = Bullet.GetComponent<ProjCollider> ();
+		Bullet.transform.localScale = new Vector3(controller.x_facing,1,1);
+		Bvar.OwnerStrike = controller.Strike;
 
 	}
 

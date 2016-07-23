@@ -26,13 +26,14 @@ MonoBehaviour:
     BaseKnockback: 42
     WeightKnockback: 0
     KnockbackGrowth: 70
-    Hitlag: 6
+    Hitlag: 8
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15
     Hitstun: 11
     HitstunScaling: 0
-    AirThreshhold: 10
+    AirThreshhold: 45
     type: 0
     effect: {fileID: 115696, guid: 802fa76e32ac9de4fb7e6abe7c194549, type: 2}
     soundname: 

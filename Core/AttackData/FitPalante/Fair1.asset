@@ -20,23 +20,25 @@ MonoBehaviour:
     TrueDamage: 5
     HboxSeed: 0
     SeedModifier: 0
-    Direction: 361
+    Direction: 45
     OptimalDI: 1
     Reversible: 0
     BaseKnockback: 20
     WeightKnockback: 0
     KnockbackGrowth: 70
     Hitlag: 5
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 15
     Hitstun: 11
     HitstunScaling: 0
-    AirThreshhold: 10
+    AirThreshhold: 45
     type: 0
-    effect: {fileID: 115696, guid: 802fa76e32ac9de4fb7e6abe7c194549, type: 2}
-    soundname: 
+    effect: {fileID: 180892, guid: 444c3aa5b3fe18a42b29fda0323bf90c, type: 2}
+    BulletCenter: {x: 0, y: 0, z: 0}
     Xflipped: 0
+    IsGrab: 0
     ownerID: 0
     effectspawn: {x: 0, y: 0, z: 0}
     cStart: {r: 0, g: 0, b: 0, a: 0}

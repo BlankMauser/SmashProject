@@ -82,19 +82,31 @@ public class FitState_AM_Idle : BaseFSMState
 
 				if (controller.Strike.ApplyHitboxFrame == true) 
 				{
-//			#if UNITY_EDITOR
-//						Debug.Log ("Got Here");
-//			#endif
 						HitboxCollision ();
+				}
+
+				if (controller.Strike.ApplyProjFrame == true) 
+				{
+					HitboxCollisionB ();
 				}
 		}
 
 		public void CheckIASAIdle() {
-				
-				if (controller.BfAction == BufferedAction.ATTACK) {
-						DoTransition (typeof(FitState_AM_GroundAttack));
-						return;
-				}
+
+		if (controller.BfAction == BufferedAction.QA) {
+			DoTransition (typeof(FitState_AM_Grab));
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.SPECIAL) {
+			DoTransition (typeof(FitState_AM_GroundSpecial));
+			return;
+		}
+
+		if (controller.BfAction == BufferedAction.ATTACK) {
+			DoTransition (typeof(FitState_AM_GroundAttack));
+			return;
+		}
 
 				if (controller.BfAction == BufferedAction.JUMP) {
 
@@ -138,6 +150,15 @@ public class FitState_AM_Idle : BaseFSMState
 				args[0] = true;
 				DoTransition (typeof(FitState_AM_HitStop), args);
 				return;
+
+		}
+
+		public void HitboxCollisionB() {
+			controller.Strike.DamageCalcB ();
+			object[] args = new object[1];
+			args[0] = true;
+			DoTransition (typeof(FitState_AM_HitStop), args);
+			return;
 
 		}
 

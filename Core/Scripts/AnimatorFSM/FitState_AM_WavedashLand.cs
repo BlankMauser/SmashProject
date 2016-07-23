@@ -68,9 +68,19 @@ public class FitState_AM_WavedashLand : BaseFSMState
 
 		public void CheckIASA() {
 
+				if (controller.BfAction == BufferedAction.QA) {
+					DoTransition (typeof(FitState_AM_Grab));
+					return;
+				}
+
 				if (controller.BfAction == BufferedAction.ATTACK) {
 						DoTransition (typeof(FitState_AM_GroundAttack));
 						return;
+				}
+
+				if (controller.BfAction == BufferedAction.SPECIAL) {
+					DoTransition (typeof(FitState_AM_GroundSpecial));
+					return;
 				}
 
 				if (controller.BfAction == BufferedAction.JUMP) {

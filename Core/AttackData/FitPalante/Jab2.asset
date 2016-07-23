@@ -16,23 +16,24 @@ MonoBehaviour:
     OwnerCollider: {fileID: 0}
     SetKnockback: 0
     MyPriority: 2
-    Damage: 18
+    Damage: 7
     TrueDamage: 5
     HboxSeed: 0
     SeedModifier: 0
-    Direction: 80
+    Direction: 361
     OptimalDI: 2
     Reversible: 0
     BaseKnockback: 8
     WeightKnockback: 0
     KnockbackGrowth: 75
     Hitlag: 7
+    HitlagDisparity: 1
     Blockstun: 9
     ShieldDamage: 0
     ShieldPush: 14
     Hitstun: 11
     HitstunScaling: 0
-    AirThreshhold: 10
+    AirThreshhold: 45
     type: 0
     effect: {fileID: 180892, guid: 444c3aa5b3fe18a42b29fda0323bf90c, type: 2}
     soundname: 
